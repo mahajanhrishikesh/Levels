@@ -1,0 +1,1 @@
+<option value="Daman">Daman</option><option value="Diu">Diu</option>

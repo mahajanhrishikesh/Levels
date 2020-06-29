@@ -250,7 +250,7 @@
                 >
                   StateClick
                 </button>
-                <button class="btn btn-primary" onclick="rollUp();">
+                <button class="btn btn-primary" onclick="rollUp();" id="backBtnMap">
                   Back
                 </button>
               </div>
@@ -402,6 +402,7 @@
 
       /*************START FUNCTIONS THAT ARE SET TO RUN ON SITE LOAD********************/
       document.getElementById('locName').innerHTML = state_code[loc] + ' Map';
+      document.getElementById('backBtnMap').style.display = 'None';
       /*************END FUNCTIONS THAT ARE SET TO RUN ON SITE LOAD********************/
 
       /*****START FUNCTIONS FOR CHANGING LOCATION IE. DOWNLOADING NEW FILES****/
@@ -414,11 +415,13 @@
         level = 0;
         loc = 'India';
         changeToLoc(loc);
+        document.getElementById('backBtnMap').style.display = 'None';
       }
 
       function changeLocation(id) {
         if (level == 0) {
           level = 1;
+          document.getElementById('backBtnMap').style.display = 'block';
           changeToLoc(id);
         } else {
           //Handle clicks on districts

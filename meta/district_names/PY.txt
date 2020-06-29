@@ -1,0 +1,1 @@
+<option value="Puducherry">Puducherry</option><option value="Yanam">Yanam</option><option value="Mahe">Mahe</option><option value="Karaikal">Karaikal</option>

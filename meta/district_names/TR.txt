@@ -1,0 +1,1 @@
+<option value="Dhalai">Dhalai</option><option value="South Tripura">South Tripura</option><option value="West Tripura">West Tripura</option><option value="North Tripura">North Tripura</option>
