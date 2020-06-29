@@ -41,16 +41,20 @@
         <div class="collapse navbar-collapse" id="navbarLinks">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a href="index.html" class="nav-link active">Home</a> <!--MAIN DESIGN-->
+              <a href="index.html" class="nav-link active">Home</a>
+              <!--MAIN DESIGN-->
             </li>
             <li class="nav-item">
-              <a href="visualize.html" class="nav-link">Visualize</a> <!--SOME GRAPHS-->
+              <a href="visualize.html" class="nav-link">Visualize</a>
+              <!--SOME GRAPHS-->
             </li>
             <li class="nav-item">
-              <a href="getAPI.html" class="nav-link">Get API</a> <!--FORM THAT WILL LINK TO GIT RAW-->
+              <a href="getAPI.html" class="nav-link">Get API</a>
+              <!--FORM THAT WILL LINK TO GIT RAW-->
             </li>
             <li class="nav-item">
-              <a href="about.html" class="nav-link">About</a> <!--PS INFO?-->
+              <a href="about.html" class="nav-link">About</a>
+              <!--PS INFO?-->
             </li>
           </ul>
         </div>
@@ -147,7 +151,7 @@
             <div class="row text-center no-gutters">
               <div class="col-3">
                 <div class="card text-success card-body">
-                  <h2>Improving<br/>Districts</h5>
+                  <h5>Improving<br />Districts</h5>
                   <h2 class="font-weight-bold">23</h2>
                 </div>
               </div>
@@ -246,6 +250,9 @@
                 >
                   StateClick
                 </button>
+                <button class="btn btn-primary" onclick="rollUp();">
+                  Back
+                </button>
               </div>
             </div>
             <!--MAP ENDS HERE-->
@@ -321,11 +328,12 @@
     ></script>
 
     <script>
-      //GLOBAL VARIABLES
+      // GLOBAL VARIABLES
       var year = 2018;
       var loc = 'India';
       var docIdx = 91;
       var algo = 'ARIMA';
+      var level = 0;
 
       // Index dictionary for years
       var idxDict = {
@@ -380,7 +388,6 @@
         MP: 'Madhya Pradesh',
         GJ: 'Gujarat',
         DD: 'Daman & Diu',
-        'DADRA & NAGAR HAVELI': 'Dadra & Nagar Haveli',
         MS: 'Maharashtra',
         AP: 'Andhra Pradesh',
         KA: 'Karnataka',
@@ -403,10 +410,24 @@
       var tableFileData = null;
       var locFileData = null;
 
-      // Will execute on clicking state on the map
+      function rollUp() {
+        level = 0;
+        loc = 'India';
+        changeToLoc(loc);
+      }
+
       function changeLocation(id) {
+        if (level == 0) {
+          level = 1;
+          changeToLoc(id);
+        } else {
+          //Handle clicks on districts
+        }
+      }
+
+      // Will execute on clicking state on the map
+      function changeToLoc(id) {
         loc = id;
-        console.log(state_code[loc]);
         document.getElementById('locName').innerHTML = state_code[loc] + ' Map';
         loadMapData();
         loadTableData();
@@ -415,33 +436,33 @@
       }
 
       //DOWNLOAD NORMAL JSON
-      function loadNormalData(stateName) {
+      function loadNormalData() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             locFileData = this.responseText;
           }
         };
-        xhttp.open('GET', 'data/DISTRICTWISE_' + stateName + '.svg', true);
+        xhttp.open('GET', 'data/DISTRICTWISE_' + loc + '.svg', true);
         xhttp.send();
         //Write Load new map function here
       }
 
       //DOWNLOAD MAP
-      function loadMapData(stateName) {
+      function loadMapData() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             mapFileData = this.responseText;
           }
         };
-        xhttp.open('GET', 'maps/' + stateName + '.svg', true);
+        xhttp.open('GET', 'maps/' + loc + '.svg', true);
         xhttp.send();
         //Write Load new map function here
       }
 
       //DOWNLOAD TABLES
-      function loadTableData(stateName) {
+      function loadTableData() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
@@ -450,14 +471,14 @@
         };
         xhttp.open(
           'GET',
-          'table_data/TABLE_DISTRICTWISE_' + stateName + '.json',
+          'table_data/TABLE_DISTRICTWISE_' + loc + '.json',
           true
         );
         xhttp.send();
         //Write Load Table function here
       }
 
-      function graphUpdate(stateName) {
+      function graphUpdate() {
         //Write graph updation code here
       }
 
@@ -465,7 +486,6 @@
 
       /*****START FUNCTIONS FOR CHANGING THE INDEX OF THE DOWNLOADED DATA************/
       function searchClick(id) {
-        console.log('Pressed Search!');
         var searchString = document.getElementById('searchText').value;
         console.log(searchString);
         //Make Search operational
@@ -499,17 +519,13 @@
       }
       /*****END FUNCTIONS FOR CHANGING THE INDEX OF THE DOWNLOADED DATA************/
 
-
       /*************** START SHWETA SECTION **********************/
 
       /*************** STOP SHWETA SECTION **********************/
 
-
       /*************** START YASH SECTION **********************/
 
       /*************** STOP YASH SECTION **********************/
-
-
     </script>
   </body>
 </html>
