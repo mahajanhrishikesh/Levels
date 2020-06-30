@@ -18,9 +18,9 @@
     />
     <link rel="stylesheet" href="css/theme.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <title>Bootstrap Theme</title>
+    <title>Ground Water DashBoard</title>
   </head>
-  <body>
+  <body onload="fetchfiles();">
     <!-- NAVBAR -->
     <nav
       class="navbar navbar-expand-lg bg-light navbar-light py-3"
@@ -151,13 +151,13 @@
             <div class="row text-center no-gutters">
               <div class="col-3">
                 <div class="card text-success card-body">
-                  <h5>Improving<br />Districts</h5>
+                  <h5>Improving<br /><span class="level">States</span></h5>
                   <h2 class="font-weight-bold">23</h2>
                 </div>
               </div>
               <div class="col-3">
                 <div class="card card-body text-danger">
-                  <h5>Declining<br />Districts</h5>
+                  <h5>Declining<br /><span class="level">States</span></h5>
                   <h2 class="font-weight-bold">10</h2>
                 </div>
               </div>
@@ -198,13 +198,13 @@
               <div class="row text-center no-gutters mb-3">
                 <div class="col-3">
                   <div class="card bg-success card-body text-white">
-                    <h5>Improving<br />Districts</h5>
+                    <h5>Improving<br /><span class="level">States</span></h5>
                     <h2 class="font-weight-bold">23</h2>
                   </div>
                 </div>
                 <div class="col-3">
                   <div class="card card-body bg-danger text-white">
-                    <h5>Declining<br />Districts</h5>
+                    <h5>Declining<br /><span class="level">States</span></h5>
                     <h2 class="font-weight-bold">10</h2>
                   </div>
                 </div>
@@ -250,7 +250,11 @@
                 >
                   StateClick
                 </button>
-                <button class="btn btn-primary" onclick="rollUp();" id="backBtnMap">
+                <button
+                  class="btn btn-primary ml-auto"
+                  onclick="rollUp();"
+                  id="backBtnMap"
+                >
                   Back
                 </button>
               </div>
@@ -294,6 +298,13 @@
             <!--GRAPHS END HERE-->
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-2 offset-md-5 mt-5">
+            <div class="btn btn-warning btn-lg btn-block" onclick="print();">
+              <span><i class="fa fa-print"></i> Print Report</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -302,7 +313,7 @@
       <div class="container">
         <div class="row text-center">
           <div class="col-md-6 mx-auto">
-            <p class="lead">
+            <p class="display-4">
               Zero2One
             </p>
           </div>
@@ -403,6 +414,10 @@
       /*************START FUNCTIONS THAT ARE SET TO RUN ON SITE LOAD********************/
       document.getElementById('locName').innerHTML = state_code[loc] + ' Map';
       document.getElementById('backBtnMap').style.display = 'None';
+
+      function fetchfiles() {
+        changeToLoc('India');
+      }
       /*************END FUNCTIONS THAT ARE SET TO RUN ON SITE LOAD********************/
 
       /*****START FUNCTIONS FOR CHANGING LOCATION IE. DOWNLOADING NEW FILES****/
@@ -416,12 +431,21 @@
         loc = 'India';
         changeToLoc(loc);
         document.getElementById('backBtnMap').style.display = 'None';
+        var spans = document.getElementsByClassName('level');
+        for (var i = 0; i < spans.length; i++) {
+          spans[i].innerHTML = 'States';
+        }
       }
 
       function changeLocation(id) {
         if (level == 0) {
           level = 1;
+          document.getElementsByClassName('level').innerHTML = 'Districts';
           document.getElementById('backBtnMap').style.display = 'block';
+          var spans = document.getElementsByClassName('level');
+          for (var i = 0; i < spans.length; i++) {
+            spans[i].innerHTML = 'Districts';
+          }
           changeToLoc(id);
         } else {
           //Handle clicks on districts
@@ -446,7 +470,12 @@
             locFileData = this.responseText;
           }
         };
-        xhttp.open('GET', 'data/DISTRICTWISE_' + loc + '.svg', true);
+        if(loc == 'India') {
+          xhttp.open('GET', 'data/' + loc + '.json', true);
+        }
+        else {
+          xhttp.open('GET', 'data/DISTRICTDATA/JSON/DISTRICTWISE_' + loc + '.json', true);
+        }
         xhttp.send();
         //Write Load new map function here
       }
@@ -472,11 +501,17 @@
             tableFileData = this.responseText;
           }
         };
-        xhttp.open(
-          'GET',
-          'table_data/TABLE_DISTRICTWISE_' + loc + '.json',
-          true
-        );
+        if(loc == 'India') {
+          xhttp.open('GET', 'table_data/' + loc + '.json', true);
+        }
+        else {
+          xhttp.open(
+            'GET',
+            'table_data/TABLE_DISTRICTWISE_' + loc + '.json',
+            true
+          );
+        }
+        
         xhttp.send();
         //Write Load Table function here
       }
