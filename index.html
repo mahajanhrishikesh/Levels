@@ -23,7 +23,7 @@
   <body onload="fetchfiles();">
     <!-- NAVBAR -->
     <nav
-      class="navbar navbar-expand-lg bg-light navbar-light py-3"
+      class="navbar navbar-expand-lg bg-dark navbar-dark py-3"
       id="mainNavbar"
     >
       <div class="container">
@@ -64,13 +64,14 @@
     <!--HOME SECTION-->
     <section id="home">
       <div class="container">
-        <div class="row mt-4">
+        <div class="row mt-5">
           <!--LEFT SIDE HOME-->
-          <div class="col-md-6 col-sm-12">
-            <p class="text-muted text-center mb-1">
-              Search State/District/Block
-            </p>
-            <div class="input-group">
+          <div class="col-md-6 col-sm-12 ">
+            <div class="shadow pt-4 pb-4 pl-3 pr-3">
+              <h1 class="text-center mb-1">
+              <b>Search State/District/Block</b>
+            </h1>
+            <div class="input-group shadow mt-4" style="height:50px">
               <input
                 type="text"
                 class="form-control"
@@ -88,13 +89,14 @@
                 </button>
               </div>
             </div>
+          </div>
 
             <!--DATE HANDLING FORM-->
 
-            <div class="row my-4 text-center">
+            <div class="row my-4 text-center ">
               <div class="col-6 p-1">
-                <div class="card card-body">
-                  <div class="card-title">Year</div>
+                <div class="card card-body shadow">
+                  <div class="card-title"><b>Year</b></div>
                   <select
                     name="year"
                     id="yearSelect"
@@ -128,9 +130,9 @@
                 </div>
               </div>
               <div class="col-6 p-1">
-                <div class="card card-body">
+                <div class="card card-body shadow">
                   <div class="card-title">
-                    Season
+                    <b>Season</b>
                   </div>
                   <select
                     name="season"
@@ -148,28 +150,28 @@
             </div>
 
             <!--CURRENT MASTER LOCATION STATS CARD GROUP-->
-            <div class="row text-center no-gutters">
-              <div class="col-3">
-                <div class="card text-success card-body">
-                  <h5>Improving<br /><span class="level">States</span></h5>
+            <div class="row text-center no-gutters ">
+              <div class="col-3 pl-2">
+                <div class="card text-success card-body shadow-sm ">
+                  <h2><b>Improving<br /><span class="level">States</span></b></h2>
                   <h2 class="font-weight-bold">23</h2>
                 </div>
               </div>
-              <div class="col-3">
-                <div class="card card-body text-danger">
-                  <h5>Declining<br /><span class="level">States</span></h5>
+              <div class="col-3 pl-2">
+                <div class="card card-body text-danger shadow-sm ">
+                  <h2><b>Declining<br /><span class="level">States</span></b></h2>
                   <h2 class="font-weight-bold">10</h2>
                 </div>
               </div>
-              <div class="col-3">
-                <div class="card card-body text-warning">
-                  <h5>Current<br />GWL</h5>
+              <div class="col-3 pl-2">
+                <div class="card card-body text-warning shadow-sm ">
+                  <h2><b>Current<br />GWL</b></h2>
                   <h2 class="font-weight-bold">10.74</h2>
                 </div>
               </div>
-              <div class="col-3">
-                <div class="card card-body text-primary">
-                  <h5>Average<br />GWL</h5>
+              <div class="col-3 pl-2">
+                <div class="card card-body text-primary shadow-sm ">
+                  <h2><b>Average<br />GWL</b></h2>
                   <h2 class="font-weight-bold">11.89</h2>
                 </div>
               </div>
@@ -187,41 +189,43 @@
 
           <!--RIGHT SIDE HOME-->
           <div class="col-md-6 col-sm-12">
-            <h1 class="text-secondary text-center" id="locName"></h1>
-            <p class="text-muted text-center">
-              Click on States/UTs for more details.
-            </p>
+            <div class="shadow pb-1 pl-1 pt-3 pr-1">
+              <h1 class="text-center" id="locName"></h1>
+              <h3 class=" text-center text-muted">
+                Click on States/UTs for more details.
+              </h3>
 
-            <!--MAP STARTS HERE-->
-            <div id="tableSection" class="mt-3">
               <!--CURRENT MASTER LOCATION STATS CARD GROUP-->
               <div class="row text-center no-gutters mb-3">
-                <div class="col-3">
+                <div class="col-3 pl-2">
                   <div class="card bg-success card-body text-white">
-                    <h5>Improving<br /><span class="level">States</span></h5>
+                    <h2><b>Improving<br /><span class="level">States</span></b></h2>
                     <h2 class="font-weight-bold">23</h2>
                   </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3 pl-2">
                   <div class="card card-body bg-danger text-white">
-                    <h5>Declining<br /><span class="level">States</span></h5>
+                    <h2><b>Declining<br /><span class="level">States</span></b></h2>
                     <h2 class="font-weight-bold">10</h2>
                   </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3 pl-2">
                   <div class="card card-body bg-warning text-white">
-                    <h5>Current<br />GWL</h5>
-                    <h2 class="font-weight-bold">10.74</h2>
+                    <h2><b>Current<br />GWL</h5>
+                    <h2 class="font-weight-bold">10.74</b></h2>
                   </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3 pl-2">
                   <div class="card card-body bg-primary text-white">
-                    <h5>Average<br />GWL</h5>
-                    <h2 class="font-weight-bold">11.89</h2>
+                    <h2><b>Average<br />GWL</h5>
+                    <h2 class="font-weight-bold">11.89</b></h2>
                   </div>
                 </div>
               </div>
-
+            </div>
+              
+            <!--MAP STARTS HERE-->
+            <div id="tableSection" class="mt-3"></div>
               <div class="card card-body mb-3">
                 <div class="card-title">
                   Algorithms
