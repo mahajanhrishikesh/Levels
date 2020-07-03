@@ -16,7 +16,7 @@
       integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="css/theme.css" />
+    <!--<link rel="stylesheet" href="css/theme.css" />-->
     <link rel="stylesheet" href="css/style.css" />
     <title>Ground Water DashBoard</title>
   </head>
@@ -68,34 +68,34 @@
           <!--LEFT SIDE HOME-->
           <div class="col-md-6 col-sm-12 ">
             <div class="shadow pt-4 pb-4 pl-3 pr-3">
-              <h1 class="text-center mb-1">
-              <b>Search State/District/Block</b>
-            </h1>
-            <div class="input-group shadow mt-4" style="height:50px">
-              <input
-                type="text"
-                class="form-control"
-                name="search"
-                placeholder="Search"
-                id="searchText"
-              />
-              <div class="input-group-append">
-                <button
-                  class="btn btn-outline-secondary"
-                  id="searchBtn"
-                  onclick="searchClick(this.id)"
-                >
-                  <i class="fa fa-search"></i>
-                </button>
+              <h4 class="text-center mb-1">
+                <b>Search State/District/Block</b>
+              </h4>
+              <div class="input-group shadow-sm mt-4" style="height:50px">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="search"
+                  placeholder="Search"
+                  id="searchText"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary"
+                    id="searchBtn"
+                    onclick="searchClick(this.id)"
+                  >
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
               </div>
-            </div>
           </div>
 
             <!--DATE HANDLING FORM-->
 
             <div class="row my-4 text-center ">
               <div class="col-6 p-1">
-                <div class="card card-body shadow">
+                <div class="card card-body shadow-sm">
                   <div class="card-title"><b>Year</b></div>
                   <select
                     name="year"
@@ -130,7 +130,7 @@
                 </div>
               </div>
               <div class="col-6 p-1">
-                <div class="card card-body shadow">
+                <div class="card card-body shadow-sm">
                   <div class="card-title">
                     <b>Season</b>
                   </div>
@@ -151,28 +151,28 @@
 
             <!--CURRENT MASTER LOCATION STATS CARD GROUP-->
             <div class="row text-center no-gutters ">
-              <div class="col-3 pl-2">
+              <div class="col-sm-6 col-md-3 pl-2">
                 <div class="card text-success card-body shadow-sm ">
-                  <h2><b>Improving<br /><span class="level">States</span></b></h2>
-                  <h2 class="font-weight-bold">23</h2>
+                  <h6><b>Improving<br /><span class="level">States</span></b></h6>
+                  <h6 class="font-weight-bold">23</h6>
                 </div>
               </div>
-              <div class="col-3 pl-2">
+              <div class="col-sm-6 col-md-3 pl-2">
                 <div class="card card-body text-danger shadow-sm ">
-                  <h2><b>Declining<br /><span class="level">States</span></b></h2>
-                  <h2 class="font-weight-bold">10</h2>
+                  <h6><b>Declining<br /><span class="level">States</span></b></h6>
+                  <h6 class="font-weight-bold">10</h6>
                 </div>
               </div>
-              <div class="col-3 pl-2">
+              <div class="col-sm-6 col-md-3 pl-2">
                 <div class="card card-body text-warning shadow-sm ">
-                  <h2><b>Current<br />GWL</b></h2>
-                  <h2 class="font-weight-bold">10.74</h2>
+                  <h6><b>Current<br />GWL</b></h6>
+                  <h6 class="font-weight-bold">10.74</h6>
                 </div>
               </div>
-              <div class="col-3 pl-2">
+              <div class="col-sm-6 col-md-3 pl-2">
                 <div class="card card-body text-primary shadow-sm ">
-                  <h2><b>Average<br />GWL</b></h2>
-                  <h2 class="font-weight-bold">11.89</h2>
+                  <h6><b>Average<br />GWL</b></h6>
+                  <h6 class="font-weight-bold">11.89</h6>
                 </div>
               </div>
             </div>
@@ -189,42 +189,42 @@
 
           <!--RIGHT SIDE HOME-->
           <div class="col-md-6 col-sm-12">
-            <h1 class="text-secondary text-center" id="locName"></h1>
-            <h3 class=" text-center">
+            <h3 class="text-secondary text-center" id="locName"></h3>
+            <h6 class=" text-center">
               <b>Click on States/UTs for more details.</b>
-            </h3>
+            </h6>
 
             <!--MAP STARTS HERE-->
-            <div id="tableSection" class="mt-3">
+            <div id="mapSection" class="mt-3">
               <!--CURRENT MASTER LOCATION STATS CARD GROUP-->
-              <div class="row text-center no-gutters mb-3">
-                <div class="col-3">
-                  <div class="card bg-success card-body text-white">
-                    <h5>Improving<br /><span class="level">States</span></h5>
-                    <h2 class="font-weight-bold">23</h2>
+              <div class="row text-center no-gutters ">
+                <div class="col-md-3 pl-2">
+                  <div class="card bg-success card-body shadow-sm text-white">
+                    <h6><b>Improving<br /><span class="level">States</span></b></h6>
+                    <h6 class="font-weight-bold">23</h6>
                   </div>
                 </div>
-                <div class="col-3">
-                  <div class="card card-body bg-danger text-white">
-                    <h5>Declining<br /><span class="level">States</span></h5>
-                    <h2 class="font-weight-bold">10</h2>
+                <div class="col-md-3 pl-2">
+                  <div class="card card-body bg-danger shadow-sm text-white">
+                    <h6><b>Declining<br /><span class="level">States</span></b></h6>
+                    <h6 class="font-weight-bold">10</h6>
                   </div>
                 </div>
-                <div class="col-3">
-                  <div class="card card-body bg-warning text-white">
-                    <h5>Current<br />GWL</h5>
-                    <h2 class="font-weight-bold">10.74</h2>
+                <div class="col-md-3 pl-2">
+                  <div class="card card-body bg-warning shadow-sm text-white">
+                    <h6><b>Current<br />GWL</b></h6>
+                    <h6 class="font-weight-bold">10.74</h6>
                   </div>
                 </div>
-                <div class="col-3">
-                  <div class="card card-body bg-primary text-white">
-                    <h5>Average<br />GWL</h5>
-                    <h2 class="font-weight-bold">11.89</h2>
+                <div class="col-md-3 pl-2">
+                  <div class="card card-body bg-primary shadow-sm text-white">
+                    <h6><b>Average<br />GWL</b></h6>
+                    <h6 class="font-weight-bold">11.89</h6>
                   </div>
                 </div>
               </div>
 
-              <div class="card card-body mb-3">
+              <div class="card card-body my-3">
                 <div class="card-title">
                   Algorithms
                 </div>
@@ -311,7 +311,7 @@
     </section>
 
     <!--FOOTER-->
-    <footer id="main-footer" class="py-5 bg-light mb-0">
+    <footer id="main-footer" class="py-5 bg-light mb-0 bg-dark text-white mt-5">
       <div class="container">
         <div class="row text-center">
           <div class="col-md-6 mx-auto">
