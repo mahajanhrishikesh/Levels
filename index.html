@@ -66,12 +66,12 @@
       <div class="container">
         <div class="row mt-5">
           <!--LEFT SIDE HOME-->
-          <div class="col-md-6 col-sm-12 ">
+          <div class="col-md-6 col-sm-12">
             <div class="shadow pt-4 pb-4 pl-3 pr-3">
               <h4 class="text-center mb-1">
                 <b>Search State/District/Block</b>
               </h4>
-              <div class="input-group shadow-sm mt-4" style="height:50px">
+              <div class="input-group shadow-sm mt-4" style="height: 50px;">
                 <input
                   type="text"
                   class="form-control"
@@ -89,11 +89,11 @@
                   </button>
                 </div>
               </div>
-          </div>
+            </div>
 
             <!--DATE HANDLING FORM-->
 
-            <div class="row my-4 text-center ">
+            <div class="row my-4 text-center">
               <div class="col-6 p-1">
                 <div class="card card-body shadow-sm">
                   <div class="card-title"><b>Year</b></div>
@@ -150,28 +150,36 @@
             </div>
 
             <!--CURRENT MASTER LOCATION STATS CARD GROUP-->
-            <div class="row text-center no-gutters ">
+            <div class="row text-center no-gutters">
               <div class="col-sm-6 col-md-3 pl-2">
-                <div class="card text-success card-body shadow-sm ">
-                  <h6><b>Improving<br /><span class="level">States</span></b></h6>
+                <div class="card text-success card-body shadow-sm">
+                  <h6>
+                    <b>Improving<br /><span class="level">States</span></b>
+                  </h6>
                   <h6 class="font-weight-bold">23</h6>
                 </div>
               </div>
               <div class="col-sm-6 col-md-3 pl-2">
-                <div class="card card-body text-danger shadow-sm ">
-                  <h6><b>Declining<br /><span class="level">States</span></b></h6>
+                <div class="card card-body text-danger shadow-sm">
+                  <h6>
+                    <b>Declining<br /><span class="level">States</span></b>
+                  </h6>
                   <h6 class="font-weight-bold">10</h6>
                 </div>
               </div>
               <div class="col-sm-6 col-md-3 pl-2">
-                <div class="card card-body text-warning shadow-sm ">
-                  <h6><b>Current<br />GWL</b></h6>
+                <div class="card card-body text-warning shadow-sm">
+                  <h6>
+                    <b>Current<br />GWL</b>
+                  </h6>
                   <h6 class="font-weight-bold">10.74</h6>
                 </div>
               </div>
               <div class="col-sm-6 col-md-3 pl-2">
-                <div class="card card-body text-primary shadow-sm ">
-                  <h6><b>Average<br />GWL</b></h6>
+                <div class="card card-body text-primary shadow-sm">
+                  <h6>
+                    <b>Average<br />GWL</b>
+                  </h6>
                   <h6 class="font-weight-bold">11.89</h6>
                 </div>
               </div>
@@ -190,35 +198,43 @@
           <!--RIGHT SIDE HOME-->
           <div class="col-md-6 col-sm-12">
             <h3 class="text-secondary text-center" id="locName"></h3>
-            <h6 class=" text-center">
+            <h6 class="text-center">
               <b>Click on States/UTs for more details.</b>
             </h6>
 
             <!--MAP STARTS HERE-->
             <div id="mapSection" class="mt-3">
               <!--CURRENT MASTER LOCATION STATS CARD GROUP-->
-              <div class="row text-center no-gutters ">
+              <div class="row text-center no-gutters">
                 <div class="col-md-3 pl-2">
                   <div class="card bg-success card-body shadow-sm text-white">
-                    <h6><b>Improving<br /><span class="level">States</span></b></h6>
+                    <h6>
+                      <b>Improving<br /><span class="level">States</span></b>
+                    </h6>
                     <h6 class="font-weight-bold">23</h6>
                   </div>
                 </div>
                 <div class="col-md-3 pl-2">
                   <div class="card card-body bg-danger shadow-sm text-white">
-                    <h6><b>Declining<br /><span class="level">States</span></b></h6>
+                    <h6>
+                      <b>Declining<br /><span class="level">States</span></b>
+                    </h6>
                     <h6 class="font-weight-bold">10</h6>
                   </div>
                 </div>
                 <div class="col-md-3 pl-2">
                   <div class="card card-body bg-warning shadow-sm text-white">
-                    <h6><b>Current<br />GWL</b></h6>
+                    <h6>
+                      <b>Current<br />GWL</b>
+                    </h6>
                     <h6 class="font-weight-bold">10.74</h6>
                   </div>
                 </div>
                 <div class="col-md-3 pl-2">
                   <div class="card card-body bg-primary shadow-sm text-white">
-                    <h6><b>Average<br />GWL</b></h6>
+                    <h6>
+                      <b>Average<br />GWL</b>
+                    </h6>
                     <h6 class="font-weight-bold">11.89</h6>
                   </div>
                 </div>
@@ -410,6 +426,7 @@
         TN: 'Tamil Nadu',
         PY: 'Pudducherry',
         AN: 'Andaman & Nicobar Islands',
+        TG: 'Telengana',
         India: 'India',
       };
 
@@ -472,11 +489,14 @@
             locFileData = this.responseText;
           }
         };
-        if(loc == 'India') {
+        if (loc == 'India') {
           xhttp.open('GET', 'data/' + loc + '.json', true);
-        }
-        else {
-          xhttp.open('GET', 'data/DISTRICTDATA/JSON/DISTRICTWISE_' + loc + '.json', true);
+        } else {
+          xhttp.open(
+            'GET',
+            'data/DISTRICTDATA/JSON/DISTRICTWISE_' + loc + '.json',
+            true
+          );
         }
         xhttp.send();
         //Write Load new map function here
@@ -503,17 +523,16 @@
             tableFileData = this.responseText;
           }
         };
-        if(loc == 'India') {
+        if (loc == 'India') {
           xhttp.open('GET', 'table_data/' + loc + '.json', true);
-        }
-        else {
+        } else {
           xhttp.open(
             'GET',
             'table_data/TABLE_DISTRICTWISE_' + loc + '.json',
             true
           );
         }
-        
+
         xhttp.send();
         //Write Load Table function here
       }
