@@ -117,7 +117,7 @@
                 <select
                   id="seasonSelect1"
                   class="form-control"
-                  onclick="changeSeason1(this.value)"
+                  onclick="changeSeason1();"
                 >
                   <option value="" id="season1POMRB">POMRB</option>
                   <option value="" id="season1PREMON">PREMON</option>
@@ -167,7 +167,7 @@
                 <select
                   id="seasonSelect2"
                   class="form-control"
-                  onclick="changeSeason2(this.value)"
+                  onclick="changeSeason2()"
                 >
                   <option value="" id="season2POMRB">POMRB</option>
                   <option value="" id="season2PREMON">PREMON</option>
@@ -195,6 +195,7 @@
         <div class="row">
           <!--LEFT SIDE SECTION-->
           <div class="col-md-6">
+            <p id="periodName1" class="h3 text-center text-muted"></p>
             <p class="h3 text-center text-muted">Map</p>
             <!--MAP STARTS HERE-->
             <div id="mapSection1" class="my-3">
@@ -252,6 +253,7 @@
           </div>
 
           <div class="col-md-6">
+            <p id="periodName2" class="h3 text-center text-muted"></p>
             <p class="h3 text-center text-muted">Map</p>
             <!--MAP STARTS HERE-->
             <div id="mapSection2" class="my-3">
@@ -352,6 +354,10 @@
       // Document Indexes
       var docIdx1 = null;
       var docIdx2 = null;
+      var year1 = null;
+      var year2 = null;
+      var season1 = null;
+      var season2 = null;
 
       // Index dictionary for years
       var idxDict = {
@@ -437,6 +443,7 @@
         document.getElementById('season1MONSOON').value = seasonIdxs[2];
         document.getElementById('season1POMKH').value = seasonIdxs[3];
         docIdx1 = seasonIdxs[0];
+        year1 = document.getElementById('yearSelect1').value;
       }
 
       // Select season for left side
@@ -461,7 +468,21 @@
       }
 
       // Main Page Function
-      function compare() {}
+      function compare() {
+        //Labelling sections
+        var periodText1 =
+          $('#yearSelect1 option:selected').text() +
+          ', ' +
+          $('#seasonSelect1 option:selected').text();
+        var periodText2 =
+          $('#yearSelect2 option:selected').text() +
+          ', ' +
+          $('#seasonSelect2 option:selected').text();
+        document.getElementById('periodName1').innerHTML = periodText1;
+        document.getElementById('periodName2').innerHTML = periodText2;
+
+        //Load maps, tables and graphs here
+      }
     </script>
   </body>
 </html>
