@@ -68,7 +68,7 @@
     </nav>
 
     <!--HOME SECTION-->
-    <section id="home" class='main_content'>
+    <section id="home" class="main_content">
       <div class="container">
         <div class="row mt-5">
           <!--LEFT SIDE HOME-->
@@ -77,13 +77,16 @@
               <h4 class="text-center mb-1">
                 <b>Search State/District/Block</b>
               </h4>
-              <div class="input-group shadow-sm mt-4" style="height: 50px;">
+              <div
+                class=" input-group shadow-sm mt-4"
+                style="height: 50px;"
+              >
                 <input
-                  type="text"
+                  id="myInput"
                   class="form-control"
+                  type="text"
                   name="search"
-                  placeholder="Search"
-                  id="searchText"
+                  placeholder="Search ..."
                 />
                 <div class="input-group-append">
                   <button
@@ -273,10 +276,7 @@
                 </select>
               </div>
 
-              <div
-                id="mapContainer"
-                class="card card-body shadow"
-              >
+              <div id="mapContainer" class="card card-body shadow">
                 <!--<button
                   class="btn btn-primary"
                   id="MS"
@@ -371,6 +371,7 @@
       integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
       crossorigin="anonymous"
     ></script>
+    <script src="scripts/dropdown.js"></script>
 
     <script>
       // GLOBAL VARIABLES
@@ -461,7 +462,6 @@
       var tableFileData = null;
       var locFileData = null;
 
-
       function rollUp() {
         level = 0;
         loc = 'INDIA';
@@ -495,7 +495,7 @@
         loadMapData();
         loadTableData();
         loadNormalData();
-        graphUpdate();      
+        graphUpdate();
       }
 
       //DOWNLOAD NORMAL JSON
@@ -504,15 +504,14 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             locFileData = this.responseText;
-            setTimeout(function(){
+            setTimeout(function () {
               processJSON();
             }, 1000);
           }
         };
         if (loc == 'INDIA') {
           xhttp.open('GET', 'data/' + loc + '.json', true);
-        } 
-        else {
+        } else {
           xhttp.open(
             'GET',
             'data/DISTRICTDATA/JSON/DISTRICTWISE_' + loc + '.json',
@@ -529,7 +528,7 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             mapFileData = this.responseText;
-            document.getElementById("mapContainer").innerHTML = mapFileData;
+            document.getElementById('mapContainer').innerHTML = mapFileData;
           }
         };
         xhttp.open('GET', 'maps/' + loc + '.svg', true);
@@ -579,7 +578,7 @@
         document.getElementById('PREMON').value = seasonIdxs[1];
         document.getElementById('MONSOON').value = seasonIdxs[2];
         document.getElementById('POMKH').value = seasonIdxs[3];
-        docIdx=seasonIdxs[0];
+        docIdx = seasonIdxs[0];
         document.getElementById('POMRB').selected = true;
         var periodText1 =
           $('#yearSelect option:selected').text() +
@@ -591,11 +590,11 @@
 
       function changeSeason(id) {
         docIdx = document.getElementById('seasonSelect').value;
-        console.log("docIdx=",docIdx);
+        console.log('docIdx=', docIdx);
         var periodText1 =
-        $('#yearSelect option:selected').text() +
-        ', ' +
-        $('#seasonSelect option:selected').text();
+          $('#yearSelect option:selected').text() +
+          ', ' +
+          $('#seasonSelect option:selected').text();
         document.getElementById('periodName1').innerHTML = periodText1;
         processJSON();
         tableUpdate();
@@ -604,9 +603,9 @@
       function changeAlgorithm() {
         algo = document.getElementById('algoSelect').value;
         var periodText1 =
-        $('#yearSelect option:selected').text() +
-        ', ' +
-        $('#seasonSelect option:selected').text();
+          $('#yearSelect option:selected').text() +
+          ', ' +
+          $('#seasonSelect option:selected').text();
         document.getElementById('periodName1').innerHTML = periodText1;
         processJSON();
       }
@@ -625,20 +624,16 @@
       /*************** STOP SHWETA SECTION **********************/
 
       /*************** START YASH SECTION **********************/
-      function processJSON()
-      {
-        if(level==1)
-        {
+      function processJSON() {
+        if (level == 1) {
           //console.log("Working Level 1");
           var t = docIdx;
           var obj = JSON.parse(locFileData);
           var temp = Object.keys(obj);
-          
-          var district_names=[];
-          for(var i=1;i<temp.length-1;i++)
-          {
-            if(!temp[i].includes("_"))
-            {
+
+          var district_names = [];
+          for (var i = 1; i < temp.length - 1; i++) {
+            if (!temp[i].includes('_')) {
               district_names.push(temp[i]);
             }
           }
@@ -648,114 +643,94 @@
           }*/
           //console.log(obj["Anand_ARIMA"][91]);
 
-          var dict={};
-          for (var i = 1; i<district_names.length; i++) 
-          { 
-            var meth = district_names[i]+"_"+algo; 
-            try
-            {
-              if(obj[district_names[i]][t] <= obj[meth][t])
-              {
+          var dict = {};
+          for (var i = 1; i < district_names.length; i++) {
+            var meth = district_names[i] + '_' + algo;
+            try {
+              if (obj[district_names[i]][t] <= obj[meth][t]) {
                 //console.log("Value",obj[states[i]][t]);
                 //console.log("Benchmark",obj[meth][t]);
                 dict[district_names[i]] = 1;
               }
-              if(obj[district_names[i]][t] > obj[meth][t])
-              {
-                  //console.log("Value",obj[states[i]][t]);
-                  //console.log("Benchmark",obj[meth][t]);
-                  dict[district_names[i]] = 0;
+              if (obj[district_names[i]][t] > obj[meth][t]) {
+                //console.log("Value",obj[states[i]][t]);
+                //console.log("Benchmark",obj[meth][t]);
+                dict[district_names[i]] = 0;
               }
-            }
-            catch(err)
-            {
-              console.log("No data for :",meth);
+            } catch (err) {
+              console.log('No data for :', meth);
             }
           }
           console.log(dict);
           console.log(states_names);
-          for(var key in dict)
-          {
+          for (var key in dict) {
             //console.log(key);
             st = document.getElementById(key);
             //console.log(key);
-            try
-            {
-              if(dict[key] ==1)
-              {
+            try {
+              if (dict[key] == 1) {
                 //console.log("Coloring level 1 green");
-                st.style.fill = "#ABEBC6";
+                st.style.fill = '#ABEBC6';
               }
-              if(dict[key] ==0)
-              {
+              if (dict[key] == 0) {
                 //console.log("Coloring level 1 red");
-                st.style.fill = "#F5B7B1";
+                st.style.fill = '#F5B7B1';
               }
+            } catch (err) {
+              console.log(key, 'NOT FOUND');
             }
-            catch(err)
-            {
-              console.log(key,"NOT FOUND");
-            }
-            
           }
-
-        }
-        else
-        {
+        } else {
           //console.log("Working Level 0");
           var t = docIdx.toString();
           var obj = JSON.parse(locFileData);
           var temp = Object.keys(obj);
-          var states_names=[];
-          for(var i=2;i<temp.length;i++)
-          {
-            if(!temp[i].includes("_") && temp[i] != "MN" && temp[i] != "NL" && temp[i] != "AN"  )
-            {
+          var states_names = [];
+          for (var i = 2; i < temp.length; i++) {
+            if (
+              !temp[i].includes('_') &&
+              temp[i] != 'MN' &&
+              temp[i] != 'NL' &&
+              temp[i] != 'AN'
+            ) {
               states_names.push(temp[i]);
             }
           }
           //console.log(states_names);
-          var dict={};
-          for (var i = 0; i<states_names.length; i++) 
-          { 
+          var dict = {};
+          for (var i = 0; i < states_names.length; i++) {
             //console.log(states[i]);
-            var meth = states_names[i]+"_"+algo; 
-            if(obj[states_names[i]][t] <= obj[meth][t])
-            {
-              console.log("Value",obj[states_names[i]][t]);
-              console.log("Ref",obj[meth][t]);
+            var meth = states_names[i] + '_' + algo;
+            if (obj[states_names[i]][t] <= obj[meth][t]) {
+              console.log('Value', obj[states_names[i]][t]);
+              console.log('Ref', obj[meth][t]);
               dict[states_names[i]] = 1;
             }
-            if(obj[states_names[i]][t] > obj[meth][t])
-            {
-                console.log("Value",obj[states_names[i]][t]);
-                console.log("Ref",obj[meth][t]);
-                dict[states_names[i]] = 0;
+            if (obj[states_names[i]][t] > obj[meth][t]) {
+              console.log('Value', obj[states_names[i]][t]);
+              console.log('Ref', obj[meth][t]);
+              dict[states_names[i]] = 0;
             }
           }
           console.log(dict);
           console.log(states_names);
-          for(var key in dict)
-          {
+          for (var key in dict) {
             st = document.getElementById(key);
             //console.log(key);
-            if(dict[key] ==1)
-            {
+            if (dict[key] == 1) {
               //console.log(key);
               //console.log("Coloring level 0 green");
-              st.style.fill = "#ABEBC6";
+              st.style.fill = '#ABEBC6';
             }
-            if(dict[key] ==0)
-            {
+            if (dict[key] == 0) {
               //console.log(key);
               //console.log("Coloring level 0 red");
-              st.style.fill = "#F5B7B1";
+              st.style.fill = '#F5B7B1';
             }
           }
           var ldk = document.getElementById('LD');
           ldk.style.fill = document.getElementById('JK').style.fill;
         }
-        
       }
 
       /*************** STOP YASH SECTION **********************/
