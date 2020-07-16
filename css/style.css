@@ -1,3 +1,8 @@
 body {
-  overflow-x: hidden;
+  overflow-x: hidden
+
 }
+.regions path:hover{
+			stroke-width:2 ;
+			stroke-opacity:1;
+		}

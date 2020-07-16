@@ -18,8 +18,6 @@
     />
     <!--<link rel="stylesheet" href="css/theme.css" />-->
     <link rel="stylesheet" href="css/style.css" />
-
-    <link rel="stylesheet" href="css/load_page_animation.css" />
     <title>Ground Water DashBoard</title>
   </head>
   <body onload="fetchfiles();">
@@ -68,7 +66,7 @@
     </nav>
 
     <!--HOME SECTION-->
-    <section id="home" class="main_content">
+    <section id="home">
       <div class="container">
         <div class="row mt-5">
           <!--LEFT SIDE HOME-->
@@ -146,10 +144,10 @@
                     class="form-control"
                     onclick="changeSeason(this.id)"
                   >
-                    <option value="" id="POMRB">POMRB</option>
-                    <option value="" id="PREMON">PREMON</option>
-                    <option value="" id="MONSOON">MONSOON</option>
-                    <option value="" id="POMKH">POMKH</option>
+                    <option value="88" id="POMRB">POMRB</option>
+                    <option value="89" id="PREMON">PREMON</option>
+                    <option value="90" id="MONSOON">MONSOON</option>
+                    <option value="91" id="POMKH" selected>POMKH</option>
                   </select>
                 </div>
               </div>
@@ -204,6 +202,7 @@
           <!--RIGHT SIDE HOME-->
           <div class="col-md-6 col-sm-12">
             <h3 class="text-secondary text-center" id="locName"></h3>
+            <p id="periodName1" class="h5 text-center text-muted"></p>
             <h6 class="text-center">
               <b>Click on States/UTs for more details.</b>
             </h6>
@@ -213,7 +212,7 @@
               <!--CURRENT MASTER LOCATION STATS CARD GROUP-->
               <div class="row text-center no-gutters">
                 <div class="col-md-3 pl-2">
-                  <div class="mb-2 card bg-success card-body shadow-sm text-white">
+                  <div class="card bg-success card-body shadow-sm text-white">
                     <h6>
                       <b>Improving<br /><span class="level">States</span></b>
                     </h6>
@@ -221,7 +220,7 @@
                   </div>
                 </div>
                 <div class="col-md-3 pl-2">
-                  <div class="mb-2 card card-body bg-danger shadow-sm text-white">
+                  <div class="card card-body bg-danger shadow-sm text-white">
                     <h6>
                       <b>Declining<br /><span class="level">States</span></b>
                     </h6>
@@ -229,7 +228,7 @@
                   </div>
                 </div>
                 <div class="col-md-3 pl-2">
-                  <div class="mb-2 card card-body bg-warning shadow-sm text-white">
+                  <div class="card card-body bg-warning shadow-sm text-white">
                     <h6>
                       <b>Current<br />GWL</b>
                     </h6>
@@ -237,7 +236,7 @@
                   </div>
                 </div>
                 <div class="col-md-3 pl-2">
-                  <div class="mb-2 card card-body bg-primary shadow-sm text-white">
+                  <div class="card card-body bg-primary shadow-sm text-white">
                     <h6>
                       <b>Average<br />GWL</b>
                     </h6>
@@ -259,15 +258,16 @@
                   <option value="ARIMA">ARIMA</option>
                   <option value="EWMA">EWMA</option>
                   <option value="SMA">SMA</option>
-                  <option value="HWES">HWES</option>
+                  <option value="DES">DES</option>
+                  <option value="TES">HWES</option>
                 </select>
               </div>
 
               <div
-                class="container"
-                style="border: 1px solid red; height: 600px;"
+                id="mapContainer"
+                class="card card-body shadow"
               >
-                <button
+                <!--<button
                   class="btn btn-primary"
                   id="MS"
                   onclick="changeLocation(this.id);"
@@ -280,7 +280,7 @@
                   id="backBtnMap"
                 >
                   Back
-                </button>
+                </button>-->
               </div>
             </div>
             <!--MAP ENDS HERE-->
@@ -433,15 +433,15 @@
         PY: 'Pudducherry',
         AN: 'Andaman & Nicobar Islands',
         TG: 'Telengana',
-        India: 'India',
+        INDIA: 'India',
       };
 
       /*************START FUNCTIONS THAT ARE SET TO RUN ON SITE LOAD********************/
       document.getElementById('locName').innerHTML = state_code[loc] + ' Map';
-      document.getElementById('backBtnMap').style.display = 'None';
+      //document.getElementById('backBtnMap').style.display = 'None';
 
       function fetchfiles() {
-        changeToLoc('India');
+        changeToLoc('INDIA');
       }
       /*************END FUNCTIONS THAT ARE SET TO RUN ON SITE LOAD********************/
 
@@ -451,9 +451,10 @@
       var tableFileData = null;
       var locFileData = null;
 
+
       function rollUp() {
         level = 0;
-        loc = 'India';
+        loc = 'INDIA';
         changeToLoc(loc);
         document.getElementById('backBtnMap').style.display = 'None';
         var spans = document.getElementsByClassName('level');
@@ -462,11 +463,11 @@
         }
       }
 
-      function changeLocation(id) {
+      function districtView(id) {
         if (level == 0) {
           level = 1;
           document.getElementsByClassName('level').innerHTML = 'Districts';
-          document.getElementById('backBtnMap').style.display = 'block';
+          //document.getElementById('backBtnMap').style.display = 'block';
           var spans = document.getElementsByClassName('level');
           for (var i = 0; i < spans.length; i++) {
             spans[i].innerHTML = 'Districts';
@@ -484,7 +485,7 @@
         loadMapData();
         loadTableData();
         loadNormalData();
-        graphUpdate();
+        graphUpdate();      
       }
 
       //DOWNLOAD NORMAL JSON
@@ -493,11 +494,15 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             locFileData = this.responseText;
+            setTimeout(function(){
+              processJSON();
+            }, 1000);
           }
         };
-        if (loc == 'India') {
+        if (loc == 'INDIA') {
           xhttp.open('GET', 'data/' + loc + '.json', true);
-        } else {
+        } 
+        else {
           xhttp.open(
             'GET',
             'data/DISTRICTDATA/JSON/DISTRICTWISE_' + loc + '.json',
@@ -514,6 +519,7 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             mapFileData = this.responseText;
+            document.getElementById("mapContainer").innerHTML = mapFileData;
           }
         };
         xhttp.open('GET', 'maps/' + loc + '.svg', true);
@@ -563,16 +569,36 @@
         document.getElementById('PREMON').value = seasonIdxs[1];
         document.getElementById('MONSOON').value = seasonIdxs[2];
         document.getElementById('POMKH').value = seasonIdxs[3];
+        docIdx=seasonIdxs[0];
+        document.getElementById('POMRB').selected = true;
+        var periodText1 =
+          $('#yearSelect option:selected').text() +
+          ', ' +
+          $('#seasonSelect option:selected').text();
+        document.getElementById('periodName1').innerHTML = periodText1;
+        processJSON();
       }
 
       function changeSeason(id) {
         docIdx = document.getElementById('seasonSelect').value;
-        mapUpdate();
+        console.log("docIdx=",docIdx);
+        var periodText1 =
+        $('#yearSelect option:selected').text() +
+        ', ' +
+        $('#seasonSelect option:selected').text();
+        document.getElementById('periodName1').innerHTML = periodText1;
+        processJSON();
         tableUpdate();
       }
 
       function changeAlgorithm() {
         algo = document.getElementById('algoSelect').value;
+        var periodText1 =
+        $('#yearSelect option:selected').text() +
+        ', ' +
+        $('#seasonSelect option:selected').text();
+        document.getElementById('periodName1').innerHTML = periodText1;
+        processJSON();
       }
 
       function mapUpdate() {
@@ -589,6 +615,138 @@
       /*************** STOP SHWETA SECTION **********************/
 
       /*************** START YASH SECTION **********************/
+      function processJSON()
+      {
+        if(level==1)
+        {
+          //console.log("Working Level 1");
+          var t = docIdx;
+          var obj = JSON.parse(locFileData);
+          var temp = Object.keys(obj);
+          
+          var district_names=[];
+          for(var i=1;i<temp.length-1;i++)
+          {
+            if(!temp[i].includes("_"))
+            {
+              district_names.push(temp[i]);
+            }
+          }
+          /*for(var i in district_names)
+          {
+            console.log(district_names[i]);
+          }*/
+          //console.log(obj["Anand_ARIMA"][91]);
+
+          var dict={};
+          for (var i = 1; i<district_names.length; i++) 
+          { 
+            var meth = district_names[i]+"_"+algo; 
+            try
+            {
+              if(obj[district_names[i]][t] <= obj[meth][t])
+              {
+                //console.log("Value",obj[states[i]][t]);
+                //console.log("Benchmark",obj[meth][t]);
+                dict[district_names[i]] = 1;
+              }
+              if(obj[district_names[i]][t] > obj[meth][t])
+              {
+                  //console.log("Value",obj[states[i]][t]);
+                  //console.log("Benchmark",obj[meth][t]);
+                  dict[district_names[i]] = 0;
+              }
+            }
+            catch(err)
+            {
+              console.log("No data for :",meth);
+            }
+          }
+          console.log(dict);
+          console.log(states_names);
+          for(var key in dict)
+          {
+            //console.log(key);
+            st = document.getElementById(key);
+            //console.log(key);
+            try
+            {
+              if(dict[key] ==1)
+              {
+                //console.log("Coloring level 1 green");
+                st.style.fill = "#ABEBC6";
+              }
+              if(dict[key] ==0)
+              {
+                //console.log("Coloring level 1 red");
+                st.style.fill = "#F5B7B1";
+              }
+            }
+            catch(err)
+            {
+              console.log(key,"NOT FOUND");
+            }
+            
+          }
+
+        }
+        else
+        {
+          //console.log("Working Level 0");
+          var t = docIdx.toString();
+          var obj = JSON.parse(locFileData);
+          var temp = Object.keys(obj);
+          var states_names=[];
+          for(var i=2;i<temp.length;i++)
+          {
+            if(!temp[i].includes("_") && temp[i] != "MN" && temp[i] != "NL" && temp[i] != "AN"  )
+            {
+              states_names.push(temp[i]);
+            }
+          }
+          //console.log(states_names);
+          var dict={};
+          for (var i = 0; i<states_names.length; i++) 
+          { 
+            //console.log(states[i]);
+            var meth = states_names[i]+"_"+algo; 
+            if(obj[states_names[i]][t] <= obj[meth][t])
+            {
+              console.log("Value",obj[states_names[i]][t]);
+              console.log("Ref",obj[meth][t]);
+              dict[states_names[i]] = 1;
+            }
+            if(obj[states_names[i]][t] > obj[meth][t])
+            {
+                console.log("Value",obj[states_names[i]][t]);
+                console.log("Ref",obj[meth][t]);
+                dict[states_names[i]] = 0;
+            }
+          }
+          console.log(dict);
+          console.log(states_names);
+          for(var key in dict)
+          {
+            st = document.getElementById(key);
+            //console.log(key);
+            if(dict[key] ==1)
+            {
+              //console.log(key);
+              //console.log("Coloring level 0 green");
+              st.style.fill = "#ABEBC6";
+            }
+            if(dict[key] ==0)
+            {
+              //console.log(key);
+              //console.log("Coloring level 0 red");
+              st.style.fill = "#F5B7B1";
+            }
+          }
+          var ldk = document.getElementById('LD');
+          ldk.style.fill = document.getElementById('JK').style.fill;
+        }
+        
+      }
 
       /*************** STOP YASH SECTION **********************/
     </script>
