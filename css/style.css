@@ -1,13 +1,9 @@
 body {
-  overflow-x: hidden;
+  font: 16px Arial;  
 }
 
 * {
   box-sizing: border-box;
-}
-
-body {
-  font: 16px Arial;  
 }
 
 /*the container must be positioned relative:*/
@@ -63,3 +59,8 @@ input[type=submit] {
   background-color: DodgerBlue !important; 
   color: #ffffff; 
 }
+
+.regions path:hover{
+			stroke-width:2 ;
+			stroke-opacity:1;
+		}
