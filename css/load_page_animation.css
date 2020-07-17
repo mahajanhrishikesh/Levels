@@ -1,12 +1,12 @@
 .main_content {
-	animation: transitionIn 1s;
+	animation: transitionIn 1.3s;
 }
 
 
 @keyframes transitionIn {
 	from {
 		opacity: 0 ;
-		transform: rotateX(-10deg);
+		transform: rotateX(-25deg);
 	}
 
 	to {
