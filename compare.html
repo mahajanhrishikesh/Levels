@@ -61,6 +61,11 @@
               <a href="about.html" class="nav-link">About</a>
               <!--PS INFO?-->
             </li>
+            <li>
+              <div class="nav-link">
+                <div id="google_translate_element"></div>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
@@ -386,6 +391,8 @@
       integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
       crossorigin="anonymous"
     ></script>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
       // Document Indexes
@@ -738,6 +745,11 @@
             ldk.style.fill = document.getElementById('JK').style.fill;
           }
         }
+      }
+
+
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
       }
     </script>
   </body>

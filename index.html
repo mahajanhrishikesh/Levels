@@ -63,6 +63,11 @@
               <a href="about.html" class="nav-link">About</a>
               <!--PS INFO?-->
             </li>
+            <li>
+              <div class="nav-link">
+                <div id="google_translate_element"></div>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
@@ -441,6 +446,9 @@
     ></script>
     <script src="scripts/dropdown.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <script>
       // GLOBAL VARIABLES
       var year = 2018;
@@ -1712,6 +1720,11 @@
       }
 
       /*************** STOP YASH SECTION **********************/
+
+
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+      }
     </script>
   </body>
 </html>
