@@ -1,0 +1,483 @@
+/*@font-face {
+    font-family: archia;
+    src: url(archia-regular-webfont.woff);
+  }*/
+  
+  .table-fineprint {
+    color: #6c757d99;
+    font-weight: 600;
+    margin: 0;
+    margin-bottom: .25rem;
+    margin-right: .10rem;
+    text-align: right;
+    width: 100%;
+    height: 700px !important;
+  }
+  
+  .table-fineprint a {
+    border-bottom: 2px solid #6c757d20;
+    color: inherit;
+    text-decoration: none;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+  }
+  
+  .table-fineprint a:hover {
+    background: #6c757d20;
+  }
+  
+  .Table {
+    margin-bottom: 1rem;
+  }
+  
+  table {
+    -ms-flex-item-align: right;
+        -ms-grid-row-align: right;
+        align-self: right;
+    border-collapse: separate;
+    border-spacing: 3px 4px;
+    font-family: 'archia';
+    position: relative;
+    width: 100% !important;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: -10px;
+    padding-right: 0px;
+  }
+  
+  table thead {
+    background: #6c757d10;
+    color: #6c757d;
+    font-size: .75rem;
+    text-align: left;
+  }
+  
+  table thead th {
+    background: #f6f6f7;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: .5rem;
+    border: none !important;
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 5px;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    z-index: 99;
+  }
+  
+  table thead th:hover {
+    background: #ecedee;
+  }
+  
+  table .heading-content {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    position: relative;
+    outline: 0;
+    border: none !important;
+  }
+  
+  table .heading-content abbr {
+    color: #6c757d;
+    text-align: left;
+  }
+  
+  table .heading-content svg {
+    color: #6c757d99;
+    margin: 0;
+    margin-left: .25rem;
+    margin-top: .15rem;
+    right: 0;
+    stroke-width: 4px;
+    width: 10px;
+  }
+  
+  table tbody {
+    color: #6c757d;
+  }
+  
+  table tbody tr .districtRow, table tbody .block-row, table tbody .district-row {
+    cursor: pointer;
+  }
+  
+  table tbody tr .districtRow:nth-child(odd), table tbody .block-row:nth-child(odd), table tbody .district-row:nth-child(odd) {
+    background: #6c757d10 !important;
+  }
+  
+  table tbody tr .districtRow.is-highlighted, table tbody .block-row.is-highlighted, table tbody .district-row.is-highlighted {
+    background: #6c757d20 !important;
+  }
+  
+  table tbody tr .districtRow.is-odd, table tbody .block-row.is-odd, table tbody .district-row.is-odd {
+    background: #6c757d10 !important;
+  }
+  
+  table tbody tr .districtRow.is-total, table tbody .block-row.is-total, table tbody .district-row.is-total {
+    background: #6c757d20;
+  }
+  
+  table tbody tr .districtRow.is-spacer, table tbody .block-row.is-spacer, table tbody .district-row.is-spacer {
+    background: transparent !important;
+  }
+  
+  table tbody tr .districtRow.is-spacer:hover, table tbody .block-row.is-spacer:hover, table tbody .district-row.is-spacer:hover {
+    background: transparent !important;
+  }
+  
+  table tbody tr .districtRow:hover, table tbody .block-row:hover, table tbody .district-row:hover {
+    background: #6c757d20 !important;
+  }
+  
+  table tbody tr .districtRow:hover .dropdown, table tbody .block-row:hover .dropdown, table tbody .district-row:hover .dropdown {
+    background: #6c757d20;
+  }
+  
+  table tbody tr .blockHead {
+    background: #6c757d10;
+    color: #6c757d;
+    font-size: .75rem;
+    text-align: left;
+  }
+  
+  table tbody tr .blockHead td .block-heading {
+    background: #f6f6f7;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: .5rem;
+    border: none !important;
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 5px;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    z-index: 99;
+  }
+  
+  table tbody tr .blockHead td .block-heading:hover {
+    background: #ecedee;
+  }
+  
+  table tbody td {
+    border-radius: 4px;
+    font-size: .9rem;
+    padding: .25rem;
+    text-align: right;
+    border: none !important;
+  }
+  
+  table tbody td:first-child {
+    font-weight: 600;
+    max-width: 7.5rem !important;
+    text-align: left;
+    word-wrap: break-word !important;
+  }
+  
+  table tbody td .heading-content {
+    background: #f1f1f1;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: .5rem;
+    border: none !important;
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 5px;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    z-index: 99;
+  }
+  
+  table tbody td .heading-content:hover {
+    background: #ecedee;
+  }
+  
+  table tbody td .delta {
+    display: inline-block;
+    font-size: 11px !important;
+  }
+  
+  table tbody td .delta svg {
+    height: 9px;
+    stroke-width: 3;
+    vertical-align: -.25px;
+    width: 9px;
+  }
+  
+  table tbody td .total {
+    margin-left: .25rem;
+  }
+  
+  table tbody td a {
+    height: 1px;
+  }
+  
+  table tbody td a svg {
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    color: #6c757d99;
+    margin-left: 2px;
+    stroke-width: 3px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    vertical-align: -.435rem;
+    width: 12px;
+  }
+  
+  table tbody td a svg:hover {
+    stroke: #6c757d;
+  }
+  
+  table tbody .title-chevron {
+    position: relative;
+  }
+  
+  table tbody .title-chevron > * {
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+  }
+  
+  table tbody .title-chevron .title-icon svg {
+    color: #6c757d99;
+    padding-left: 2px;
+    stroke-width: 3;
+    vertical-align: -6.5px;
+    width: 12px;
+  }
+  
+  table tbody .state-last-update {
+    background: transparent !important;
+    color: #28a745 !important;
+    height: 2rem;
+  }
+  
+  table tbody .state-last-update p {
+    font-size: .75rem;
+    margin: 0;
+  }
+  
+  table tbody .state-last-update:hover {
+    background: transparent !important;
+  }
+  
+  table tbody .state-last-update .disclaimer {
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+            backdrop-filter: saturate(180%) blur(20px);
+    background: #6c757d10;
+    border-radius: 5px;
+    color: #6c757d;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    font-family: 'archia';
+    font-size: 12px;
+    left: 0;
+    margin-top: .5rem;
+    max-width: 10rem;
+    padding: .5rem;
+  }
+  
+  table tbody .state-last-update .disclaimer svg {
+    margin-right: .25rem;
+    margin-top: -.25rem;
+    stroke-width: 2px;
+    width: 20px !important;
+  }
+  
+  table tbody .state-last-update .state-page-link {
+    background: #ffc10720 !important;
+    color: #fd7e14;
+    font-size: .75rem;
+    font-weight: 600;
+    padding: 0.5rem;
+    text-align: center;
+    margin-right: -10rem;
+  }
+  
+  table tbody .state-last-update .state-page-link:hover {
+    background: #ffc10730 !important;
+  }
+  
+  table tbody .districtHead {
+    background: #f6f6f7;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: .5rem;
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 10px;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    z-index: 99;
+  }
+  
+  table tbody .districtHead:hover {
+    background: #ecedee;
+    background: #6c757d10;
+  }
+  
+  table tbody .districtHead td {
+    background: #6c757d10;
+    color: #343a40;
+    font-size: .75rem;
+    font-weight: 900;
+    padding: .45rem;
+    text-align: left !important;
+  }
+  
+  table tbody .districtHead td .heading-content {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    height: .9rem;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    position: relative;
+  }
+  
+  table tbody .districtHead td .heading-content abbr {
+    text-align: left;
+  }
+  
+  table tbody .districtHead td .heading-content svg {
+    color: #6c757d99;
+    margin: 0;
+    margin-left: .25rem;
+    margin-top: .15rem;
+    right: 0;
+    stroke-width: 4px;
+    width: 10px;
+  }
+  
+  table tbody .districtHead td .heading-content .heading-content {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    position: relative;
+  }
+  
+  table tbody .districtHead td .heading-content .heading-content abbr {
+    color: #6c757d;
+    text-align: left;
+  }
+  
+  table tbody .districtHead td .heading-content .heading-content abbr.is-confirmed {
+    color: #ff073a;
+  }
+  
+  table tbody .districtHead td .heading-content .heading-content abbr.is-active {
+    color: #007bff;
+  }
+  
+  table tbody .districtHead td .heading-content .heading-content abbr.is-recovered {
+    color: #28a745;
+  }
+  
+  table tbody .districtHead td .heading-content .heading-content abbr.is-deaths {
+    color: #6c757d;
+  }
+  
+  table tbody .districtHead td .heading-content .heading-content svg {
+    color: #6c757d99;
+    margin: 0;
+    margin-left: .25rem;
+    margin-top: .15rem;
+    right: 0;
+    stroke-width: 4px;
+    width: 10px;
+  }
+  
+  table .affected-count {
+    color: #6c757d99;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    top: -1rem;
+  }
+  
+  table .unknown svg {
+    color: #6c757d99;
+    height: 12px;
+    padding-left: 2px;
+    stroke-width: 3;
+    vertical-align: -1.5px;
+    width: 12px;
+  }
+  
+  table .dropdown {
+    background: #6c757d10;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 13px;
+    left: -1.25rem;
+    position: absolute;
+    top: .125rem;
+    -webkit-transition: background .2s ease-in-out;
+    transition: background .2s ease-in-out;
+    width: 13px;
+  }
+  
+  table .dropdown:hover {
+    background: #6c757d20;
+  }
+  
+  table .dropdown svg {
+    left: 1px;
+    position: absolute;
+    stroke-width: 3;
+    top: -.35rem;
+    width: 11px;
+  }
+  
+  @media (max-width: 769px) {
+    table {
+      width: 100%;
+    }
+    .Home .TimeSeries .svg-parent,
+    .State .TimeSeries .svg-parent {
+      width: 100%;
+    }
+    .Home table td,
+    .State table td {
+      max-width: 6.75rem;
+    }
+    .Home .table-fineprint,
+    .State .table-fineprint {
+      margin-right: 1.25rem;
+    }
+  }
+  
