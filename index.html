@@ -333,22 +333,21 @@
                 </select>
               </div>
 
-              <div id="mapContainer" class="card card-body shadow">
-                <!--<button
-                  class="btn btn-primary"
-                  id="MS"
-                  onclick="changeLocation(this.id);"
-                >
-                  StateClick
-                </button>
-                <button
-                  class="btn btn-primary ml-auto"
-                  onclick="rollUp();"
-                  id="backBtnMap"
-                >
-                  Back
-                </button>-->
+              <!--MAP CONTAINER WITH BACK BUTTON-->
+              <div class="card shadow">
+                <div class="card-header">
+                  <button
+                    class="btn btn-outline-primary"
+                    hidden
+                    id="mapBackBtn"
+                    onclick="rollUp();"
+                  >
+                    BACK
+                  </button>
+                </div>
+                <div id="mapContainer" class="card-body"></div>
               </div>
+              <!--END OF MAP CONTAINER-->
             </div>
             <!--MAP ENDS HERE-->
 
@@ -528,18 +527,19 @@
         level = 0;
         loc = 'INDIA';
         changeToLoc(loc);
-        document.getElementById('backBtnMap').style.display = 'None';
+        document.getElementById('mapBackBtn').hidden = false;
         var spans = document.getElementsByClassName('level');
         for (var i = 0; i < spans.length; i++) {
           spans[i].innerHTML = 'States';
         }
+        document.getElementById('mapBackBtn').hidden = true;
       }
 
       function districtView(id) {
         if (level == 0) {
           level = 1;
           document.getElementsByClassName('level').innerHTML = 'Districts';
-          //document.getElementById('backBtnMap').style.display = 'block';
+          document.getElementById('mapBackBtn').hidden = false;
           var spans = document.getElementsByClassName('level');
           for (var i = 0; i < spans.length; i++) {
             spans[i].innerHTML = 'Districts';
