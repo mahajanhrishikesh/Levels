@@ -681,7 +681,9 @@
         var periodText1 =
           $('#yearSelect option:selected').text() +
           ', ' +
-          $('#seasonSelect option:selected').text();
+          $('#seasonSelect option:selected').text() +
+          ', ' +
+          $('#algoSelect option:selected').text();
         document.getElementById('periodName1').innerHTML = periodText1;
         processJSON();
         buildtable();
@@ -693,7 +695,9 @@
         var periodText1 =
           $('#yearSelect option:selected').text() +
           ', ' +
-          $('#seasonSelect option:selected').text();
+          $('#seasonSelect option:selected').text() +
+          ', ' +
+          $('#algoSelect option:selected').text();
         // console.log((periodText1.split(","))[1])
         document.getElementById('periodName1').innerHTML = periodText1;
         processJSON();
@@ -706,7 +710,9 @@
         var periodText1 =
           $('#yearSelect option:selected').text() +
           ', ' +
-          $('#seasonSelect option:selected').text();
+          $('#seasonSelect option:selected').text() +
+          ', ' +
+          $('#algoSelect option:selected').text();
         document.getElementById('periodName1').innerHTML = periodText1;
         processJSON();
         graphUpdate();
