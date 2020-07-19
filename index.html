@@ -19,6 +19,7 @@
     />
     <!--<link rel="stylesheet" href="css/theme.css" />-->
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/table.css" />
     <link rel="stylesheet" href="css/load_page_animation.css" />
     <title>Ground Water DashBoard</title>
   </head>
@@ -193,10 +194,47 @@
 
             <!--TABLE STARTS HERE-->
             <div id="tableSection" class="mt-3">
-              <div
-                class="container"
-                style="border: 1px solid red; height: 700px;"
-              ></div>
+            <div
+              class="container"
+              style="border: 1px solid red; height:auto;"
+            >
+              <table class="table fadeInUp">
+              <thead  >
+                  <tr>
+                      <th data-column="State" data-order="desc" class="state-heading" id="Heading">
+                          <div class="heading-content"> 
+                              <abbr class="s-name" title="State">State/UT</abbr>
+                          </div>
+                      </th>
+                      <th data-column="IncreasingDistricts" data-order="desc" class="state-heading">
+                          <div class="heading-content"> 
+                              <abbr class="s-imp" title="Improving Disrticts">Increasing Districts</abbr>
+                          </div>
+                      </th>
+                      <th data-column="DecreasingDistricts" data-order="desc" class="state-heading">
+                          <div class="heading-content"> 
+                              <abbr class="s-dec" title="Declining Disrticts">Decreasing Districts</abbr>
+                          </div>
+                      </th>
+                      <th data-column="Current Level" data-order="desc" class="state-heading">
+                          <div class="heading-content"> 
+                              <abbr class="s-avg" title="Average Level">Average Level</abbr>
+                          </div>
+                          
+                      </th>
+                      <th data-column="Algorithm Level" data-order="desc" class="state-heading" >
+                        <div class="heading-content"> 
+                            <abbr class="s-algo" title="Minimum Level">Minimum Level</abbr>
+                        </div>
+                      </th>             
+                  </tr>
+              </thead>
+            <tbody id="myTable">   
+                
+            </tbody>
+          </table>
+        </div>
+
             </div>
             <!--TABLE ENDS HERE-->
           </div>
@@ -300,30 +338,35 @@
             <div
               class="container mt-3"
               style="border: 1px solid red; height: 200px;"
+              id="graph1"
             ></div>
 
             <!--POMRB GRAPH-->
             <div
               class="container mt-3"
               style="border: 1px solid red; height: 200px;"
+              id="graph2"
             ></div>
 
             <!--PREMON GRAPH-->
             <div
               class="container mt-3"
               style="border: 1px solid red; height: 200px;"
+              id="graph3"
             ></div>
 
             <!--MONSOON GRAPH-->
             <div
               class="container mt-3"
               style="border: 1px solid red; height: 200px;"
+              id="graph4"
             ></div>
 
             <!--POMKH GRAPH-->
             <div
               class="container mt-3"
               style="border: 1px solid red; height: 200px;"
+              id="graph5"
             ></div>
 
             <!--GRAPHS END HERE-->
@@ -369,7 +412,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="scripts/dropdown.js"></script>
-
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script>
       // GLOBAL VARIABLES
       var year = 2018;
@@ -443,7 +486,7 @@
         TG: 'Telengana',
         INDIA: 'India',
       };
-
+    
       /*************START FUNCTIONS THAT ARE SET TO RUN ON SITE LOAD********************/
       document.getElementById('locName').innerHTML = state_code[loc] + ' Map';
       //document.getElementById('backBtnMap').style.display = 'None';
@@ -458,7 +501,7 @@
       var mapFileData = null;
       var tableFileData = null;
       var locFileData = null;
-
+      var graphFileData = null;   
       function rollUp() {
         level = 0;
         loc = 'INDIA';
@@ -492,7 +535,6 @@
         loadMapData();
         loadTableData();
         loadNormalData();
-        graphUpdate();
       }
 
       //DOWNLOAD NORMAL JSON
@@ -539,25 +581,68 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             tableFileData = this.responseText;
+            setTimeout(function () {
+              buildtable();
+            }, 1000);
           }
         };
-        if (loc == 'India') {
-          xhttp.open('GET', 'table_data/' + loc + '.json', true);
+        if (loc == "INDIA") {
+          //xhttp.open('GET', 'table_data/' + loc + '.json', true);
+          xhttp.open('GET', 'table_data/TABLE_DATA.json', true);
         } else {
           xhttp.open(
             'GET',
-            'table_data/TABLE_DISTRICTWISE_' + loc + '.json',
+            'table_data/STATEWISE/TABLE_DATA_' + loc + '.json',
             true
           );
         }
-
+        
         xhttp.send();
         //Write Load Table function here
+  
+      }
+      //Download graphs
+      function loadGraphData() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            graphFileData = this.responseText;
+            setTimeout(function () {
+              graphUpdate();
+            }, 1000);
+          }
+        };
+        if (loc == 'INDIA') {
+          //Load India's data 
+        } 
+        else if(state_code.hasOwnProperty(loc)) {
+          //Load state's data
+        }
+        else{
+          //Load districts's data
+        }
+        xhttp.send();
+        //Write Load new graph function here
       }
 
-      function graphUpdate() {
+      
+    var chart1
+    function graphUpdate() {
         //Write graph updation code here
+        graph_data = JSON.parse(graphFileData)
+        buildGraphData();
+        for(var i =0; i<4;i++){
+         chart1.options.data[i].dataPoints = [];
+         }
+         for(var i =0; i<2;i++){
+         chart2.options.data[i].dataPoints = [];
+         chart3.options.data[i].dataPoints = [];
+         chart4.options.data[i].dataPoints = [];
+         chart5.options.data[i].dataPoints = [];
+         }
       }
+    
+      
 
       /*****END FUNCTIONS FOR CHANGING LOCATION IE. DOWNLOADING NEW FILES****/
 
@@ -583,6 +668,7 @@
           $('#seasonSelect option:selected').text();
         document.getElementById('periodName1').innerHTML = periodText1;
         processJSON();
+        buildtable();
       }
 
       function changeSeason(id) {
@@ -592,10 +678,12 @@
           $('#yearSelect option:selected').text() +
           ', ' +
           $('#seasonSelect option:selected').text();
+         // console.log((periodText1.split(","))[1])
         document.getElementById('periodName1').innerHTML = periodText1;
         processJSON();
-        tableUpdate();
-      }
+        //tableUpdate();
+        buildtable();
+        }
 
       function changeAlgorithm() {
         algo = document.getElementById('algoSelect').value;
@@ -605,6 +693,8 @@
           $('#seasonSelect option:selected').text();
         document.getElementById('periodName1').innerHTML = periodText1;
         processJSON();
+        graphUpdate();
+        buildtable();
       }
 
       function mapUpdate() {
@@ -613,10 +703,816 @@
 
       function tableUpdate() {
         //Update table with new index
+        buildtable();
       }
       /*****END FUNCTIONS FOR CHANGING THE INDEX OF THE DOWNLOADED DATA************/
 
       /*************** START SHWETA SECTION **********************/
+        //Tables
+
+var seasons = {
+    "POMRB" : 0,
+    "MONSOON" : 1,
+    "PREMON" : 2,
+    "POMKH" : 3
+}
+
+function buildtable(){
+  if (loc=="INDIA"){
+    table_data = builddata()
+    buildTable(table_data)
+  }
+  else{
+    table_data = buildDistrictData()
+    builddistrictTable(table_data)
+  }
+}
+//Build data for State Table
+function builddata(){
+    
+    var i = 0
+    var table_data = []
+    var data = JSON.parse(tableFileData.replace(/\bNaN\b/g, "null"))
+    for(i=0;i<data.length;i++){
+        var state_data = {}
+        var districts = []
+        state_data.State = data[i].State
+        state_data.CurrentLevel = data[i].CurrentLevel[docIdx]
+        state_data.AlgoLevel = data[i].AlgoLevel[docIdx]
+        state_data.IncreasingDistricts= data[i].IncreasingDistricts[docIdx]
+        state_data.DecreasingDistricts = data[i].DecreasingDistricts[docIdx]
+        for(var j=0 ; j < data[i].districts.length ;j++)
+        {
+            var district_data = {}
+            district_data.district = data[i].districts[j].district
+            district_data.CurrentLevel = data[i].districts[j].CurrentLevel[docIdx]
+            district_data.AlgoLevel = data[i].districts[j].AlgoLevel[docIdx]
+            district_data.IncreasingBlocks= data[i].districts[j].IncreasingBlocks[docIdx]
+            district_data.DecreasingBlocks = data[i].districts[j].DecreasingBlocks[docIdx]
+            districts[j] = district_data
+        }
+        state_data.districts = districts
+     table_data[i] = state_data
+     
+    }
+  //  console.log(table_data)
+    return table_data
+}
+//Build State Table
+function buildTable(data){
+  $("#Heading").attr("class","state-heading")
+  $(".s-name").text("State")
+  $(".s-imp").text("Improving Districts")
+  $(".s-dec").text("Declining Districts")
+  var table = document.getElementById('myTable')
+  table.innerHTML = ""
+  for (var i = 0; i< data.length; i++){
+    var row = `<tr class="state-row ${i}">
+                    <td>
+                      <div class="title-chevron">
+                        <span class="dropdown rotateDownRight">
+                          <svg height="24" width="24" viewbox=" 0 0 24 24">
+                             <polyline points="6 9 12 15 18 9" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" />
+                          </svg>
+                          </span>
+                      <span class ="title-icon" >${data[i].State}</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="delta is-increasing"></span> 
+                      <span class="total">${data[i].IncreasingDistricts}</span>
+                    </td>
+                    <td>
+                      <span class="delta is-decreasing"></span> 
+                      <span class="total">${data[i].DecreasingDistricts}</span>
+                    </td>
+                    <td>
+                      <span class="delta is-avgLevel"></span> 
+                      <span class="total">${Math.round((data[i].CurrentLevel) * 100) / 100}</span>
+                    </td>
+                    <td>
+                      <span class="delta is-minLevel"></span> 
+                      <span class="total">${Math.round((data[i].AlgoLevel) * 100) / 100}</span>
+                    </td>
+               </tr>
+               <tr></tr>`
+    
+
+              
+    table.innerHTML += row;
+    
+  }
+  var row = `<!--<tr class="is-spacer" style="display:none;">
+              <td colspan="4">
+              </td>
+            </tr>-->
+            <tr class="state-last-update" style="display:none;">
+              <td colspan="4" style="padding-bottom: 0px;">
+              </td>
+              <td align="center" class="state-page-link" colspan="1" style="width: 2.5rem;" style="padding-bottom:1rem;">
+                See more details 
+              </td>
+            </tr>
+
+            <tr class="districtHead" style="display:none;">
+            <td data-column="district" data-order="desc" class="district-heading">
+              <div class="heading-content"> 
+                  <abbr title="District">District</abbr>
+              </div>
+          </td>
+          <td data-column="IncreasingBlocks" data-order="desc" class="district-heading">
+              <div class="heading-content" > 
+                  <abbr title="Increasing Blocks">Increasing Blocks</abbr>
+              </div>
+          </td>
+          <td data-column="DecreasingBlocks" data-order="desc" class="district-heading">
+              <div class="heading-content"> 
+                  <abbr title="Decreasing Blocks">Decreasing Blocks</abbr>
+              </div>
+          </td>
+          <td data-column="CurrentLevel" data-order="desc" class="district-heading">
+              <div class="heading-content"> 
+                  <abbr title="Current Level">Current Level</abbr>
+              </div>
+              
+          </td>
+          <td data-column="AlgorithmLevel" data-order="desc" class="district-heading">
+            <div class="heading-content"> 
+                <abbr title="Algorithm Level">Algorithm Level</abbr>
+            </div>
+           
+        </td>
+          
+      </td>              
+    </tr>`
+    $(".state-row").after(row);
+    
+  for(i=0;i<data.length;i++){
+    for(j=0;j<data[i].districts.length;j++){
+
+      var row = `<tr class="district-row ${i}" style="display:none;">
+                    <td>
+                      <div class="title-chevron">
+                        <span class ="title-icon">${data[i].districts[j].district}</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="delta is-increasing"></span> 
+                      <span class="total">${data[i].districts[j].IncreasingBlocks}</span>
+                    </td>
+                    <td>
+                      <span class="delta is-decreasing"></span> 
+                      <span class="total">${data[i].districts[j].DecreasingBlocks}</span>
+                    </td>
+                    <td>
+                      <span class="delta is-avgLevel"></span> 
+                      <span class="total">${Math.round((data[i].districts[j].CurrentLevel) * 100) / 100}</span>
+                    </td>
+                    <td>
+                      <span class="delta is-minLevel"></span> 
+                      <span class="total">${Math.round((data[i].districts[j].AlgoLevel) * 100) / 100}</span>
+                    </td>
+               </tr>`
+               var dist = $(".districtHead")[i]
+            $(dist).after(row);
+    }
+  }
+}
+
+//State sorting
+$(document).on('click','.state-heading', function(){
+
+var column = $(this).data('column')
+var order = $(this).data('order')
+var text = $(this).html()
+text = text.substring(0, text.length - 1)
+if(order == 'desc'){
+$(this).data('order', "asc")
+table_data = table_data.sort((a,b) => a[column] > b[column] ? 1 : -1)
+text += '&#9660'
+
+}else{
+$(this).data('order', "desc")
+table_data = table_data.sort((a,b) => a[column] < b[column] ? 1 : -1)
+text += '&#9650'
+
+}
+$(this).html(text)
+buildTable(table_data)
+});
+
+//Disrtict dropdown
+$(document).ready(function(){
+  $(document).on('click', '.state-row',function(){
+    $(this).nextUntil('tr.state-row').slideToggle(200);
+    $(this).find("span:first").toggleClass("rotateDownRight");
+});
+});
+
+//District sorting
+
+  $(document).on('click','td.district-heading', function(){
+  var x = $(this).parent().next().attr('class')
+  var stateIndex = x.split(' ')
+  var index = stateIndex[1]
+  var column = $(this).data('column')
+  var order = $(this).data('order')
+  var text = $(this).html()
+  text = text.substring(0, text.length - 1)
+if(order == 'desc'){
+$(this).data('order', "asc")
+
+table_data[index].districts = table_data[index].districts.sort((a,b) => a[column] > b[column] ? 1 : -1)
+text += '        &#9660'}
+else{
+$(this).data('order', "desc")
+table_data[index].districts = table_data[index].districts.sort((a,b) => a[column] < b[column] ? 1 : -1)
+text += '&#9650'}
+
+$(this).html(text)
+
+var table1 = $(this).parent();
+buildDistrictTable(table1,index)
+});
+//Build District Tables after sorting
+function buildDistrictTable(table,index){
+  $(`.district-row.${index}`).remove()
+  for (var i = 0; i< table_data[index].districts.length; i++){
+    
+    var row = `<tr class="district-row ${index}">
+                    <td>
+                      <div class="title-chevron">
+                      <span class ="title-icon">${table_data[index].districts[i].district}</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="delta is-increasing"></span> 
+                      <span class="total">${table_data[index].districts[i].IncreasingBlocks}</span>
+                    </td>
+                    <td>
+                      <span class="delta is-decreasing"></span> 
+                      <span class="total">${table_data[index].districts[i].DecreasingBlocks}</span>
+                    </td>
+                    <td>
+                      <span class="delta is-avgLevel"></span> 
+                      <span class="total">${Math.round((table_data[index].districts[i].CurrentLevel) * 100) / 100}</span>
+                    </td>
+                    <td>
+                      <span class="delta is-minLevel"></span> 
+                      <span class="total">${Math.round((table_data[index].districts[i].AlgoLevel) * 100) / 100}</span>
+                    </td>
+        
+                  
+               </tr>`
+              var appendRow = $(`.state-row.${index}`).next().next()
+            
+    appendRow.after(row).app;
+  }
+}
+
+//Tables for each state 
+
+//Build Table Data for districts and blocks
+function buildDistrictData(){
+  var data = JSON.parse(tableFileData.replace(/\bNaN\b/g, "null"))
+    var i =0
+    var table_data = []
+    for(i=0;i<data.length;i++){
+        var district_data = {}
+        var blocks = []
+        district_data.District = data[i].District
+        district_data.CurrentLevel = data[i].CurrentLevel[docIdx]
+        district_data.AlgoLevel = data[i].AlgoLevel[docIdx]
+        district_data.IncreasingBlocks= data[i].IncreasingBlocks[docIdx]
+        district_data.DecreasingBlocks = data[i].DecreasingBlocks[docIdx]
+        for(var j=0 ; j < data[i].blocks.length ;j++)
+        {
+            var block_data = {}
+            block_data.block = data[i].blocks[j].Block
+            block_data.CurrentLevel = data[i].blocks[j].CurrentLevel[docIdx]
+            block_data.AlgoLevel = data[i].blocks[j].AlgoLevel[docIdx]
+            blocks[j] = block_data
+        }
+        district_data.blocks = blocks
+     table_data[i] = district_data
+     
+    }
+  //  console.log(table_data)
+    return table_data
+}
+
+
+//District sorting
+
+$(document).on('click','.district-Heading', function(){
+
+    var column = $(this).data('column')
+    var order = $(this).data('order')
+    var text = $(this).html()
+    text = text.substring(0, text.length - 1)
+    if(order == 'desc'){
+    $(this).data('order', "asc")
+    table_data = table_data.sort((a,b) => a[column] > b[column] ? 1 : -1)
+    text += '&#9660'
+    
+    }else{
+    $(this).data('order', "desc")
+    table_data = table_data.sort((a,b) => a[column] < b[column] ? 1 : -1)
+    text += '&#9650'
+    
+    }
+    $(this).html(text)
+    builddistrictTable(table_data)
+    });
+
+//Build district table   
+    function builddistrictTable(data){
+      $(".state-heading").attr("class", "district-Heading")
+      $(".s-name").text("District")
+      $(".s-imp").text("Improving Blocks")
+      $(".s-dec").text("Declining Blocks")
+    
+      var table = document.getElementById('myTable')
+      table.innerHTML = ""
+      var odd
+      for (var i = 0; i< data.length; i++){
+        if(i%2==0)
+            odd="odd"
+        else
+            odd=""
+        var row = `<tr class="districtRow ${i}" id ="${odd}">
+                        <td>
+                          <div class="title-chevron">
+                            <span class="dropdown rotateDownRight">
+                              <svg height="24" width="24" viewbox=" 0 0 24 24">
+                                 <polyline points="6 9 12 15 18 9" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" />
+                              </svg>
+                              </span>
+                          <span class ="title-icon" >${data[i].District}</span>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="delta is-increasing"></span> 
+                          <span class="total">${data[i].IncreasingBlocks}</span>
+                        </td>
+                        <td>
+                          <span class="delta is-decreasing"></span> 
+                          <span class="total">${data[i].DecreasingBlocks}</span>
+                        </td>
+                        <td>
+                          <span class="delta is-avgLevel"></span> 
+                          <span class="total">${Math.round((data[i].CurrentLevel) * 100) / 100}</span>
+                        </td>
+                        <td>
+                          <span class="delta is-minLevel"></span> 
+                          <span class="total">${Math.round((data[i].AlgoLevel) * 100) / 100}</span>
+                        </td>
+                   </tr>`
+        
+    
+                  
+        table.innerHTML += row;
+        
+      }
+      //Add block Heading
+      var row = `
+                <tr class="state-last-update" style="display:none;">
+                  <td colspan="4" style="padding-bottom: 0px;">
+                  </td>
+                  <td align="center" class="state-page-link" colspan="1" style="width: 2.5rem;" style="padding-bottom:1rem;">
+                    See more details 
+                  </td>
+                </tr>
+    
+                <tr class="blockHead" style="display:none;">
+                <td data-column="district" data-order="desc" class="block-heading" clospan="1">
+                  <div class="heading-content"> 
+                      <abbr title="District">Block</abbr>
+                  </div>
+              </td>
+              <td data-column="CurrentLevel" data-order="desc" class="block-heading" colspan="2">
+                  <div class="heading-content"> 
+                      <abbr title="Current Level">Current Level</abbr>
+                  </div>
+                  
+              </td>
+              <td data-column="AlgorithmLevel" data-order="desc" class="block-heading" colspan="2">
+                <div class="heading-content"> 
+                    <abbr title="Algorithm Level">Algorithm Level</abbr>
+                </div>
+               
+            </td>
+              
+          </td>              
+        </tr>`
+        $(".districtRow").after(row);
+      //Add block rows
+      for(i=0;i<data.length;i++){
+        for(j=0;j<data[i].blocks.length;j++){
+    
+          var row = `<tr class="block-row ${i}" style="display:none;">
+                        <td colspan="1">
+                          <div class="title-chevron">
+                            <span class ="title-icon">${data[i].blocks[j].block}</span>
+                          </div>
+                        </td>
+                        <td colspan="2">
+                          <span class="delta is-avgLevel"></span> 
+                          <span class="total">${Math.round((data[i].blocks[j].CurrentLevel) * 100) / 100}</span>
+                        </td>
+                        <td colspan="2">
+                          <span class="delta is-minLevel"></span> 
+                          <span class="total">${Math.round((data[i].blocks[j].AlgoLevel) * 100) / 100}</span>
+                        </td>
+                   </tr>`
+                   var dist = $(".blockHead")[i]
+                $(dist).after(row);
+        }
+      }
+    }
+    
+    //Block dropdown 
+    $(document).ready(function(){
+      $(document).on('click', '.districtRow',function(){
+        $(this).nextUntil('tr.districtRow').slideToggle(200);
+        $(this).find("span:first").toggleClass("rotateDownRight");
+    });
+    });
+    
+    //Blocks sorting
+    
+      $(document).on('click','td.block-heading', function(){
+      var x = $(this).parent().next().attr('class')
+      var stateIndex = x.split(' ')
+      var index = stateIndex[1]
+      var column = $(this).data('column')
+      var order = $(this).data('order')
+      var text = $(this).html()
+      text = text.substring(0, text.length - 1)
+    if(order == 'desc'){
+    $(this).data('order', "asc")
+    
+    table_data[index].blocks = table_data[index].blocks.sort((a,b) => a[column] > b[column] ? 1 : -1)
+    text += '        &#9660'}
+    else{
+    $(this).data('order', "desc")
+    table_data[index].blocks = table_data[index].blocks.sort((a,b) => a[column] < b[column] ? 1 : -1)
+    text += '&#9650'}
+    
+    $(this).html(text)
+    
+    var table2 = $(this).parent();
+    buildBlockTable(table2,index)
+    });
+    
+    //Build block table after sorting
+    function buildBlockTable(table,index){
+      
+      $(`.block-row.${index}`).remove()
+      for (var i = 0; i< table_data[index].blocks.length; i++){
+        
+        var row = `<tr class="block-row ${index}">
+                        <td colspan="1">
+                          <div class="title-chevron">
+                          <span class ="title-icon">${table_data[index].blocks[i].block}</span>
+                          </div>
+                        </td>
+                        <td colspan="2">
+                          <span class="delta is-avgLevel"></span> 
+                          <span class="total">${Math.round((table_data[index].blocks[i].CurrentLevel) * 100) / 100}</span>
+                        </td>
+                        <td colspan="2">
+                          <span class="delta is-minLevel"></span> 
+                          <span class="total">${Math.round((table_data[index].blocks[i].AlgoLevel) * 100) / 100}</span>
+                        </td>
+                        </tr>`
+                  var appendRow = $(`.districtRow.${index}`).next().next()
+        appendRow.after(row).app;
+      }
+      
+    }
+
+    //Graphs section
+
+    function buildGraphData(){
+
+      var graphDataOriginalPOMRB = []
+      var graphDataAlgoPOMRB = []
+      var graphDataOriginalPREMON = []
+      var graphDataAlgoPREMON = []
+      var graphDataOriginalMONSOON = []
+      var graphDataAlgoMONSOON = []
+      var graphDataOriginalPOMKH = []
+      var graphDataAlgoPOMKH = []
+      var locAlgo = loc.concat("_",algo)
+      var POMRB_IDX = [] 
+      var PREMON_IDX = [] 
+      var MONSOON_IDX = []
+      var POMKH_IDX = []
+  
+    Object.keys(idxDict).forEach(function(key) {
+        POMRB_IDX.push(idxDict[key][0]);
+        PREMON_IDX.push(idxDict[key][1]);
+        MONSOON_IDX.push(idxDict[key][2]);
+        POMKH_IDX.push(idxDict[key][3]);
+    });
+    
+   for(var i=0;i<POMRB_IDX.length;i++)
+    { 
+      graphDataOriginalPOMRB.push({
+               x: new Date(graph_data.Date[POMRB_IDX[i]]),
+               y: graph_data[loc][POMRB_IDX[i]],
+               z: graph_data.Season[POMRB_IDX[i]]
+            })
+      graphDataAlgoPOMRB.push({
+               x: new Date(graph_data.Date[POMRB_IDX[i]]),
+               y: graph_data[locAlgo][POMRB_IDX[i]],
+               z: graph_data.Season[POMRB_IDX[i]]
+               
+            })
+      graphDataOriginalPREMON.push({
+               x: new Date(graph_data.Date[PREMON_IDX[i]]),
+               y: graph_data[loc][PREMON_IDX[i]],
+               z: graph_data.Season[PREMON_IDX[i]]
+               
+            })
+      graphDataAlgoPREMON.push({
+               x: new Date(graph_data.Date[PREMON_IDX[i]]),
+               y: graph_data[locAlgo][PREMON_IDX[i]],
+               z: graph_data.Season[PREMON_IDX[i]]
+            }) 
+      graphDataOriginalMONSOON.push({
+               x: new Date( graph_data.Date[MONSOON_IDX[i]]),
+               y: graph_data[loc][MONSOON_IDX[i]],
+               z: graph_data.Season[MONSOON_IDX[i]]
+               
+            })
+      graphDataAlgoMONSOON.push({
+               x: new Date(graph_data.Date[MONSOON_IDX[i]]),
+               y: graph_data[locAlgo][MONSOON_IDX[i]],
+               z: graph_data.Season[MONSOON_IDX[i]]
+               
+            }) 
+      graphDataOriginalPOMKH.push({
+               x: new Date(graph_data.Date[POMKH_IDX[i]]),
+               y: graph_data[loc][POMKH_IDX[i]],
+               z: graph_data.Season[POMKH_IDX[i]]
+               
+            })
+      graphDataAlgoPOMKH.push({
+               x: new Date(graph_data.Date[POMKH_IDX[i]]),
+               y: graph_data[locAlgo][POMKH_IDX[i]],
+               z: graph_data.Season[POMKH_IDX[i]]
+               
+            })
+    }
+      
+     chart1 = new CanvasJS.Chart("graph1", {
+         title: {
+            text: "All Seasons"
+         },
+         axisX: {
+            valueFormatString: "MMM YYYY"
+        },
+         axisY: {
+         //  title: "Median List Price",
+         //   minimum: 0
+            //suffix: k
+         },
+         toolTip: {
+            shared: true
+         },
+         legend: {
+            cursor: "pointer",
+            gridThickness:"0",
+            verticalAlign: "top",
+            horizontalAlign: "center",
+            dockInsidePlotArea: true,
+            
+
+         //	itemclick: toogleDataSeries
+         },
+         data: [{
+            type:"line",
+         //	axisYType: "secondary",
+            name: "POMRB",
+            showInLegend: true,
+            markerSize: 0,
+            yValueFormatString: "#.###",
+            dataPoints: graphDataAlgoPOMRB
+         },
+         {
+            type: "line",
+         //	axisYType: "secondary",
+            name: "PREMON",
+            showInLegend: true,
+            markerSize: 0,
+            yValueFormatString: "#.###",
+            dataPoints:graphDataAlgoPREMON
+         },
+         {
+            type: "line",
+         //	axisYType: "secondary",
+            name: "MONSOON",
+            showInLegend: true,
+            markerSize: 0,
+            yValueFormatString: "#.###",
+            dataPoints:graphDataAlgoMONSOON
+         },
+         {
+            type: "line",
+         //	axisYType: "secondary",
+            name: "POMKH",
+            showInLegend: true,
+            markerSize: 0,
+            yValueFormatString: "#.###",
+            dataPoints:graphDataAlgoPOMKH
+         }]
+        }) 
+      chart2 = new CanvasJS.Chart("graph2", {
+         title: {
+            text: "POMRB"
+         },
+         axisX: {
+            valueFormatString: "MMM YYYY"
+            
+         },
+         axisY: {
+         //  title: "Median List Price",
+         //  maximum: maxVal
+            
+         //   minimum: 4
+
+            //suffix: "K"
+         },
+         toolTip: {
+            shared: true
+         },
+         legend: {
+            cursor: "pointer",
+            verticalAlign: "top",
+            horizontalAlign: "center",
+            dockInsidePlotArea: true,
+         //	itemclick: toogleDataSeries
+         },
+         data: [{
+            type:"line",
+         //	axisYType: "secondary",
+            name: "Original Data",
+            showInLegend: true,
+            markerSize: 0,
+            yValueFormatString: "#.###",
+            dataPoints: graphDataOriginalPOMRB
+         },
+         {
+            type: "line",
+         //	axisYType: "secondary",
+            name: "Algorithm Data",
+            showInLegend: true,
+            markerSize: 0,
+            yValueFormatString: "#.###",
+            dataPoints:graphDataAlgoPOMRB
+         }]
+         })
+
+      chart3 = new CanvasJS.Chart("graph3", {
+         title: {
+            text: "MONSOON"
+         },
+         axisX: {
+            valueFormatString: "MMM YYYY"
+            
+         },
+         axisY: {
+         //  title: "Median List Price",
+         //  maximum: maxVal
+         //   minimum: 4
+        //suffix: "K"
+         },
+         toolTip: {
+            shared: true
+         },
+         legend: {
+            cursor: "pointer",
+            verticalAlign: "top",
+            horizontalAlign: "center",
+            dockInsidePlotArea: true,
+         //	itemclick: toogleDataSeries
+         },
+         data: [{
+            type:"line",
+         //	axisYType: "secondary",
+            name: "Original Data",
+            showInLegend: true,
+            markerSize: 0,
+            yValueFormatString: "#.###",
+            dataPoints: graphDataOriginalMONSOON
+         },
+         {
+            type: "line",
+         //	axisYType: "secondary",
+            name: "Algorithm Data",
+            showInLegend: true,
+            markerSize: 0,
+            yValueFormatString: "#.###",
+            dataPoints:graphDataAlgoMONSOON
+         }]
+         })
+
+      chart4 = new CanvasJS.Chart("graph4", {
+         title: {
+            text: "PREMON"
+         },
+         axisX: {
+            valueFormatString: "MMM YYYY"
+            
+         },
+         axisY: {
+         //  title: "Median List Price",
+         //  maximum: maxVal
+         //   minimum: 4
+        //suffix: "K"
+         },
+         toolTip: {
+            shared: true
+         },
+         legend: {
+            cursor: "pointer",
+            verticalAlign: "top",
+            horizontalAlign: "center",
+            dockInsidePlotArea: true,
+         //	itemclick: toogleDataSeries
+         },
+         data: [{
+            type:"line",
+         //	axisYType: "secondary",
+            name: "Original Data",
+            showInLegend: true,
+            markerSize: 0,
+            yValueFormatString: "#.###",
+            dataPoints: graphDataOriginalPREMON
+         },
+         {
+            type: "line",
+         //	axisYType: "secondary",
+            name: "Algorithm Data",
+            showInLegend: true,
+            markerSize: 0,
+            yValueFormatString: "#.###",
+            dataPoints:graphDataAlgoPREMON
+         }]
+         })
+
+      chart5 = new CanvasJS.Chart("graph5", {
+         title: {
+            text: "POMKH"
+         },
+         axisX: {
+            valueFormatString: "MMM YYYY"
+            
+         },
+         axisY: {
+         //  title: "Median List Price",
+        //suffix: "K"
+         },
+         toolTip: {
+            shared: true
+         },
+         legend: {
+            cursor: "pointer",
+            verticalAlign: "top",
+            horizontalAlign: "center",
+            dockInsidePlotArea: true,
+         //	itemclick: toogleDataSeries
+         },
+         data: [{
+            type:"line",
+         //	axisYType: "secondary",
+            name: "Original Data",
+            showInLegend: true,
+            markerSize: 0,
+            yValueFormatString: "#.###",
+            dataPoints: graphDataOriginalPOMKH
+         },
+         {
+            type: "line",
+         //	axisYType: "secondary",
+            name: "Algorithm Data",
+            showInLegend: true,
+            markerSize: 0,
+            yValueFormatString: "#.###",
+            dataPoints:graphDataAlgoPOMKH
+         }]
+
+
+         })
+         chart1.render()
+        chart2.render()
+        chart3.render()
+        chart4.render()
+        chart5.render()
+         
+      }
 
       /*************** STOP SHWETA SECTION **********************/
 
