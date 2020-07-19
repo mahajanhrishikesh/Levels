@@ -74,7 +74,7 @@
         <div class="row mt-5">
           <!--LEFT SIDE HOME-->
           <div class="col-md-6 col-sm-12">
-            <div class="shadow pt-4 pb-4 pl-3 pr-3">
+            <div class="card card-body mb-3 shadow-sm">
               <h4 class="text-center mb-1">
                 <b>Search State/District/Block</b>
               </h4>
@@ -96,66 +96,65 @@
                   </button>
                 </div>
               </div>
-            </div>
 
-            <!--DATE HANDLING FORM-->
+              <!--DATE HANDLING FORM-->
 
-            <div class="row my-4 text-center">
-              <div class="col-6 p-1">
-                <div class="card card-body shadow-sm">
-                  <div class="card-title"><b>Year</b></div>
-                  <select
-                    name="year"
-                    id="yearSelect"
-                    class="form-control"
-                    onclick="changeYear(this.value);"
-                  >
-                    <option value="2018">2018</option>
-                    <option value="2017">2017</option>
-                    <option value="2016">2016</option>
-                    <option value="2015">2015</option>
-                    <option value="2014">2014</option>
-                    <option value="2013">2013</option>
-                    <option value="2012">2012</option>
-                    <option value="2011">2011</option>
-                    <option value="2010">2010</option>
-                    <option value="2009">2009</option>
-                    <option value="2008">2008</option>
-                    <option value="2007">2007</option>
-                    <option value="2006">2006</option>
-                    <option value="2005">2005</option>
-                    <option value="2004">2004</option>
-                    <option value="2003">2003</option>
-                    <option value="2002">2002</option>
-                    <option value="2001">2001</option>
-                    <option value="2000">2000</option>
-                    <option value="1999">1999</option>
-                    <option value="1998">1998</option>
-                    <option value="1997">1997</option>
-                    <option value="1996">1996</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-6 p-1">
-                <div class="card card-body shadow-sm">
-                  <div class="card-title">
-                    <b>Season</b>
+              <div class="row my-4 text-center">
+                <div class="col-6 p-1">
+                  <div class="">
+                    <div class="card-title lead"><b>Year</b></div>
+                    <select
+                      name="year"
+                      id="yearSelect"
+                      class="form-control"
+                      onclick="changeYear(this.value);"
+                    >
+                      <option value="2018">2018</option>
+                      <option value="2017">2017</option>
+                      <option value="2016">2016</option>
+                      <option value="2015">2015</option>
+                      <option value="2014">2014</option>
+                      <option value="2013">2013</option>
+                      <option value="2012">2012</option>
+                      <option value="2011">2011</option>
+                      <option value="2010">2010</option>
+                      <option value="2009">2009</option>
+                      <option value="2008">2008</option>
+                      <option value="2007">2007</option>
+                      <option value="2006">2006</option>
+                      <option value="2005">2005</option>
+                      <option value="2004">2004</option>
+                      <option value="2003">2003</option>
+                      <option value="2002">2002</option>
+                      <option value="2001">2001</option>
+                      <option value="2000">2000</option>
+                      <option value="1999">1999</option>
+                      <option value="1998">1998</option>
+                      <option value="1997">1997</option>
+                      <option value="1996">1996</option>
+                    </select>
                   </div>
-                  <select
-                    name="season"
-                    id="seasonSelect"
-                    class="form-control"
-                    onclick="changeSeason(this.id)"
-                  >
-                    <option value="88" id="POMRB">POMRB</option>
-                    <option value="89" id="PREMON">PREMON</option>
-                    <option value="90" id="MONSOON">MONSOON</option>
-                    <option value="91" id="POMKH" selected>POMKH</option>
-                  </select>
+                </div>
+                <div class="col-6 p-1">
+                  <div class="">
+                    <div class="card-title lead">
+                      <b>Season</b>
+                    </div>
+                    <select
+                      name="season"
+                      id="seasonSelect"
+                      class="form-control"
+                      onclick="changeSeason(this.id)"
+                    >
+                      <option value="88" id="POMRB">POMRB</option>
+                      <option value="89" id="PREMON">PREMON</option>
+                      <option value="90" id="MONSOON">MONSOON</option>
+                      <option value="91" id="POMKH" selected>POMKH</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
-
             <!--CURRENT MASTER LOCATION STATS CARD GROUP-->
             <div class="row text-center no-gutters">
               <div class="col-sm-6 col-md-3 pl-2">
@@ -163,7 +162,9 @@
                   <h6>
                     <b>Improving<br /><span class="level">States</span></b>
                   </h6>
-                  <h6 class="font-weight-bold">23</h6>
+                  <h6 class="font-weight-bold">
+                    <span class="improvingRegions"></span>
+                  </h6>
                 </div>
               </div>
               <div class="col-sm-6 col-md-3 pl-2">
@@ -171,7 +172,9 @@
                   <h6>
                     <b>Declining<br /><span class="level">States</span></b>
                   </h6>
-                  <h6 class="font-weight-bold">10</h6>
+                  <h6 class="font-weight-bold">
+                    <span class="decliningRegions"></span>
+                  </h6>
                 </div>
               </div>
               <div class="col-sm-6 col-md-3 pl-2">
@@ -280,7 +283,9 @@
                     <h6>
                       <b>Improving<br /><span class="level">States</span></b>
                     </h6>
-                    <h6 class="font-weight-bold">23</h6>
+                    <h6 class="font-weight-bold">
+                      <span class="improvingRegions"></span>
+                    </h6>
                   </div>
                 </div>
                 <div class="col-md-3 pl-2">
@@ -290,7 +295,9 @@
                     <h6>
                       <b>Declining<br /><span class="level">States</span></b>
                     </h6>
-                    <h6 class="font-weight-bold">10</h6>
+                    <h6 class="font-weight-bold">
+                      <span class="decliningRegions"></span>
+                    </h6>
                   </div>
                 </div>
                 <div class="col-md-3 pl-2">
@@ -441,6 +448,8 @@
       var docIdx = 91;
       var algo = 'ARIMA';
       var level = 0;
+      var improvingRegionCount = 0;
+      var decliningRegionCount = 0;
 
       // Index dictionary for years
       var idxDict = {
@@ -1576,6 +1585,8 @@
 
       /*************** START YASH SECTION **********************/
       function processJSON() {
+        improvingRegionCount = 0;
+        decliningRegionCount = 0;
         if (level == 1) {
           //console.log("Working Level 1");
           var t = docIdx;
@@ -1622,10 +1633,12 @@
               if (dict[key] == 1) {
                 //console.log("Coloring level 1 green");
                 st.style.fill = '#ABEBC6';
+                improvingRegionCount += 1;
               }
               if (dict[key] == 0) {
                 //console.log("Coloring level 1 red");
                 st.style.fill = '#F5B7B1';
+                decliningRegionCount += 1;
               }
             } catch (err) {
               console.log(key, 'NOT FOUND');
@@ -1672,15 +1685,29 @@
               //console.log(key);
               //console.log("Coloring level 0 green");
               st.style.fill = '#ABEBC6';
+              improvingRegionCount += 1;
             }
             if (dict[key] == 0) {
               //console.log(key);
               //console.log("Coloring level 0 red");
               st.style.fill = '#F5B7B1';
+              decliningRegionCount += 1;
             }
           }
           var ldk = document.getElementById('LD');
           ldk.style.fill = document.getElementById('JK').style.fill;
+        }
+        var improvingRegions = document.getElementsByClassName(
+          'improvingRegions'
+        );
+        for (var i = 0; i < improvingRegions.length; i++) {
+          improvingRegions[i].innerHTML = improvingRegionCount.toString();
+        }
+        var decliningRegions = document.getElementsByClassName(
+          'decliningRegions'
+        );
+        for (var i = 0; i < decliningRegions.length; i++) {
+          decliningRegions[i].innerHTML = decliningRegionCount.toString();
         }
       }
 

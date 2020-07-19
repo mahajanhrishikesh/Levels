@@ -18,6 +18,7 @@
     />
     <!--<link rel="stylesheet" href="css/theme.css" />-->
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/load_page_animation.css" />
     <title>Bootstrap Theme</title>
   </head>
   <body>
@@ -66,15 +67,19 @@
     </nav>
 
     <!-- FORM SECTION -->
-    <section id="formSection">
+    <section id="formSection" class="main_content">
       <div class="container">
         <div class="card card-body shadow my-5">
           <p class="h2 text-center">Compare Ground Water Levels</p>
           <div class="form-group">
-            <label for="regionSelect"  class="font-weight-bold"
+            <label for="regionSelect" class="font-weight-bold"
               >Select Region</label
             >
-            <select class="form-control" onclick="changeRegion()" id="regionSelect"></select>
+            <select
+              class="form-control"
+              onclick="changeRegion()"
+              id="regionSelect"
+            ></select>
             <div class="row mt-3">
               <!-- Select Left Period -->
               <div class="col-md-6">
@@ -138,7 +143,6 @@
                   <option value="SMA">SMA</option>
                   <option value="DES">DES</option>
                   <option value="TES">HWES</option>
-                  
                 </select>
               </div>
 
@@ -204,7 +208,6 @@
                   <option value="SMA">SMA</option>
                   <option value="DES">DES</option>
                   <option value="TES">HWES</option>
-
                 </select>
               </div>
             </div>
@@ -231,7 +234,8 @@
             <p class="h3 text-center text-muted">Map</p>
             <!--MAP STARTS HERE-->
             <div id="mapSection1" class="my-3">
-              <div id = "mapContainer1"
+              <div
+                id="mapContainer1"
                 class="card card-body shadow"
                 style="height: 600px;"
               ></div>
@@ -289,7 +293,8 @@
             <p class="h3 text-center text-muted">Map</p>
             <!--MAP STARTS HERE-->
             <div id="mapSection2" class="my-3">
-              <div id="mapContainer2" 
+              <div
+                id="mapContainer2"
                 class="card card-body shadow"
                 style="height: 600px;"
               ></div>
@@ -384,22 +389,21 @@
 
     <script>
       // Document Indexes
-      var algo1 = null;
-	  var algo2 = null;
-      var docIdx1 = null;
-      var docIdx2 = null;
-      var year1 = null;
-      var year2 = null;
-      var season1 = null;
-      var season2 = null;
-      var loc = null;
+      var algo1 = 'ARIMA';
+      var algo2 = 'ARIMA';
+      var docIdx1 = 88;
+      var docIdx2 = 88;
+      var year1 = 2018;
+      var year2 = 2018;
+      var season1 = 'POMRB';
+      var season2 = 'POMRB';
+      var loc = 'INDIA';
 
       //FILE VARIABLES WITH DATA
       var mapFile1Data = null;
       var mapFile2Data = null;
       var tableFileData = null;
       var locFileData = null;
-
 
       // Index dictionary for years
       var idxDict = {
@@ -476,9 +480,8 @@
       }
       document.getElementById('regionSelect').innerHTML = selectStateInner;
 
-      function changeRegion()
-      {
-      	loc = document.getElementById('regionSelect').value;
+      function changeRegion() {
+        loc = document.getElementById('regionSelect').value;
       }
 
       // Select year for left side
@@ -541,16 +544,14 @@
         loadMap1Data();
         loadMap2Data();
         loadNormalData();
-
       }
 
-      function loadMap1Data()
-      {
-      	var xhttp = new XMLHttpRequest();
+      function loadMap1Data() {
+        var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             mapFile1Data = this.responseText;
-            document.getElementById("mapContainer1").innerHTML = mapFile1Data;
+            document.getElementById('mapContainer1').innerHTML = mapFile1Data;
             separateSVG();
           }
         };
@@ -558,13 +559,12 @@
         xhttp.send();
       }
 
-      function loadMap2Data()
-      {
-      	var xhttp = new XMLHttpRequest();
+      function loadMap2Data() {
+        var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             mapFile2Data = this.responseText;
-            document.getElementById("mapContainer2").innerHTML = mapFile2Data;
+            document.getElementById('mapContainer2').innerHTML = mapFile2Data;
           }
         };
         xhttp.open('GET', 'maps/' + loc + '.svg', true);
@@ -576,16 +576,15 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             locFileData = this.responseText;
-            setTimeout(function(){
-              processJSON("map1");//LEFT SIDE CALL
-              processJSON("map2");//RIGHT SIDE CALL
+            setTimeout(function () {
+              processJSON('map1'); //LEFT SIDE CALL
+              processJSON('map2'); //RIGHT SIDE CALL
             }, 1000);
           }
         };
         if (loc == 'INDIA') {
           xhttp.open('GET', 'data/' + loc + '.json', true);
-        } 
-        else {
+        } else {
           xhttp.open(
             'GET',
             'data/DISTRICTDATA/JSON/DISTRICTWISE_' + loc + '.json',
@@ -597,34 +596,32 @@
         //Write Load new map function here
       }
 
-      function separateSVG()
-      {
-      	var ids = document.getElementsByTagName("path");
-      	//console.log(ramesh);
-      	for (var i in ids)
-      	{
-      		var temp = ids[i].id;
-      		temp = temp + "_1";
-      		ids[i].id = temp;
-      	}
+      function separateSVG() {
+        var ids = document.getElementsByTagName('path');
+        //console.log(ramesh);
+        for (var i in ids) {
+          var temp = ids[i].id;
+          temp = temp + '_1';
+          ids[i].id = temp;
+        }
       }
 
-      function processJSON(identifier)
-      {
-      	//console.log(identifier);
-        if(identifier=="map1")
-        {
-
+      function processJSON(identifier) {
+        //console.log(identifier);
+        if (identifier == 'map1') {
           //console.log("Working Level 1");
           var t = docIdx1;
           var obj = JSON.parse(locFileData);
           var temp = Object.keys(obj);
-          
-          var region_names=[];
-          for(var i=1;i<temp.length-1;i++)
-          {
-            if(!temp[i].includes("_") && temp[i] != "MN" && temp[i] != "NL" && temp[i] != "AN"  )
-            {
+
+          var region_names = [];
+          for (var i = 1; i < temp.length - 1; i++) {
+            if (
+              !temp[i].includes('_') &&
+              temp[i] != 'MN' &&
+              temp[i] != 'NL' &&
+              temp[i] != 'AN'
+            ) {
               region_names.push(temp[i]);
             }
           }
@@ -634,143 +631,114 @@
           }*/
           //console.log(obj["Anand_ARIMA"][91]);
 
+          var dict = {};
 
-          var dict={};
-          
-          for (var i = 1; i<region_names.length; i++) 
-          { 
-            var meth = region_names[i]+"_"+algo1; 
-            try
-            {
-              if(obj[region_names[i]][t] <= obj[meth][t])
-              {
+          for (var i = 1; i < region_names.length; i++) {
+            var meth = region_names[i] + '_' + algo1;
+            try {
+              if (obj[region_names[i]][t] <= obj[meth][t]) {
                 //console.log("Value",obj[states[i]][t]);
                 //console.log("Benchmark",obj[meth][t]);
                 dict[region_names[i]] = 1;
               }
-              if(obj[region_names[i]][t] > obj[meth][t])
-              {
-                  //console.log("Value",obj[states[i]][t]);
-                  //console.log("Benchmark",obj[meth][t]);
-                  dict[region_names[i]] = 0;
+              if (obj[region_names[i]][t] > obj[meth][t]) {
+                //console.log("Value",obj[states[i]][t]);
+                //console.log("Benchmark",obj[meth][t]);
+                dict[region_names[i]] = 0;
               }
-            }
-            catch(err)
-            {
-              console.log("[LEFT]No data for :",meth);
+            } catch (err) {
+              console.log('[LEFT]No data for :', meth);
             }
           }
           //console.log("_ wala");
-          for(var key in dict)
-          {
+          for (var key in dict) {
             //console.log(key);
-            var key2 = key + "_1";
+            var key2 = key + '_1';
             //console.log(key);
             st = document.getElementById(key2);
             console.log(st);
-            try
-            {
-              if(dict[key] ==1)
-              {
+            try {
+              if (dict[key] == 1) {
                 //console.log("Coloring level 1 green");
-                st.style.fill = "#ABEBC6";
+                st.style.fill = '#ABEBC6';
               }
-              if(dict[key] ==0)
-              {
+              if (dict[key] == 0) {
                 //console.log("Coloring level 1 red");
-                st.style.fill = "#F5B7B1";
+                st.style.fill = '#F5B7B1';
               }
+            } catch (err) {
+              console.log(key, 'NOT FOUND [LEFT]');
             }
-            catch(err)
-            {
-              console.log(key,"NOT FOUND [LEFT]");
-            }
-            
           }
-          if(loc=="INDIA")
-          {
-          	var ldk = document.getElementById('LD_1');
-          	ldk.style.fill = document.getElementById('JK_1').style.fill;	
+          if (loc == 'INDIA') {
+            var ldk = document.getElementById('LD_1');
+            ldk.style.fill = document.getElementById('JK_1').style.fill;
           }
-          
         }
         //LEFT UP
         //RIGHT BELOW
-        else
-        {
+        else {
           //console.log("Working Level 0");
           var t = docIdx2;
           var obj = JSON.parse(locFileData);
           var temp = Object.keys(obj);
-          var states_names=[];
-          for(var i=2;i<temp.length;i++)
-          {
-            if(!temp[i].includes("_") && temp[i] != "MN" && temp[i] != "NL" && temp[i] != "AN"  )
-            {
+          var states_names = [];
+          for (var i = 2; i < temp.length; i++) {
+            if (
+              !temp[i].includes('_') &&
+              temp[i] != 'MN' &&
+              temp[i] != 'NL' &&
+              temp[i] != 'AN'
+            ) {
               states_names.push(temp[i]);
             }
           }
           //console.log(states_names);
-          var dict={};
-          for (var i = 0; i<states_names.length; i++) 
-          { 
+          var dict = {};
+          for (var i = 0; i < states_names.length; i++) {
             //console.log(states[i]);
-            var meth = states_names[i]+"_"+algo2; 
-            try
-            {
-	            if(obj[states_names[i]][t] <= obj[meth][t])
-	            {
-	              //console.log("Value",obj[states_names[i]][t]);
-	              //console.log("Ref",obj[meth][t]);
-	              dict[states_names[i]] = 1;
-	            }
-	            if(obj[states_names[i]][t] > obj[meth][t])
-	            {
-	                //console.log("Value",obj[states_names[i]][t]);
-	                //console.log("Ref",obj[meth][t]);
-	                dict[states_names[i]] = 0;
-	            }
-	        }
-	        catch(err)
-            {
-              console.log("[RIGHT]No data for :",meth);
+            var meth = states_names[i] + '_' + algo2;
+            try {
+              if (obj[states_names[i]][t] <= obj[meth][t]) {
+                //console.log("Value",obj[states_names[i]][t]);
+                //console.log("Ref",obj[meth][t]);
+                dict[states_names[i]] = 1;
+              }
+              if (obj[states_names[i]][t] > obj[meth][t]) {
+                //console.log("Value",obj[states_names[i]][t]);
+                //console.log("Ref",obj[meth][t]);
+                dict[states_names[i]] = 0;
+              }
+            } catch (err) {
+              console.log('[RIGHT]No data for :', meth);
             }
           }
           console.log(dict);
           console.log(states_names);
-          for(var key in dict)
-          {
+          for (var key in dict) {
             st = document.getElementById(key);
             //console.log(key);
-            try
-            {
-	            if(dict[key] ==1)
-	            {
-	              //console.log(key);
-	              //console.log("Coloring level 0 green");
-	              st.style.fill = "#ABEBC6";
-	            }
-	            if(dict[key] ==0)
-	            {
-	              //console.log(key);
-	              //console.log("Coloring level 0 red");
-	              st.style.fill = "#F5B7B1";
-	            }
-	        }
-	        catch(err)
-            {
-              console.log(key,"NOT FOUND [LEFT]");
+            try {
+              if (dict[key] == 1) {
+                //console.log(key);
+                //console.log("Coloring level 0 green");
+                st.style.fill = '#ABEBC6';
+              }
+              if (dict[key] == 0) {
+                //console.log(key);
+                //console.log("Coloring level 0 red");
+                st.style.fill = '#F5B7B1';
+              }
+            } catch (err) {
+              console.log(key, 'NOT FOUND [LEFT]');
             }
           }
-          if(loc=="INDIA")
-          {
-          	var ldk = document.getElementById('LD');
-          	ldk.style.fill = document.getElementById('JK').style.fill;	
+          if (loc == 'INDIA') {
+            var ldk = document.getElementById('LD');
+            ldk.style.fill = document.getElementById('JK').style.fill;
           }
         }
-        
       }
-
     </script>
   </body>
 </html>
