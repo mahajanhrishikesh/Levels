@@ -159,10 +159,29 @@
                   </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="card-title">
+                    Algorithms
+                  </div>
+                  <select
+                    name="year"
+                    id="algoSelect"
+                    class="form-control"
+                    onclick="changeAlgorithm()"
+                  >
+                    <option value="ARIMA">ARIMA</option>
+                    <option value="EWMA">EWMA</option>
+                    <option value="SMA">SMA</option>
+                    <option value="DES">DES</option>
+                    <option value="TES">HWES</option>
+                  </select>
+                </div>
+              </div>
             </div>
             <!--CURRENT MASTER LOCATION STATS CARD GROUP-->
             <div class="row text-center no-gutters">
-              <div class="col-sm-6 col-md-3 pl-2">
+              <div class="col-sm-6 col-md-6 pl-2">
                 <div class="mb-2 card text-success card-body shadow-sm">
                   <h6>
                     <b>Improving<br /><span class="level">States</span></b>
@@ -172,7 +191,7 @@
                   </h6>
                 </div>
               </div>
-              <div class="col-sm-6 col-md-3 pl-2">
+              <div class="col-sm-6 col-md-6 pl-2">
                 <div class="mb-2 card card-body text-danger shadow-sm">
                   <h6>
                     <b>Declining<br /><span class="level">States</span></b>
@@ -180,22 +199,6 @@
                   <h6 class="font-weight-bold">
                     <span class="decliningRegions"></span>
                   </h6>
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-3 pl-2">
-                <div class="mb-2 card card-body text-warning shadow-sm">
-                  <h6>
-                    <b>Current<br />GWL</b>
-                  </h6>
-                  <h6 class="font-weight-bold">10.74</h6>
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-3 pl-2">
-                <div class="mb-2 card card-body text-primary shadow-sm">
-                  <h6>
-                    <b>Average<br />GWL</b>
-                  </h6>
-                  <h6 class="font-weight-bold">11.89</h6>
                 </div>
               </div>
             </div>
@@ -278,73 +281,6 @@
             </h6>
 
             <!--MAP STARTS HERE-->
-            <div id="mapSection" class="mt-3">
-              <!--CURRENT MASTER LOCATION STATS CARD GROUP-->
-              <div class="row text-center no-gutters">
-                <div class="col-md-3 pl-2">
-                  <div
-                    class="mb-2 card bg-success card-body shadow-sm text-white"
-                  >
-                    <h6>
-                      <b>Improving<br /><span class="level">States</span></b>
-                    </h6>
-                    <h6 class="font-weight-bold">
-                      <span class="improvingRegions"></span>
-                    </h6>
-                  </div>
-                </div>
-                <div class="col-md-3 pl-2">
-                  <div
-                    class="mb-2 card card-body bg-danger shadow-sm text-white"
-                  >
-                    <h6>
-                      <b>Declining<br /><span class="level">States</span></b>
-                    </h6>
-                    <h6 class="font-weight-bold">
-                      <span class="decliningRegions"></span>
-                    </h6>
-                  </div>
-                </div>
-                <div class="col-md-3 pl-2">
-                  <div
-                    class="mb-2 card card-body bg-warning shadow-sm text-white"
-                  >
-                    <h6>
-                      <b>Current<br />GWL</b>
-                    </h6>
-                    <h6 class="font-weight-bold">10.74</h6>
-                  </div>
-                </div>
-                <div class="col-md-3 pl-2">
-                  <div
-                    class="mb-2 card card-body bg-primary shadow-sm text-white"
-                  >
-                    <h6>
-                      <b>Average<br />GWL</b>
-                    </h6>
-                    <h6 class="font-weight-bold">11.89</h6>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card card-body my-3">
-                <div class="card-title">
-                  Algorithms
-                </div>
-                <select
-                  name="year"
-                  id="algoSelect"
-                  class="form-control"
-                  onclick="changeAlgorithm()"
-                >
-                  <option value="ARIMA">ARIMA</option>
-                  <option value="EWMA">EWMA</option>
-                  <option value="SMA">SMA</option>
-                  <option value="DES">DES</option>
-                  <option value="TES">HWES</option>
-                </select>
-              </div>
-
               <!--MAP CONTAINER WITH BACK BUTTON-->
               <div class="card shadow">
                 <div class="card-header">
