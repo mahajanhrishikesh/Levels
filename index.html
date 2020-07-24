@@ -345,11 +345,39 @@
             <div class="btn btn-warning btn-lg btn-block" onclick="print();">
               <span><i class="fa fa-print"></i> Print Report</span>
             </div>
-            
+            <button class="btn btn-light mt-3" data-toggle="modal" data-target="#detailsModal">Test Modal</button>
           </div>
         </div>
       </div>
     </section>
+
+
+    <!-- Details MODAL -->
+    <div class="modal" id="detailsModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Login</h5>
+            <button class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" placeholder="Username" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password" class="form-control">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal">Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!--FOOTER-->
     <footer id="main-footer" class="py-5 bg-light mb-0 bg-dark text-white mt-5">
