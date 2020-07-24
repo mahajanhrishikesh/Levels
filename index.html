@@ -205,8 +205,8 @@
 
             <!--TABLE STARTS HERE-->
             <div id="tableSection" class="mt-3">
-              <div class="container card card-body shadow-sm">
-                <table class="table fadeInUp">
+              <div class="container card card-body shadow-sm" style="overflow-x: scroll; padding-right: 0%; padding-left: 0%;">
+                <table class="table fadeInUp" style="overflow-x: scroll;">
                   <thead>
                     <tr>
                       <th
@@ -226,7 +226,7 @@
                       >
                         <div class="heading-content">
                           <abbr class="s-imp" title="Improving Disrticts"
-                            >Increasing Districts</abbr
+                            >Improving Districts</abbr
                           >
                         </div>
                       </th>
@@ -237,7 +237,7 @@
                       >
                         <div class="heading-content">
                           <abbr class="s-dec" title="Declining Disrticts"
-                            >Decreasing Districts</abbr
+                            >Declining Districts</abbr
                           >
                         </div>
                       </th>
@@ -248,7 +248,7 @@
                       >
                         <div class="heading-content">
                           <abbr class="s-avg" title="Average Level"
-                            >Average Level</abbr
+                            >Current Level</abbr
                           >
                         </div>
                       </th>
@@ -259,7 +259,18 @@
                       >
                         <div class="heading-content">
                           <abbr class="s-algo" title="Minimum Level"
-                            >Minimum Level</abbr
+                            >Algorithm Level</abbr
+                          >
+                        </div>
+                      </th>
+                      <th
+                        data-column="Status"
+                        data-order="desc"
+                        class="state-heading"
+                      >
+                        <div class="heading-content">
+                          <abbr class="s-algo" 
+                            >Status</abbr
                           >
                         </div>
                       </th>
@@ -538,6 +549,7 @@
         loadMapData();
         loadTableData();
         loadNormalData();
+        loadGraphData();
       }
 
       //DOWNLOAD NORMAL JSON
@@ -591,11 +603,11 @@
         };
         if (loc == 'INDIA') {
           //xhttp.open('GET', 'table_data/' + loc + '.json', true);
-          xhttp.open('GET', 'table_data/TABLE_DATA.json', true);
+          xhttp.open('GET', 'table_data/TABLE_DATA_'+ algo +'.json', true);
         } else {
           xhttp.open(
             'GET',
-            'table_data/STATEWISE/TABLE_DATA_' + loc + '.json',
+            'table_data/STATEWISE'+ algo +'/TABLE_DATA_' + loc + '.json',
             true
           );
         }
@@ -603,6 +615,32 @@
         xhttp.send();
         //Write Load Table function here
       }
+      //DOWNLOAD TABLES
+      function loadTableData() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            tableFileData = this.responseText;
+            setTimeout(function () {
+              buildtable();
+            }, 1000);
+          }
+        };
+        if (loc == 'INDIA') {
+          //xhttp.open('GET', 'table_data/' + loc + '.json', true);
+          xhttp.open('GET', 'table_data/TABLE_DATA_'+ algo +'.json', true);
+        } else {
+          xhttp.open(
+            'GET',
+            'table_data/STATEWISE-'+ algo +'/TABLE_DATA_' + loc + '.json',
+            true
+          );
+        }
+
+        xhttp.send();
+        //Write Load Table function here
+      }
+
       //Download graphs
       function loadGraphData() {
         var xhttp = new XMLHttpRequest();
@@ -611,26 +649,35 @@
             graphFileData = this.responseText;
             setTimeout(function () {
               graphUpdate();
+              
             }, 1000);
           }
         };
         if (loc == 'INDIA') {
-          //Load India's data
+          xhttp.open('GET', 'data/Total-india.json', true);
         } else if (state_code.hasOwnProperty(loc)) {
-          //Load state's data
+          xhttp.open('GET', 'data/India.json', true);
         } else {
-          //Load districts's data
+          xhttp.open(
+            'GET',
+            'data/DISTRICTDATA/JSON/DISTRICTWISE_' + loc + '.json',
+            true
+          );
         }
         xhttp.send();
         //Write Load new graph function here
       }
 
-      var chart1;
       function graphUpdate() {
         //Write graph updation code here
         graph_data = JSON.parse(graphFileData);
         buildGraphData();
-        for (var i = 0; i < 4; i++) {
+        chart1.render();
+        chart2.render();
+        chart3.render();
+        chart4.render();
+        chart5.render();
+        /*for (var i = 0; i < 4; i++) {
           chart1.options.data[i].dataPoints = [];
         }
         for (var i = 0; i < 2; i++) {
@@ -638,7 +685,7 @@
           chart3.options.data[i].dataPoints = [];
           chart4.options.data[i].dataPoints = [];
           chart5.options.data[i].dataPoints = [];
-        }
+        }*/
       }
 
       /*****END FUNCTIONS FOR CHANGING LOCATION IE. DOWNLOADING NEW FILES****/
@@ -695,6 +742,7 @@
           ', ' +
           $('#algoSelect option:selected').text();
         document.getElementById('periodName1').innerHTML = periodText1;
+        loadTableData();
         processJSON();
         graphUpdate();
         buildtable();
@@ -729,6 +777,17 @@
           builddistrictTable(table_data);
         }
       }
+
+      //last column
+      function lastCol(n1,n2){
+        if((n1-n2)>=0){
+          return "Improving"
+        }
+        else{
+          return "Declining"
+        }
+      }
+
       //Build data for State Table
       function builddata() {
         var i = 0;
@@ -800,6 +859,12 @@
                         Math.round(data[i].AlgoLevel * 100) / 100
                       }</span>
                     </td>
+                    <td>
+                      <span class="delta is-minLevel"></span> 
+                      <span class="total">${
+                        lastCol(data[i].CurrentLevel,data[i].AlgoLevel) 
+                      }</span>
+                    </td>
                </tr>
                <tr></tr>`;
 
@@ -810,13 +875,12 @@
               </td>
             </tr>-->
             <tr class="state-last-update" style="display:none;">
-              <td colspan="4" style="padding-bottom: 0px;">
+              <td colspan="5" style="padding-bottom: 0px;">
               </td>
               <td align="center" class="state-page-link" colspan="1" style="width: 2.5rem;" style="padding-bottom:1rem;">
                 See more details 
               </td>
             </tr>
-
             <tr class="districtHead" style="display:none;">
             <td data-column="district" data-order="desc" class="district-heading">
               <div class="heading-content"> 
@@ -837,16 +901,17 @@
               <div class="heading-content"> 
                   <abbr title="Current Level">Current Level</abbr>
               </div>
-              
           </td>
           <td data-column="AlgorithmLevel" data-order="desc" class="district-heading">
             <div class="heading-content"> 
                 <abbr title="Algorithm Level">Algorithm Level</abbr>
             </div>
-           
-        </td>
-          
-      </td>              
+          </td>
+          <td data-column="AlgorithmLevel" data-order="desc" class="district-heading">
+            <div class="heading-content"> 
+                <abbr title="Status">Status</abbr>
+            </div>
+          </td>            
     </tr>`;
         $('.state-row').after(row);
 
@@ -883,6 +948,12 @@
                       <span class="delta is-minLevel"></span> 
                       <span class="total">${
                         Math.round(data[i].districts[j].AlgoLevel * 100) / 100
+                      }</span>
+                    </td>
+                    <td>
+                      <span class="delta is-minLevel"></span> 
+                      <span class="total">${
+                        lastCol(data[i].districts[j].CurrentLevel,data[i].districts[j].AlgoLevel)
                       }</span>
                     </td>
                </tr>`;
@@ -993,6 +1064,12 @@
                         ) / 100
                       }</span>
                     </td>
+                    <td>
+                      <span class="delta is-minLevel"></span> 
+                      <span class="total">${
+                        lastCol(table_data[index].districts[i].CurrentLevel,table_data[index].districts[i].AlgoLevel)
+                      }</span>
+                    </td>
         
                   
                </tr>`;
@@ -1099,14 +1176,21 @@
                             Math.round(data[i].AlgoLevel * 100) / 100
                           }</span>
                         </td>
+                        <td>
+                          <span class="delta is-minLevel"></span> 
+                          <span class="total">${
+                            lastCol(data[i].CurrentLevel,data[i].AlgoLevel)
+                          }</span>
+                        </td>
                    </tr>`;
 
           table.innerHTML += row;
         }
+
         //Add block Heading
         var row = `
                 <tr class="state-last-update" style="display:none;">
-                  <td colspan="4" style="padding-bottom: 0px;">
+                  <td colspan="5" style="padding-bottom: 0px;">
                   </td>
                   <td align="center" class="state-page-link" colspan="1" style="width: 2.5rem;" style="padding-bottom:1rem;">
                     See more details 
@@ -1114,7 +1198,7 @@
                 </tr>
     
                 <tr class="blockHead" style="display:none;">
-                <td data-column="district" data-order="desc" class="block-heading" clospan="1">
+                <td data-column="district" data-order="desc" class="block-heading" colsplan="1">
                   <div class="heading-content"> 
                       <abbr title="District">Block</abbr>
                   </div>
@@ -1128,6 +1212,12 @@
               <td data-column="AlgorithmLevel" data-order="desc" class="block-heading" colspan="2">
                 <div class="heading-content"> 
                     <abbr title="Algorithm Level">Algorithm Level</abbr>
+                </div>
+               
+            </td>
+            <td data-column="AlgorithmLevel" data-order="desc" class="block-heading" colspan="1">
+                <div class="heading-content"> 
+                    <abbr title="">Status</abbr>
                 </div>
                
             </td>
@@ -1157,6 +1247,12 @@
                           <span class="delta is-minLevel"></span> 
                           <span class="total">${
                             Math.round(data[i].blocks[j].AlgoLevel * 100) / 100
+                          }</span>
+                        </td>
+                        <td colspan="1">
+                          <span class="delta is-minLevel"></span> 
+                          <span class="total">${
+                            lastCol(data[i].blocks[j].CurrentLevel,data[i].blocks[j].AlgoLevel)
                           }</span>
                         </td>
                    </tr>`;
@@ -1231,6 +1327,12 @@
                             Math.round(
                               table_data[index].blocks[i].AlgoLevel * 100
                             ) / 100
+                          }</span>
+                        </td>
+                        <td colspan="1">
+                          <span class="delta is-minLevel"></span> 
+                          <span class="total">${
+                            lastCol(table_data[index].blocks[i].CurrentLevel,table_data[index].blocks[i].AlgoLevel)
                           }</span>
                         </td>
                         </tr>`;
@@ -1546,11 +1648,6 @@
             },
           ],
         });
-        chart1.render();
-        chart2.render();
-        chart3.render();
-        chart4.render();
-        chart5.render();
       }
 
       /*************** STOP SHWETA SECTION **********************/

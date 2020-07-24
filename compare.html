@@ -19,6 +19,7 @@
     <!--<link rel="stylesheet" href="css/theme.css" />-->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/load_page_animation.css" />
+    <link rel="stylesheet" href="css/table.css" />
     <title>Bootstrap Theme</title>
   </head>
   <body>
@@ -251,8 +252,81 @@
             <div id="tableSection1">
               <div
                 class="container"
-                style="border: 1px solid red; height: 800px;"
-              ></div>
+                style="border: 1px solid red; overflow-x:scroll; height:auto; min-height: 800px;"
+              >
+              <table class="table fadeInUp" style="overflow-x: scroll;">
+                <thead>
+                  <tr>
+                    <th
+                      data-column="State"
+                      data-order="asc"
+                      class="state-heading"
+                      id="Heading"
+                    >
+                      <div class="heading-content">
+                        <abbr class="s-name" title="State">State/UT</abbr>
+                      </div>
+                    </th>
+                    <th
+                      data-column="IncreasingDistricts"
+                      data-order="asc"
+                      class="state-heading"
+                    >
+                      <div class="heading-content">
+                        <abbr class="s-imp" title="Improving Disrticts"
+                          >Improving Districts</abbr
+                        >
+                      </div>
+                    </th>
+                    <th
+                      data-column="DecreasingDistricts"
+                      data-order="asc"
+                      class="state-heading"
+                    >
+                      <div class="heading-content">
+                        <abbr class="s-dec" title="Declining Disrticts"
+                          >Declining Districts</abbr
+                        >
+                      </div>
+                    </th>
+                    <th
+                      data-column="Current Level"
+                      data-order="asc"
+                      class="state-heading"
+                    >
+                      <div class="heading-content">
+                        <abbr class="s-avg" title="Average Level"
+                          >Current Level</abbr
+                        >
+                      </div>
+                    </th>
+                    <th
+                      data-column="Algorithm Level"
+                      data-order="asc"
+                      class="state-heading"
+                    >
+                      <div class="heading-content">
+                        <abbr class="s-algo" title="Minimum Level"
+                          >Algorithm Level</abbr
+                        >
+                      </div>
+                    </th>
+                    <th
+                      data-column="Algorithm Level"
+                      data-order="asc"
+                      class="state-heading"
+                    >
+                      <div class="heading-content">
+                        <abbr class="s-algo" 
+                          >Status</abbr
+                        >
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="myTableA"></tbody>
+              </table>
+            </div>
             </div>
             <!--TABLE ENDS HERE-->
 
@@ -264,30 +338,35 @@
             <div
               class="container mt-3"
               style="border: 1px solid red; height: 200px;"
+              id = "graph1A"
             ></div>
 
             <!--POMRB GRAPH-->
             <div
               class="container mt-3"
               style="border: 1px solid red; height: 200px;"
+              id = "graph2A"
             ></div>
 
             <!--PREMON GRAPH-->
             <div
               class="container mt-3"
               style="border: 1px solid red; height: 200px;"
+              id = "graph3A"
             ></div>
 
             <!--MONSOON GRAPH-->
             <div
               class="container mt-3"
               style="border: 1px solid red; height: 200px;"
+              id = "graph4A"
             ></div>
 
             <!--POMKH GRAPH-->
             <div
               class="container my-3"
               style="border: 1px solid red; height: 200px;"
+              id = "graph5A"
             ></div>
 
             <!--GRAPHS END HERE-->
@@ -310,8 +389,80 @@
             <div id="tableSection2">
               <div
                 class="container"
-                style="border: 1px solid red; height: 800px;"
-              ></div>
+                style="border: 1px solid red; overflow-x: scroll; height: auto; min-height: 800px;"
+              >
+              <table class="table fadeInUp" style="overflow-x: scroll;">
+                <thead>
+                  <tr>
+                    <th
+                      data-column="State"
+                      data-order="desc"
+                      class="state-heading"
+                      id="Heading"
+                    >
+                      <div class="heading-content">
+                        <abbr class="s-name" title="State">State/UT</abbr>
+                      </div>
+                    </th>
+                    <th
+                      data-column="IncreasingDistricts"
+                      data-order="desc"
+                      class="state-heading"
+                    >
+                      <div class="heading-content">
+                        <abbr class="s-imp" title="Improving Disrticts"
+                          >Improving Districts</abbr
+                        >
+                      </div>
+                    </th>
+                    <th
+                      data-column="DecreasingDistricts"
+                      data-order="desc"
+                      class="state-heading"
+                    >
+                      <div class="heading-content">
+                        <abbr class="s-dec" title="Declining Disrticts"
+                          >Declining Districts</abbr
+                        >
+                      </div>
+                    </th>
+                    <th
+                      data-column="Current Level"
+                      data-order="desc"
+                      class="state-heading"
+                    >
+                      <div class="heading-content">
+                        <abbr class="s-avg" title="Average Level"
+                          >Current Level</abbr
+                        >
+                      </div>
+                    </th>
+                    <th
+                      data-column="Algorithm Level"
+                      data-order="desc"
+                      class="state-heading"
+                    >
+                      <div class="heading-content">
+                        <abbr class="s-algo" title="Minimum Level"
+                          >Algorithm Level</abbr
+                        >
+                      </div>
+                    </th>
+                    <th
+                      data-column="Algorithm Level"
+                      data-order="desc"
+                      class="state-heading"
+                    >
+                      <div class="heading-content">
+                        <abbr class="s-algo" 
+                          >Status</abbr
+                        >
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="myTableB"></tbody>
+              </table></div>
             </div>
             <!--TABLE ENDS HERE-->
 
@@ -323,30 +474,35 @@
             <div
               class="container mt-3"
               style="border: 1px solid red; height: 200px;"
+              id = "graph1B"
             ></div>
 
             <!--POMRB GRAPH-->
             <div
               class="container mt-3"
               style="border: 1px solid red; height: 200px;"
+              id = "graph2B"
             ></div>
 
             <!--PREMON GRAPH-->
             <div
               class="container mt-3"
               style="border: 1px solid red; height: 200px;"
+              id = "graph3B"
             ></div>
 
             <!--MONSOON GRAPH-->
             <div
               class="container mt-3"
               style="border: 1px solid red; height: 200px;"
+              id = "graph4B"
             ></div>
 
             <!--POMKH GRAPH-->
             <div
               class="container my-3"
               style="border: 1px solid red; height: 200px;"
+              id = "graph5B"
             ></div>
 
             <!--GRAPHS END HERE-->
@@ -393,6 +549,10 @@
     ></script>
 
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    
 
     <script>
       // Document Indexes
@@ -551,6 +711,9 @@
         loadMap1Data();
         loadMap2Data();
         loadNormalData();
+        loadTableData1();
+        loadTableData2();
+        loadGraphData();
       }
 
       function loadMap1Data() {
@@ -601,6 +764,82 @@
         xhttp.send();
 
         //Write Load new map function here
+      }
+
+      function loadTableData1() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            tableFileData1 = this.responseText;
+            setTimeout(function () {
+              buildtable();
+            }, 1000);
+          }
+        };
+        if (loc == 'INDIA') {
+          //xhttp.open('GET', 'table_data/' + loc + '.json', true);
+          xhttp.open('GET', 'table_data/TABLE_DATA_'+ algo1 +'.json', true);
+        } else {
+          xhttp.open(
+            'GET',
+            'table_data/STATEWISE-'+ algo1 +'/TABLE_DATA_' + loc + '.json',
+            true
+          );
+        }
+
+        xhttp.send();
+        //Write Load Table function here
+      }
+
+      function loadTableData2() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            tableFileData2 = this.responseText;
+            setTimeout(function () {
+              buildtable();
+            }, 1000);
+          }
+        };
+        if (loc == 'INDIA') {
+          //xhttp.open('GET', 'table_data/' + loc + '.json', true);
+          xhttp.open('GET', 'table_data/TABLE_DATA_'+ algo2 +'.json', true);
+        } else {
+          xhttp.open(
+            'GET',
+            'table_data/STATEWISE-'+ algo2 +'/TABLE_DATA_' + loc + '.json',
+            true
+          );
+        }
+
+        xhttp.send();
+        //Write Load Table function here
+      }
+      
+      function loadGraphData() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            graphFileData = this.responseText;
+            setTimeout(function () {
+              graphUpdate();
+              
+            }, 1000);
+          }
+        };
+        if (loc == 'INDIA') {
+          xhttp.open('GET', 'data/Total-india.json', true);
+        } else if (state_code.hasOwnProperty(loc)) {
+          xhttp.open('GET', 'data/India.json', true);
+        } else {
+          xhttp.open(
+            'GET',
+            'data/DISTRICTDATA/JSON/DISTRICTWISE_' + loc + '.json',
+            true
+          );
+        }
+        xhttp.send();
+        //Write Load new graph function here
       }
 
       function separateSVG() {
@@ -750,6 +989,703 @@
 
       function googleTranslateElementInit() {
         new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'bn,gu,hi,kn,ml,mr,or,sd,ta,te,ur', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      }
+       //Tables
+       function buildtable() {
+        if (loc == 'INDIA') {
+          table_data1 = buildTableData(tableFileData1, docIdx1);
+          buildStateTable(table_data1,"A");
+          table_data2 = buildTableData(tableFileData2, docIdx2);
+          buildStateTable(table_data2,"B");
+        } else {
+          table_data1 = buildDistrictData(tableFileData1, docIdx1);
+          table_data2 = buildDistrictData(tableFileData2, docIdx2);
+          builddistrictTable(table_data1,"A");
+          builddistrictTable(table_data2,"B");
+        }
+      }
+      function lastCol(n1,n2){
+        if((n1-n2)>=0){
+          return "Improving"
+        }
+        else{
+          return "Declining"
+        }
+      }
+      function buildTableData(tableFileData, docIdx){
+        
+        var i = 0;
+        var table_data = [];
+        var data = JSON.parse(tableFileData.replace(/\bNaN\b/g, 'null'));
+        for (i = 0; i < data.length; i++) {
+          var state_data = {};
+          var districts = [];
+          state_data.State = data[i].State;
+          state_data.CurrentLevel = data[i].CurrentLevel[docIdx];
+          state_data.AlgoLevel = data[i].AlgoLevel[docIdx];
+          state_data.IncreasingDistricts = data[i].IncreasingDistricts[docIdx];
+          state_data.DecreasingDistricts = data[i].DecreasingDistricts[docIdx];
+          for (var j = 0; j < data[i].districts.length; j++) {
+            var district_data = {};
+            district_data.district = data[i].districts[j].district;
+            district_data.CurrentLevel =
+              data[i].districts[j].CurrentLevel[docIdx];
+            district_data.AlgoLevel = data[i].districts[j].AlgoLevel[docIdx];
+            district_data.IncreasingBlocks =
+              data[i].districts[j].IncreasingBlocks[docIdx];
+            district_data.DecreasingBlocks =
+              data[i].districts[j].DecreasingBlocks[docIdx];
+            districts[j] = district_data;
+          }
+          state_data.districts = districts;
+          table_data[i] = state_data;
+        }
+        return table_data;
+      }
+
+      //Build State Table
+      function buildStateTable(data,table_id) {
+        $('#Heading').attr('class', 'state-heading');
+        $('.s-name').text('State');
+        $('.s-imp').text('Improving Districts');
+        $('.s-dec').text('Declining Districts');
+        var Table = ('myTable').concat(table_id)
+        var districtHead = ('disrtrictHead ').concat(table_id)
+        var table = document.getElementById(Table);
+        table.innerHTML = '';
+        for (var i = 0; i < data.length; i++) {
+          var row = `<tr class="state-row ${table_id} ${i}">
+                    <td>
+                      <div class="title-chevron">
+                        <span class="dropdown rotateDownRight">
+                          <svg height="24" width="24" viewbox=" 0 0 24 24">
+                             <polyline points="6 9 12 15 18 9" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" />
+                          </svg>
+                          </span>
+                      <span class ="title-icon" >${data[i].State}</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="delta is-increasing"></span> 
+                      <span class="total">${data[i].IncreasingDistricts}</span>
+                    </td>
+                    <td>
+                      <span class="delta is-decreasing"></span> 
+                      <span class="total">${data[i].DecreasingDistricts}</span>
+                    </td>
+                    <td>
+                      <span class="delta is-avgLevel"></span> 
+                      <span class="total">${Math.round(data[i].CurrentLevel * 100) / 100}</span>
+                    </td>
+                    <td>
+                      <span class="delta is-minLevel"></span> 
+                      <span class="total">${Math.round(data[i].AlgoLevel * 100) / 100}</span>
+                    </td>
+                    <td>
+                      <span class="delta is-minLevel"></span> 
+                      <span class="total">${lastCol(data[i].CurrentLevel,data[i].AlgoLevel) }</span>
+                    </td>
+               </tr>`;
+
+          table.innerHTML += row;
+        }
+        var row = `
+            <tr class="state-last-update" style="display:none;">
+              <td colspan="5" style="padding-bottom: 0px;">
+              </td>
+              <td align="center" class="state-page-link" colspan="1" style="width: 2.5rem;" style="padding-bottom:1rem;">
+                See more details 
+              </td>
+            </tr>
+            <tr class="districtHead ${table_id}" style="display:none;">
+            <td data-column="district" data-order="desc" class="district-heading">
+              <div class="heading-content"> 
+                  <abbr title="District">District</abbr>
+              </div>
+          </td>
+          <td data-column="IncreasingBlocks" data-order="desc" class="district-heading">
+              <div class="heading-content" > 
+                  <abbr title="Increasing Blocks">Increasing Blocks</abbr>
+              </div>
+          </td>
+          <td data-column="DecreasingBlocks" data-order="desc" class="district-heading">
+              <div class="heading-content"> 
+                  <abbr title="Decreasing Blocks">Decreasing Blocks</abbr>
+              </div>
+          </td>
+          <td data-column="CurrentLevel" data-order="desc" class="district-heading">
+              <div class="heading-content"> 
+                  <abbr title="Current Level">Current Level</abbr>
+              </div>
+          </td>
+          <td data-column="AlgorithmLevel" data-order="desc" class="district-heading">
+            <div class="heading-content"> 
+                <abbr title="Algorithm Level">Algorithm Level</abbr>
+            </div>
+          </td>
+          <td data-column="AlgorithmLevel" data-order="desc" class="district-heading">
+            <div class="heading-content"> 
+                <abbr title="Status">Status</abbr>
+            </div>
+          </td>            
+        </tr>`;
+        $(`.state-row.${table_id}`).after(row);
+
+        for (i = 0; i < data.length; i++) {
+          for (j = 0; j < data[i].districts.length; j++) {
+            var row = `<tr class="district-row ${i}" style="display:none;">
+                    <td>
+                      <div class="title-chevron">
+                        <span class ="title-icon">${
+                          data[i].districts[j].district
+                        }</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="delta is-increasing"></span> 
+                      <span class="total">${
+                        data[i].districts[j].IncreasingBlocks
+                      }</span>
+                    </td>
+                    <td>
+                      <span class="delta is-decreasing"></span> 
+                      <span class="total">${
+                        data[i].districts[j].DecreasingBlocks
+                      }</span>
+                    </td>
+                    <td>
+                      <span class="delta is-avgLevel"></span> 
+                      <span class="total">${
+                        Math.round(data[i].districts[j].CurrentLevel * 100) /
+                        100
+                      }</span>
+                    </td>
+                    <td>
+                      <span class="delta is-minLevel"></span> 
+                      <span class="total">${
+                        Math.round(data[i].districts[j].AlgoLevel * 100) / 100
+                      }</span>
+                    </td>
+                    <td>
+                      <span class="delta is-minLevel"></span> 
+                      <span class="total">${
+                        lastCol(data[i].districts[j].CurrentLevel,data[i].districts[j].AlgoLevel)
+                      }</span>
+                    </td>
+               </tr>`;
+            var dist = $(`.districtHead.${table_id}`)[i];
+            $(dist).after(row);
+          }
+        }
+      }
+      $(document).ready(function () {
+        $(document).on('click', '.state-row', function () {
+          var ind = $(this).attr('class').split(" ")[2]
+          $(`.state-row.A.${ind}`).nextUntil(`tr.state-row.A`).slideToggle(200);
+          $(`.state-row.B.${ind}`).nextUntil(`tr.state-row.B`).slideToggle(200);
+          $(this).find('span:first').toggleClass('rotateDownRight');
+        });
+      });
+
+      function buildDistrictData(tableFileData,docIdx) {
+        var data = JSON.parse(tableFileData.replace(/\bNaN\b/g, 'null'));
+        var i = 0;
+        var table_data = [];
+        for (i = 0; i < data.length; i++) {
+          var district_data = {};
+          var blocks = [];
+          district_data.District = data[i].District;
+          district_data.CurrentLevel = data[i].CurrentLevel[docIdx];
+          district_data.AlgoLevel = data[i].AlgoLevel[docIdx];
+          district_data.IncreasingBlocks = data[i].IncreasingBlocks[docIdx];
+          district_data.DecreasingBlocks = data[i].DecreasingBlocks[docIdx];
+          for (var j = 0; j < data[i].blocks.length; j++) {
+            var block_data = {};
+            block_data.block = data[i].blocks[j].Block;
+            block_data.CurrentLevel = data[i].blocks[j].CurrentLevel[docIdx];
+            block_data.AlgoLevel = data[i].blocks[j].AlgoLevel[docIdx];
+            blocks[j] = block_data;
+          }
+          district_data.blocks = blocks;
+          table_data[i] = district_data;
+        }
+        //  console.log(table_data)
+        return table_data;
+      }
+
+      //Build district table
+      function builddistrictTable(data,table_id) {
+        $('.state-heading').attr('class', 'district-Heading');
+        $('.s-name').text('District');
+        $('.s-imp').text('Improving Blocks');
+        $('.s-dec').text('Declining Blocks');
+        var Table = ('myTable').concat(table_id)
+        var table = document.getElementById(Table);
+        table.innerHTML = '';
+        for (var i = 0; i < data.length; i++) {
+          var row = `<tr class="districtRow ${table_id} ${i}" >
+                        <td>
+                          <div class="title-chevron">
+                            <span class="dropdown rotateDownRight">
+                              <svg height="24" width="24" viewbox=" 0 0 24 24">
+                                 <polyline points="6 9 12 15 18 9" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" />
+                              </svg>
+                              </span>
+                          <span class ="title-icon" >${data[i].District}</span>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="delta is-increasing"></span> 
+                          <span class="total">${data[i].IncreasingBlocks}</span>
+                        </td>
+                        <td>
+                          <span class="delta is-decreasing"></span> 
+                          <span class="total">${data[i].DecreasingBlocks}</span>
+                        </td>
+                        <td>
+                          <span class="delta is-avgLevel"></span> 
+                          <span class="total">${
+                            Math.round(data[i].CurrentLevel * 100) / 100
+                          }</span>
+                        </td>
+                        <td>
+                          <span class="delta is-minLevel"></span> 
+                          <span class="total">${
+                            Math.round(data[i].AlgoLevel * 100) / 100
+                          }</span>
+                        </td>
+                        <td>
+                          <span class="delta is-minLevel"></span> 
+                          <span class="total">${
+                            lastCol(data[i].CurrentLevel,data[i].AlgoLevel)
+                          }</span>
+                        </td>
+                   </tr>`;
+
+          table.innerHTML += row;
+        }
+
+        //Add block Heading
+        var row = `
+                <tr class="state-last-update" style="display:none;">
+                  <td colspan="5" style="padding-bottom: 0px;">
+                  </td>
+                  <td align="center" class="state-page-link" colspan="1" style="width: 2.5rem;" style="padding-bottom:1rem;">
+                    See more details 
+                  </td>
+                </tr>
+    
+                <tr class="blockHead ${table_id}" style="display:none;">
+                <td data-column="district" data-order="desc" class="block-heading" colsplan="1">
+                  <div class="heading-content"> 
+                      <abbr title="District">Block</abbr>
+                  </div>
+              </td>
+              <td data-column="CurrentLevel" data-order="desc" class="block-heading" colspan="2">
+                  <div class="heading-content"> 
+                      <abbr title="Current Level">Current Level</abbr>
+                  </div>
+                  
+              </td>
+              <td data-column="AlgorithmLevel" data-order="desc" class="block-heading" colspan="2">
+                <div class="heading-content"> 
+                    <abbr title="Algorithm Level">Algorithm Level</abbr>
+                </div>
+               
+            </td>
+            <td data-column="AlgorithmLevel" data-order="desc" class="block-heading" colspan="1">
+                <div class="heading-content"> 
+                    <abbr title="">Status</abbr>
+                </div>
+               
+            </td>
+              
+          </td>              
+        </tr>`;
+        $(`.districtRow.${table_id}`).after(row);
+        //Add block rows
+        for (i = 0; i < data.length; i++) {
+          for (j = 0; j < data[i].blocks.length; j++) {
+            var row = `<tr class="block-row ${i}" style="display:none;">
+                        <td colspan="1">
+                          <div class="title-chevron">
+                            <span class ="title-icon">${
+                              data[i].blocks[j].block
+                            }</span>
+                          </div>
+                        </td>
+                        <td colspan="2">
+                          <span class="delta is-avgLevel"></span> 
+                          <span class="total">${
+                            Math.round(data[i].blocks[j].CurrentLevel * 100) /
+                            100
+                          }</span>
+                        </td>
+                        <td colspan="2">
+                          <span class="delta is-minLevel"></span> 
+                          <span class="total">${
+                            Math.round(data[i].blocks[j].AlgoLevel * 100) / 100
+                          }</span>
+                        </td>
+                        <td colspan="1">
+                          <span class="delta is-minLevel"></span> 
+                          <span class="total">${
+                            lastCol(data[i].blocks[j].CurrentLevel,data[i].blocks[j].AlgoLevel)
+                          }</span>
+                        </td>
+                   </tr>`;
+            var dist = $(`.blockHead.${table_id}`)[i];
+            $(dist).after(row);
+          }
+        }
+      }
+      
+        $(document).on('click', '.districtRow', function () {
+          var ind = $(this).attr('class').split(" ")[2]
+          $(`.districtRow.A.${ind}`).nextUntil(`tr.districtRow.A`).slideToggle(200);
+          $(`.districtRow.B.${ind}`).nextUntil(`tr.districtRow.B`).slideToggle(200);
+          $(this).find('span:first').toggleClass('rotateDownRight');
+        });
+      
+
+    function graphUpdate() {
+        //Write graph updation code here
+        graph_data = JSON.parse(graphFileData);
+        chartA = buildGraphData(algo1,"A")
+        chartB = buildGraphData(algo2,"B")
+        chart1A = chartA[0]
+        chart2A = chartA[1]
+        chart3A = chartA[2]
+        chart4A = chartA[3]
+        chart5A = chartA[4]
+        
+        chart1B = chartB[0]
+        chart2B = chartB[1]
+        chart3B = chartB[2]
+        chart4B = chartB[3]
+        chart5B = chartB[4]
+        
+
+        chart1A.render();
+        chart2A.render();
+        chart3A.render();
+        chart4A.render();
+        chart5A.render();
+
+        chart1B.render();
+        chart2B.render();
+        chart3B.render();
+        chart4B.render();
+        chart5B.render();
+      }
+    
+      function buildGraphData(algo,graph_id) {
+        var graphDataOriginalPOMRB = [];
+        var graphDataAlgoPOMRB = [];
+        var graphDataOriginalPREMON = [];
+        var graphDataAlgoPREMON = [];
+        var graphDataOriginalMONSOON = [];
+        var graphDataAlgoMONSOON = [];
+        var graphDataOriginalPOMKH = [];
+        var graphDataAlgoPOMKH = [];
+        var locAlgo = loc.concat('_', algo);
+        var POMRB_IDX = [];
+        var PREMON_IDX = [];
+        var MONSOON_IDX = [];
+        var POMKH_IDX = [];
+        chart1 = ("chart1").concat(graph_id)
+        console.log(chart1)
+        Object.keys(idxDict).forEach(function (key) {
+          POMRB_IDX.push(idxDict[key][0]);
+          PREMON_IDX.push(idxDict[key][1]);
+          MONSOON_IDX.push(idxDict[key][2]);
+          POMKH_IDX.push(idxDict[key][3]);
+        });
+
+        for (var i = 0; i < POMRB_IDX.length; i++) {
+          graphDataOriginalPOMRB.push({
+            x: new Date(graph_data.Date[POMRB_IDX[i]]),
+            y: graph_data[loc][POMRB_IDX[i]],
+            z: graph_data.Season[POMRB_IDX[i]],
+          });
+          graphDataAlgoPOMRB.push({
+            x: new Date(graph_data.Date[POMRB_IDX[i]]),
+            y: graph_data[locAlgo][POMRB_IDX[i]],
+            z: graph_data.Season[POMRB_IDX[i]],
+          });
+          graphDataOriginalPREMON.push({
+            x: new Date(graph_data.Date[PREMON_IDX[i]]),
+            y: graph_data[loc][PREMON_IDX[i]],
+            z: graph_data.Season[PREMON_IDX[i]],
+          });
+          graphDataAlgoPREMON.push({
+            x: new Date(graph_data.Date[PREMON_IDX[i]]),
+            y: graph_data[locAlgo][PREMON_IDX[i]],
+            z: graph_data.Season[PREMON_IDX[i]],
+          });
+          graphDataOriginalMONSOON.push({
+            x: new Date(graph_data.Date[MONSOON_IDX[i]]),
+            y: graph_data[loc][MONSOON_IDX[i]],
+            z: graph_data.Season[MONSOON_IDX[i]],
+          });
+          graphDataAlgoMONSOON.push({
+            x: new Date(graph_data.Date[MONSOON_IDX[i]]),
+            y: graph_data[locAlgo][MONSOON_IDX[i]],
+            z: graph_data.Season[MONSOON_IDX[i]],
+          });
+          graphDataOriginalPOMKH.push({
+            x: new Date(graph_data.Date[POMKH_IDX[i]]),
+            y: graph_data[loc][POMKH_IDX[i]],
+            z: graph_data.Season[POMKH_IDX[i]],
+          });
+          graphDataAlgoPOMKH.push({
+            x: new Date(graph_data.Date[POMKH_IDX[i]]),
+            y: graph_data[locAlgo][POMKH_IDX[i]],
+            z: graph_data.Season[POMKH_IDX[i]],
+          });
+        }
+        chart1= new CanvasJS.Chart(`graph1${graph_id}`, {
+          title: {
+            text: 'All Seasons',
+          },
+          axisX: {
+            valueFormatString: 'MMM YYYY',
+          },
+          axisY: {
+            //  title: "Median List Price",
+            //   minimum: 0
+            //suffix: k
+          },
+          toolTip: {
+            shared: true,
+          },
+          legend: {
+            cursor: 'pointer',
+            gridThickness: '0',
+            verticalAlign: 'top',
+            horizontalAlign: 'center',
+            dockInsidePlotArea: true,
+
+            //	itemclick: toogleDataSeries
+          },
+          data: [
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'POMRB',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataAlgoPOMRB,
+            },
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'PREMON',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataAlgoPREMON,
+            },
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'MONSOON',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataAlgoMONSOON,
+            },
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'POMKH',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataAlgoPOMKH,
+            },
+          ],
+        });
+        
+        chart2 = new CanvasJS.Chart(`graph2${graph_id}`, {
+          title: {
+            text: 'POMRB',
+          },
+          axisX: {
+            valueFormatString: 'MMM YYYY',
+          },
+          axisY: {
+            //  title: "Median List Price",
+            //  maximum: maxVal
+            //   minimum: 4
+            //suffix: "K"
+          },
+          toolTip: {
+            shared: true,
+          },
+          legend: {
+            cursor: 'pointer',
+            verticalAlign: 'top',
+            horizontalAlign: 'center',
+            dockInsidePlotArea: true,
+            //	itemclick: toogleDataSeries
+          },
+          data: [
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'Original Data',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataOriginalPOMRB,
+            },
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'Algorithm Data',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataAlgoPOMRB,
+            },
+          ],
+        });
+
+        chart3 = new CanvasJS.Chart(`graph3${graph_id}`, {
+          title: {
+            text: 'MONSOON',
+          },
+          axisX: {
+            valueFormatString: 'MMM YYYY',
+          },
+          axisY: {
+            //  title: "Median List Price",
+            //  maximum: maxVal
+            //   minimum: 4
+            //suffix: "K"
+          },
+          toolTip: {
+            shared: true,
+          },
+          legend: {
+            cursor: 'pointer',
+            verticalAlign: 'top',
+            horizontalAlign: 'center',
+            dockInsidePlotArea: true,
+            //	itemclick: toogleDataSeries
+          },
+          data: [
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'Original Data',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataOriginalMONSOON,
+            },
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'Algorithm Data',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataAlgoMONSOON,
+            },
+          ],
+        });
+
+        chart4 = new CanvasJS.Chart(`graph4${graph_id}`, {
+          title: {
+            text: 'PREMON',
+          },
+          axisX: {
+            valueFormatString: 'MMM YYYY',
+          },
+          axisY: {
+            //  title: "Median List Price",
+            //  maximum: maxVal
+            //   minimum: 4
+            //suffix: "K"
+          },
+          toolTip: {
+            shared: true,
+          },
+          legend: {
+            cursor: 'pointer',
+            verticalAlign: 'top',
+            horizontalAlign: 'center',
+            dockInsidePlotArea: true,
+            //	itemclick: toogleDataSeries
+          },
+          data: [
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'Original Data',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataOriginalPREMON,
+            },
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'Algorithm Data',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataAlgoPREMON,
+            },
+          ],
+        });
+
+        chart5 = new CanvasJS.Chart(`graph5${graph_id}`, {
+          title: {
+            text: 'POMKH',
+          },
+          axisX: {
+            valueFormatString: 'MMM YYYY',
+          },
+          axisY: {
+            //  title: "Median List Price",
+            //suffix: "K"
+          },
+          toolTip: {
+            shared: true,
+          },
+          legend: {
+            cursor: 'pointer',
+            verticalAlign: 'top',
+            horizontalAlign: 'center',
+            dockInsidePlotArea: true,
+            //	itemclick: toogleDataSeries
+          },
+          data: [
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'Original Data',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataOriginalPOMKH,
+            },
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'Algorithm Data',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataAlgoPOMKH,
+            },
+          ],
+        });
+        return [chart1, chart2, chart3, chart4, chart5];
       }
     </script>
   </body>

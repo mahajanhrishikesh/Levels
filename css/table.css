@@ -8,10 +8,11 @@
     font-weight: 600;
     margin: 0;
     margin-bottom: .25rem;
-    margin-right: .10rem;
+   
     text-align: right;
     width: 100%;
     height: 700px !important;
+    overflow-x: scroll;
   }
   
   .table-fineprint a {
@@ -22,9 +23,6 @@
     transition: all .2s ease-in-out;
   }
   
-  .table-fineprint a:hover {
-    background: #6c757d20;
-  }
   
   .Table {
     margin-bottom: 1rem;
@@ -43,6 +41,7 @@
     margin-right: 0px;
     padding-left: -10px;
     padding-right: 0px;
+    cursor: pointer;
   }
   
   table thead {
@@ -106,13 +105,16 @@
   
   table tbody {
     color: #6c757d;
+    width: 100%;
   }
-  
-  table tbody tr .districtRow, table tbody .block-row, table tbody .district-row {
+  table tbody tr:hover{
+    background: #6c757d20 !important;
+  }
+  table tbody tr .districtRow, table tbody tr .block-row, table tbody tr .district-row, table tbody tr .state-row {
     cursor: pointer;
   }
   
-  table tbody tr .districtRow:nth-child(odd), table tbody .block-row:nth-child(odd), table tbody .district-row:nth-child(odd) {
+  table tbody tr .state-row:nth-child(odd), table tbody tr .districtRow:nth-child(odd), table tbody .block-row:nth-child(odd), table tbody .district-row:nth-child(odd) {
     background: #6c757d10 !important;
   }
   
@@ -132,13 +134,10 @@
     background: transparent !important;
   }
   
-  table tbody tr .districtRow.is-spacer:hover, table tbody .block-row.is-spacer:hover, table tbody .district-row.is-spacer:hover {
+  table tbody tr .districtRow.is-spacer:hover, table tbody .block-row.is-spacer:hover, table tbody .district-row.is-spacer:hover, table tbody .state-row.districtRow.is-spacer:hover {
     background: transparent !important;
   }
   
-  table tbody tr .districtRow:hover, table tbody .block-row:hover, table tbody .district-row:hover {
-    background: #6c757d20 !important;
-  }
   
   table tbody tr .districtRow:hover .dropdown, table tbody .block-row:hover .dropdown, table tbody .district-row:hover .dropdown {
     background: #6c757d20;
@@ -151,7 +150,7 @@
     text-align: left;
   }
   
-  table tbody tr .blockHead td .block-heading {
+  table tbody tr .blockHead{
     background: #f6f6f7;
     border-radius: 5px;
     cursor: pointer;
@@ -163,6 +162,7 @@
     -webkit-transition: all .1s ease-in-out;
     transition: all .1s ease-in-out;
     z-index: 99;
+    width: auto;
   }
   
   table tbody tr .blockHead td .block-heading:hover {
@@ -173,15 +173,16 @@
     border-radius: 4px;
     font-size: .9rem;
     padding: .25rem;
-    text-align: right;
+    text-align: center;
     border: none !important;
+    height: 58px;
   }
   
   table tbody td:first-child {
     font-weight: 600;
-    max-width: 7.5rem !important;
     text-align: left;
     word-wrap: break-word !important;
+    width: auto;
   }
   
   table tbody td .heading-content {
@@ -314,7 +315,7 @@
     background: #ffc10730 !important;
   }
   
-  table tbody .districtHead {
+  table tbody .districtHead, table tbody .blockHead {
     background: #f6f6f7;
     border-radius: 5px;
     cursor: pointer;
@@ -327,12 +328,12 @@
     z-index: 99;
   }
   
-  table tbody .districtHead:hover {
+  table tbody .districtHead:hover, table tbody .blockHead:hover {
     background: #ecedee;
     background: #6c757d10;
   }
   
-  table tbody .districtHead td {
+  table tbody .districtHead td, table tbody .blockHead td {
     background: #6c757d10;
     color: #343a40;
     font-size: .75rem;
@@ -341,7 +342,7 @@
     text-align: left !important;
   }
   
-  table tbody .districtHead td .heading-content {
+  table tbody .districtHead td .heading-content, table tbody .blockHead td .heading-content {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
@@ -359,11 +360,11 @@
     position: relative;
   }
   
-  table tbody .districtHead td .heading-content abbr {
+  table tbody .districtHead td .heading-content abbr, table tbody .blockHead td .heading-content abbr {
     text-align: left;
   }
   
-  table tbody .districtHead td .heading-content svg {
+  table tbody .districtHead td .heading-content svg, table tbody .blockHead td .heading-content svg {
     color: #6c757d99;
     margin: 0;
     margin-left: .25rem;
@@ -373,7 +374,7 @@
     width: 10px;
   }
   
-  table tbody .districtHead td .heading-content .heading-content {
+  table tbody .districtHead td .heading-content .heading-content, table tbody .blockHead td .heading-content .heading-content {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
@@ -390,7 +391,7 @@
     position: relative;
   }
   
-  table tbody .districtHead td .heading-content .heading-content abbr {
+  table tbody .districtHead td .heading-content .heading-content abbr,  table tbody .blockHead td .heading-content .heading-content abbr {
     color: #6c757d;
     text-align: left;
   }
@@ -465,7 +466,7 @@
   
   @media (max-width: 769px) {
     table {
-      width: 100%;
+      width: 90%;
     }
     .Home .TimeSeries .svg-parent,
     .State .TimeSeries .svg-parent {
