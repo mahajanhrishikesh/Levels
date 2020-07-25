@@ -205,7 +205,7 @@
 
             <!--TABLE STARTS HERE-->
             <div id="tableSection" class="mt-3">
-              <div class="container card card-body shadow-sm" style="overflow-x: scroll; padding-right: 0%; padding-left: 0%;">
+              <div class="container card card-body shadow-sm" style="padding-right: 0%; padding-left: 0%;">
                 <table class="table fadeInUp" style="overflow-x: scroll;">
                   <thead>
                     <tr>
@@ -276,7 +276,7 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody id="myTable"></tbody>
+                  <tbody id="myTable" style="overflow-x: visible;"></tbody>
                 </table>
               </div>
             </div>
@@ -1341,9 +1341,9 @@
         }
       }
 
-      //Graphs section
+     //Graphs section
 
-      function buildGraphData() {
+     function buildGraphData() {
         var graphDataOriginalPOMRB = [];
         var graphDataAlgoPOMRB = [];
         var graphDataOriginalPREMON = [];
@@ -1351,7 +1351,9 @@
         var graphDataOriginalMONSOON = [];
         var graphDataAlgoMONSOON = [];
         var graphDataOriginalPOMKH = [];
-        var graphDataAlgoPOMKH = [];
+        var graphDataAlgoPOMKH = [] 
+        var AllSeason = [];
+        var AllSeasonAlgo =[];
         var locAlgo = loc.concat('_', algo);
         var POMRB_IDX = [];
         var PREMON_IDX = [];
@@ -1364,8 +1366,13 @@
           MONSOON_IDX.push(idxDict[key][2]);
           POMKH_IDX.push(idxDict[key][3]);
         });
-
-        for (var i = 0; i < POMRB_IDX.length; i++) {
+        var j = 0
+        var z = 0
+        if(algo == "ARIMA"){
+            j = 1
+            z = 4
+        }
+       for (i = j; i < POMRB_IDX.length; i++) {
           graphDataOriginalPOMRB.push({
             x: new Date(graph_data.Date[POMRB_IDX[i]]),
             y: graph_data[loc][POMRB_IDX[i]],
@@ -1407,7 +1414,18 @@
             z: graph_data.Season[POMKH_IDX[i]],
           });
         }
-
+        for (var i = z;i<92;i++){
+          AllSeason.push({
+            x: new Date(graph_data.Date[i]),
+            y: graph_data[loc][i],
+            z:graph_data.Season[i]
+          })
+          AllSeasonAlgo.push({
+            x: new Date(graph_data.Date[i]),
+            y: graph_data[locAlgo][i],
+            z:graph_data.Season[i]
+          })
+        }
         chart1 = new CanvasJS.Chart('graph1', {
           title: {
             text: 'All Seasons',
@@ -1436,39 +1454,23 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'POMRB',
+              name: 'Original',
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
-              dataPoints: graphDataAlgoPOMRB,
+              toolTipContent :"<a>{x} <br> Original Data: {y}</a>",
+              dataPoints: AllSeason
             },
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'PREMON',
+              name: algo,
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
-              dataPoints: graphDataAlgoPREMON,
-            },
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: 'MONSOON',
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              dataPoints: graphDataAlgoMONSOON,
-            },
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: 'POMKH',
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              dataPoints: graphDataAlgoPOMKH,
-            },
+              toolTipContent :"<a>Algorithm Data: {y} <br> Season:{z} </a>",
+              dataPoints: AllSeasonAlgo
+            }
           ],
         });
         chart2 = new CanvasJS.Chart('graph2', {
@@ -1498,7 +1500,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Original Data',
+              name: 'Original',
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
@@ -1507,7 +1509,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Algorithm Data',
+              name: algo,
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
@@ -1543,7 +1545,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Original Data',
+              name: 'Original',
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
@@ -1552,7 +1554,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Algorithm Data',
+              name: algo,
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
@@ -1588,7 +1590,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Original Data',
+              name: 'Original',
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
@@ -1597,7 +1599,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Algorithm Data',
+              name: algo,
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
@@ -1631,7 +1633,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Original Data',
+              name: 'Original',
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
@@ -1640,7 +1642,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Algorithm Data',
+              name: algo,
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
