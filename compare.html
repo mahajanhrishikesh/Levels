@@ -252,7 +252,8 @@
             <div id="tableSection1">
               <div
                 class="container"
-                style="border: 1px solid red; overflow-x:scroll; height:auto; min-height: 800px;"
+                style="border: 1px solid red;  height:auto; min-height: 800px;
+                overflow-x:initial;padding-right: 0%; padding-left: 0%;"
               >
               <table class="table fadeInUp" style="overflow-x: scroll;">
                 <thead>
@@ -389,9 +390,10 @@
             <div id="tableSection2">
               <div
                 class="container"
-                style="border: 1px solid red; overflow-x: scroll; height: auto; min-height: 800px;"
+                style="border: 1px solid red;height: auto; min-height: 800px;
+                overflow-x:initial;padding-right: 0%; padding-left: 0%;"
               >
-              <table class="table fadeInUp" style="overflow-x: scroll;">
+              <table class="table fadeInUp">
                 <thead>
                   <tr>
                     <th
@@ -1348,7 +1350,7 @@
         });
       
 
-    function graphUpdate() {
+        function graphUpdate() {
         //Write graph updation code here
         graph_data = JSON.parse(graphFileData);
         chartA = buildGraphData(algo1,"A")
@@ -1388,6 +1390,8 @@
         var graphDataAlgoMONSOON = [];
         var graphDataOriginalPOMKH = [];
         var graphDataAlgoPOMKH = [];
+        var AllSeason = []
+        var AllSeasonAlgo = []
         var locAlgo = loc.concat('_', algo);
         var POMRB_IDX = [];
         var PREMON_IDX = [];
@@ -1402,7 +1406,14 @@
           POMKH_IDX.push(idxDict[key][3]);
         });
 
-        for (var i = 0; i < POMRB_IDX.length; i++) {
+        var j = 0
+        var z = 0
+        if(algo == "ARIMA"){
+            j = 1
+            z = 4
+        }
+      
+       for (var i = j; i < POMRB_IDX.length; i++) {
           graphDataOriginalPOMRB.push({
             x: new Date(graph_data.Date[POMRB_IDX[i]]),
             y: graph_data[loc][POMRB_IDX[i]],
@@ -1444,7 +1455,19 @@
             z: graph_data.Season[POMKH_IDX[i]],
           });
         }
-        chart1= new CanvasJS.Chart(`graph1${graph_id}`, {
+        for (var i = z;i<92;i++){
+          AllSeason.push({
+            x: new Date(graph_data.Date[i]),
+            y: graph_data[loc][i],
+            z:graph_data.Season[i]
+          })
+          AllSeasonAlgo.push({
+            x: new Date(graph_data.Date[i]),
+            y: graph_data[locAlgo][i],
+            z:graph_data.Season[i]
+          })
+        }
+        chart1 = new CanvasJS.Chart(`graph1${graph_id}`, {
           title: {
             text: 'All Seasons',
           },
@@ -1472,42 +1495,25 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'POMRB',
+              name: 'Original',
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
-              dataPoints: graphDataAlgoPOMRB,
+              toolTipContent :"<a>{x} <br> Original Data: {y}</a>",
+              dataPoints: AllSeason
             },
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'PREMON',
+              name: algo,
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
-              dataPoints: graphDataAlgoPREMON,
-            },
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: 'MONSOON',
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              dataPoints: graphDataAlgoMONSOON,
-            },
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: 'POMKH',
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              dataPoints: graphDataAlgoPOMKH,
-            },
+              toolTipContent :"<a>Algorithm Data: {y} <br> Season:{z} </a>",
+              dataPoints: AllSeasonAlgo
+            }
           ],
         });
-        
         chart2 = new CanvasJS.Chart(`graph2${graph_id}`, {
           title: {
             text: 'POMRB',
@@ -1535,7 +1541,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Original Data',
+              name: 'Original',
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
@@ -1544,7 +1550,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Algorithm Data',
+              name: algo,
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
@@ -1580,7 +1586,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Original Data',
+              name: 'Original',
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
@@ -1589,7 +1595,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Algorithm Data',
+              name: algo,
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
@@ -1625,7 +1631,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Original Data',
+              name: 'Original',
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
@@ -1634,7 +1640,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Algorithm Data',
+              name: algo,
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
@@ -1668,7 +1674,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Original Data',
+              name: 'Original',
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
@@ -1677,7 +1683,7 @@
             {
               type: 'line',
               //	axisYType: "secondary",
-              name: 'Algorithm Data',
+              name: algo,
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
