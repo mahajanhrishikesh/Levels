@@ -60,8 +60,8 @@
               <!--FORECASTING PAGE-->
             </li>
             <li class="nav-item">
-              <a href="about.html" class="nav-link">About</a>
-              <!--PS INFO?-->
+              <a href="deepdive.html" class="nav-link">Deep Dive</a>
+              <!--KEPLER-->
             </li>
             <li>
               <div class="nav-link">
@@ -181,7 +181,7 @@
             </div>
             <!--CURRENT MASTER LOCATION STATS CARD GROUP-->
             <div class="row text-center no-gutters">
-              <div class="col-sm-6 col-md-6 pl-2">
+              <div class="col-6 pl-2">
                 <div class="mb-2 card text-success card-body shadow-sm">
                   <h6>
                     <b>Improving<br /><span class="level">States</span></b>
@@ -191,7 +191,7 @@
                   </h6>
                 </div>
               </div>
-              <div class="col-sm-6 col-md-6 pl-2">
+              <div class="col-6 pl-2">
                 <div class="mb-2 card card-body text-danger shadow-sm">
                   <h6>
                     <b>Declining<br /><span class="level">States</span></b>
@@ -206,78 +206,80 @@
             <!--TABLE STARTS HERE-->
             <div id="tableSection" class="mt-3">
               <div class="container card card-body shadow-sm" style="padding-right: 0%; padding-left: 0%;">
-                <table class="table fadeInUp" style="overflow-x: scroll;">
-                  <thead>
-                    <tr>
-                      <th
-                        data-column="State"
-                        data-order="desc"
-                        class="state-heading"
-                        id="Heading"
-                      >
-                        <div class="heading-content">
-                          <abbr class="s-name" title="State">State/UT</abbr>
-                        </div>
-                      </th>
-                      <th
-                        data-column="IncreasingDistricts"
-                        data-order="desc"
-                        class="state-heading"
-                      >
-                        <div class="heading-content">
-                          <abbr class="s-imp" title="Improving Disrticts"
-                            >Improving Districts</abbr
-                          >
-                        </div>
-                      </th>
-                      <th
-                        data-column="DecreasingDistricts"
-                        data-order="desc"
-                        class="state-heading"
-                      >
-                        <div class="heading-content">
-                          <abbr class="s-dec" title="Declining Disrticts"
-                            >Declining Districts</abbr
-                          >
-                        </div>
-                      </th>
-                      <th
-                        data-column="Current Level"
-                        data-order="desc"
-                        class="state-heading"
-                      >
-                        <div class="heading-content">
-                          <abbr class="s-avg" title="Average Level"
-                            >Current Level</abbr
-                          >
-                        </div>
-                      </th>
-                      <th
-                        data-column="Algorithm Level"
-                        data-order="desc"
-                        class="state-heading"
-                      >
-                        <div class="heading-content">
-                          <abbr class="s-algo" title="Minimum Level"
-                            >Algorithm Level</abbr
-                          >
-                        </div>
-                      </th>
-                      <th
-                        data-column="Status"
-                        data-order="desc"
-                        class="state-heading"
-                      >
-                        <div class="heading-content">
-                          <abbr class="s-algo" 
-                            >Status</abbr
-                          >
-                        </div>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody id="myTable" style="overflow-x: visible;"></tbody>
-                </table>
+                <div class="table-responsive">
+                  <table class="table fadeInUp" style="overflow-x: scroll;">
+                    <thead>
+                      <tr>
+                        <th
+                          data-column="State"
+                          data-order="desc"
+                          class="state-heading"
+                          id="Heading"
+                        >
+                          <div class="heading-content">
+                            <abbr class="s-name" title="State">State/UT</abbr>
+                          </div>
+                        </th>
+                        <th
+                          data-column="IncreasingDistricts"
+                          data-order="desc"
+                          class="state-heading"
+                        >
+                          <div class="heading-content">
+                            <abbr class="s-imp" title="Improving Disrticts"
+                              >Improving Districts</abbr
+                            >
+                          </div>
+                        </th>
+                        <th
+                          data-column="DecreasingDistricts"
+                          data-order="desc"
+                          class="state-heading"
+                        >
+                          <div class="heading-content">
+                            <abbr class="s-dec" title="Declining Disrticts"
+                              >Declining Districts</abbr
+                            >
+                          </div>
+                        </th>
+                        <th
+                          data-column="Current Level"
+                          data-order="desc"
+                          class="state-heading"
+                        >
+                          <div class="heading-content">
+                            <abbr class="s-avg" title="Average Level"
+                              >Current Level</abbr
+                            >
+                          </div>
+                        </th>
+                        <th
+                          data-column="Algorithm Level"
+                          data-order="desc"
+                          class="state-heading"
+                        >
+                          <div class="heading-content">
+                            <abbr class="s-algo" title="Minimum Level"
+                              >Algorithm Level</abbr
+                            >
+                          </div>
+                        </th>
+                        <th
+                          data-column="Status"
+                          data-order="desc"
+                          class="state-heading"
+                        >
+                          <div class="heading-content">
+                            <abbr class="s-algo" 
+                              >Status</abbr
+                            >
+                          </div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="myTable" style="overflow-x: visible;"></tbody>
+                  </table>
+                </div>
               </div>
             </div>
             <!--TABLE ENDS HERE-->
@@ -304,7 +306,7 @@
                     BACK
                   </button>
                 </div>
-                <div id="mapContainer" class="card-body"></div>
+                <div id="mapContainer" class="card-body responsive"></div>
               </div>
               <!--END OF MAP CONTAINER-->
             <!--MAP ENDS HERE-->
@@ -316,35 +318,35 @@
             <!--ALL SEASONS GRAPH-->
             <div
               class="container mt-3"
-              style="border: 1px solid red; height: 200px;"
+              style="border: 1px solid white; height: 200px;"
               id="graph1"
             ></div>
 
             <!--POMRB GRAPH-->
             <div
               class="container mt-3"
-              style="border: 1px solid red; height: 200px;"
+              style="border: 1px solid white; height: 200px;"
               id="graph2"
             ></div>
 
             <!--PREMON GRAPH-->
             <div
               class="container mt-3"
-              style="border: 1px solid red; height: 200px;"
+              style="border: 1px solid white; height: 200px;"
               id="graph3"
             ></div>
 
             <!--MONSOON GRAPH-->
             <div
               class="container mt-3"
-              style="border: 1px solid red; height: 200px;"
+              style="border: 1px solid white; height: 200px;"
               id="graph4"
             ></div>
 
             <!--POMKH GRAPH-->
             <div
               class="container mt-3"
-              style="border: 1px solid red; height: 200px;"
+              style="border: 1px solid white; height: 200px;"
               id="graph5"
             ></div>
 
@@ -506,6 +508,7 @@
 
       function fetchfiles() {
         changeToLoc('INDIA');
+        labelMap();
       }
       /*************END FUNCTIONS THAT ARE SET TO RUN ON SITE LOAD********************/
 
@@ -697,6 +700,16 @@
         //Make Search operational
       }
 
+      function labelMap(){
+        var periodText1 =
+          $('#yearSelect option:selected').text() +
+          ', ' +
+          $('#seasonSelect option:selected').text() +
+          ', ' +
+          $('#algoSelect option:selected').text();
+        document.getElementById('periodName1').innerHTML = periodText1;
+      }
+
       function changeYear() {
         var seasonIdxs =
           idxDict[parseInt(document.getElementById('yearSelect').value)];
@@ -706,13 +719,7 @@
         document.getElementById('POMKH').value = seasonIdxs[3];
         docIdx = seasonIdxs[0];
         document.getElementById('POMRB').selected = true;
-        var periodText1 =
-          $('#yearSelect option:selected').text() +
-          ', ' +
-          $('#seasonSelect option:selected').text() +
-          ', ' +
-          $('#algoSelect option:selected').text();
-        document.getElementById('periodName1').innerHTML = periodText1;
+        labelMap();
         processJSON();
         buildtable();
       }
@@ -720,14 +727,7 @@
       function changeSeason(id) {
         docIdx = document.getElementById('seasonSelect').value;
         console.log('docIdx=', docIdx);
-        var periodText1 =
-          $('#yearSelect option:selected').text() +
-          ', ' +
-          $('#seasonSelect option:selected').text() +
-          ', ' +
-          $('#algoSelect option:selected').text();
-        // console.log((periodText1.split(","))[1])
-        document.getElementById('periodName1').innerHTML = periodText1;
+        labelMap();
         processJSON();
         //tableUpdate();
         buildtable();
@@ -735,13 +735,7 @@
 
       function changeAlgorithm() {
         algo = document.getElementById('algoSelect').value;
-        var periodText1 =
-          $('#yearSelect option:selected').text() +
-          ', ' +
-          $('#seasonSelect option:selected').text() +
-          ', ' +
-          $('#algoSelect option:selected').text();
-        document.getElementById('periodName1').innerHTML = periodText1;
+        labelMap();
         loadTableData();
         processJSON();
         graphUpdate();
