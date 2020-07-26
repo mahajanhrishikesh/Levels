@@ -68,4 +68,5 @@ input[type='submit'] {
 #navbar_element:hover{
   background-color: rgb(219, 216, 216);
   color: black;
+  transition: 0.4s;
 }
