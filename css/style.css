@@ -64,3 +64,8 @@ input[type='submit'] {
   stroke-width: 2;
   stroke-opacity: 1;
 }
+
+#navbar_element:hover{
+  background-color: rgb(219, 216, 216);
+  color: black;
+}
