@@ -39,29 +39,63 @@
           data-toggle="collapse"
           data-target="#navbarLinks"
         >
-
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarLinks">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a href="index.html" style="background-color:white;color: black; font-weight: 600;border-radius: 8px;margin:2px" class="nav-link active">Home</a>
+              <a
+                href="index.html"
+                style="
+                  background-color: white;
+                  color: black;
+                  font-weight: 600;
+                  border-radius: 8px;
+                  margin: 2px;
+                "
+                class="nav-link active"
+                >Home</a
+              >
               <!--MAIN DESIGN-->
             </li>
             <li class="nav-item">
-              <a href="compare.html" style="border-radius:8px;margin:2px" id="navbar_element" class="nav-link">Compare</a>
+              <a
+                href="compare.html"
+                style="border-radius: 8px; margin: 2px;"
+                id="navbar_element"
+                class="nav-link"
+                >Compare</a
+              >
               <!--SOME GRAPHS-->
             </li>
             <li class="nav-item">
-              <a href="getAPI.html" style="border-radius:8px;margin:2px"  id="navbar_element" class="nav-link">Get API</a>
+              <a
+                href="getAPI.html"
+                style="border-radius: 8px; margin: 2px;"
+                id="navbar_element"
+                class="nav-link"
+                >Get API</a
+              >
               <!--FORM THAT WILL LINK TO GIT RAW-->
             </li>
             <li class="nav-item">
-              <a href="forecast.html" style="border-radius:8px;margin:2px"  id="navbar_element" class="nav-link">Forecast</a>
+              <a
+                href="forecast.html"
+                style="border-radius: 8px; margin: 2px;"
+                id="navbar_element"
+                class="nav-link"
+                >Forecast</a
+              >
               <!--FORECASTING PAGE-->
             </li>
             <li class="nav-item">
-              <a href="deepdive.html" style="border-radius:8px;margin:2px"  id="navbar_element" class="nav-link">Deep Dive</a>
+              <a
+                href="deepdive.html"
+                style="border-radius: 8px; margin: 2px;"
+                id="navbar_element"
+                class="nav-link"
+                >Deep Dive</a
+              >
               <!--KEPLER-->
             </li>
             <li>
@@ -206,7 +240,10 @@
 
             <!--TABLE STARTS HERE-->
             <div id="tableSection" class="mt-3">
-              <div class="container card card-body shadow-sm" style="padding-right: 0%; padding-left: 0%;">
+              <div
+                class="container card card-body shadow-sm"
+                style="padding-right: 0%; padding-left: 0%;"
+              >
                 <div class="table-responsive">
                   <table class="table fadeInUp" style="overflow-x: scroll;">
                     <thead>
@@ -271,9 +308,7 @@
                           class="state-heading"
                         >
                           <div class="heading-content">
-                            <abbr class="s-algo" 
-                              >Status</abbr
-                            >
+                            <abbr class="s-algo">Status</abbr>
                           </div>
                         </th>
                       </tr>
@@ -295,21 +330,21 @@
             </h6>
 
             <!--MAP STARTS HERE-->
-              <!--MAP CONTAINER WITH BACK BUTTON-->
-              <div class="card shadow">
-                <div class="card-header">
-                  <button
-                    class="btn btn-outline-primary"
-                    hidden
-                    id="mapBackBtn"
-                    onclick="rollUp();"
-                  >
-                    BACK
-                  </button>
-                </div>
-                <div id="mapContainer" class="card-body responsive"></div>
+            <!--MAP CONTAINER WITH BACK BUTTON-->
+            <div class="card shadow">
+              <div class="card-header">
+                <button
+                  class="btn btn-outline-primary"
+                  hidden
+                  id="mapBackBtn"
+                  onclick="rollUp();"
+                >
+                  BACK
+                </button>
               </div>
-              <!--END OF MAP CONTAINER-->
+              <div id="mapContainer" class="card-body responsive"></div>
+            </div>
+            <!--END OF MAP CONTAINER-->
             <!--MAP ENDS HERE-->
 
             <p class="text-muted text-center h3 mt-3">Trends</p>
@@ -359,12 +394,17 @@
             <div class="btn btn-warning btn-lg btn-block" onclick="print();">
               <span><i class="fa fa-print"></i> Print Report</span>
             </div>
-            <button class="btn btn-light mt-3" data-toggle="modal" data-target="#detailsModal">Test Modal</button>
+            <button
+              class="btn btn-light mt-3"
+              data-toggle="modal"
+              data-target="#detailsModal"
+            >
+              Test Modal
+            </button>
           </div>
         </div>
       </div>
     </section>
-
 
     <!-- Details MODAL -->
     <div class="modal" id="detailsModal">
@@ -378,11 +418,19 @@
             <form>
               <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" placeholder="Username" class="form-control">
+                <input
+                  type="text"
+                  placeholder="Username"
+                  class="form-control"
+                />
               </div>
               <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" placeholder="Password" class="form-control">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  class="form-control"
+                />
               </div>
             </form>
           </div>
@@ -425,7 +473,10 @@
     <script src="scripts/dropdown.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script
+      type="text/javascript"
+      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
 
     <script>
       // GLOBAL VARIABLES
@@ -564,7 +615,7 @@
             locFileData = this.responseText;
             setTimeout(function () {
               processJSON();
-            }, 1000);
+            }, 10000);
           }
         };
         if (loc == 'INDIA') {
@@ -602,16 +653,16 @@
             tableFileData = this.responseText;
             setTimeout(function () {
               buildtable();
-            }, 1000);
+            }, 10000);
           }
         };
         if (loc == 'INDIA') {
           //xhttp.open('GET', 'table_data/' + loc + '.json', true);
-          xhttp.open('GET', 'table_data/TABLE_DATA_'+ algo +'.json', true);
+          xhttp.open('GET', 'table_data/TABLE_DATA_' + algo + '.json', true);
         } else {
           xhttp.open(
             'GET',
-            'table_data/STATEWISE'+ algo +'/TABLE_DATA_' + loc + '.json',
+            'table_data/STATEWISE' + algo + '/TABLE_DATA_' + loc + '.json',
             true
           );
         }
@@ -627,16 +678,16 @@
             tableFileData = this.responseText;
             setTimeout(function () {
               buildtable();
-            }, 1000);
+            }, 10000);
           }
         };
         if (loc == 'INDIA') {
           //xhttp.open('GET', 'table_data/' + loc + '.json', true);
-          xhttp.open('GET', 'table_data/TABLE_DATA_'+ algo +'.json', true);
+          xhttp.open('GET', 'table_data/TABLE_DATA_' + algo + '.json', true);
         } else {
           xhttp.open(
             'GET',
-            'table_data/STATEWISE-'+ algo +'/TABLE_DATA_' + loc + '.json',
+            'table_data/STATEWISE-' + algo + '/TABLE_DATA_' + loc + '.json',
             true
           );
         }
@@ -653,8 +704,7 @@
             graphFileData = this.responseText;
             setTimeout(function () {
               graphUpdate();
-              
-            }, 1000);
+            }, 10000);
           }
         };
         if (loc == 'INDIA') {
@@ -701,7 +751,7 @@
         //Make Search operational
       }
 
-      function labelMap(){
+      function labelMap() {
         var periodText1 =
           $('#yearSelect option:selected').text() +
           ', ' +
@@ -774,12 +824,11 @@
       }
 
       //last column
-      function lastCol(n1,n2){
-        if((n1-n2)<0){
-          return "Improving"
-        }
-        else{
-          return "Declining"
+      function lastCol(n1, n2) {
+        if (n1 - n2 < 0) {
+          return 'Improving';
+        } else {
+          return 'Declining';
         }
       }
 
@@ -856,9 +905,10 @@
                     </td>
                     <td>
                       <span class="delta is-minLevel"></span> 
-                      <span class="total">${
-                        lastCol(data[i].CurrentLevel,data[i].AlgoLevel) 
-                      }</span>
+                      <span class="total">${lastCol(
+                        data[i].CurrentLevel,
+                        data[i].AlgoLevel
+                      )}</span>
                     </td>
                </tr>
                <tr></tr>`;
@@ -947,9 +997,10 @@
                     </td>
                     <td>
                       <span class="delta is-minLevel"></span> 
-                      <span class="total">${
-                        lastCol(data[i].districts[j].CurrentLevel,data[i].districts[j].AlgoLevel)
-                      }</span>
+                      <span class="total">${lastCol(
+                        data[i].districts[j].CurrentLevel,
+                        data[i].districts[j].AlgoLevel
+                      )}</span>
                     </td>
                </tr>`;
             var dist = $('.districtHead')[i];
@@ -1061,9 +1112,10 @@
                     </td>
                     <td>
                       <span class="delta is-minLevel"></span> 
-                      <span class="total">${
-                        lastCol(table_data[index].districts[i].CurrentLevel,table_data[index].districts[i].AlgoLevel)
-                      }</span>
+                      <span class="total">${lastCol(
+                        table_data[index].districts[i].CurrentLevel,
+                        table_data[index].districts[i].AlgoLevel
+                      )}</span>
                     </td>
         
                   
@@ -1173,9 +1225,10 @@
                         </td>
                         <td>
                           <span class="delta is-minLevel"></span> 
-                          <span class="total">${
-                            lastCol(data[i].CurrentLevel,data[i].AlgoLevel)
-                          }</span>
+                          <span class="total">${lastCol(
+                            data[i].CurrentLevel,
+                            data[i].AlgoLevel
+                          )}</span>
                         </td>
                    </tr>`;
 
@@ -1246,9 +1299,10 @@
                         </td>
                         <td colspan="1">
                           <span class="delta is-minLevel"></span> 
-                          <span class="total">${
-                            lastCol(data[i].blocks[j].CurrentLevel,data[i].blocks[j].AlgoLevel)
-                          }</span>
+                          <span class="total">${lastCol(
+                            data[i].blocks[j].CurrentLevel,
+                            data[i].blocks[j].AlgoLevel
+                          )}</span>
                         </td>
                    </tr>`;
             var dist = $('.blockHead')[i];
@@ -1326,9 +1380,10 @@
                         </td>
                         <td colspan="1">
                           <span class="delta is-minLevel"></span> 
-                          <span class="total">${
-                            lastCol(table_data[index].blocks[i].CurrentLevel,table_data[index].blocks[i].AlgoLevel)
-                          }</span>
+                          <span class="total">${lastCol(
+                            table_data[index].blocks[i].CurrentLevel,
+                            table_data[index].blocks[i].AlgoLevel
+                          )}</span>
                         </td>
                         </tr>`;
           var appendRow = $(`.districtRow.${index}`).next().next();
@@ -1336,9 +1391,9 @@
         }
       }
 
-     //Graphs section
+      //Graphs section
 
-     function buildGraphData() {
+      function buildGraphData() {
         var graphDataOriginalPOMRB = [];
         var graphDataAlgoPOMRB = [];
         var graphDataOriginalPREMON = [];
@@ -1346,9 +1401,9 @@
         var graphDataOriginalMONSOON = [];
         var graphDataAlgoMONSOON = [];
         var graphDataOriginalPOMKH = [];
-        var graphDataAlgoPOMKH = [] 
+        var graphDataAlgoPOMKH = [];
         var AllSeason = [];
-        var AllSeasonAlgo =[];
+        var AllSeasonAlgo = [];
         var locAlgo = loc.concat('_', algo);
         var POMRB_IDX = [];
         var PREMON_IDX = [];
@@ -1361,13 +1416,13 @@
           MONSOON_IDX.push(idxDict[key][2]);
           POMKH_IDX.push(idxDict[key][3]);
         });
-        var j = 0
-        var z = 0
-        if(algo == "ARIMA"){
-            j = 1
-            z = 4
+        var j = 0;
+        var z = 0;
+        if (algo == 'ARIMA') {
+          j = 1;
+          z = 4;
         }
-       for (i = j; i < POMRB_IDX.length; i++) {
+        for (i = j; i < POMRB_IDX.length; i++) {
           graphDataOriginalPOMRB.push({
             x: new Date(graph_data.Date[POMRB_IDX[i]]),
             y: graph_data[loc][POMRB_IDX[i]],
@@ -1409,17 +1464,17 @@
             z: graph_data.Season[POMKH_IDX[i]],
           });
         }
-        for (var i = z;i<92;i++){
+        for (var i = z; i < 92; i++) {
           AllSeason.push({
             x: new Date(graph_data.Date[i]),
             y: graph_data[loc][i],
-            z:graph_data.Season[i]
-          })
+            z: graph_data.Season[i],
+          });
           AllSeasonAlgo.push({
             x: new Date(graph_data.Date[i]),
             y: graph_data[locAlgo][i],
-            z:graph_data.Season[i]
-          })
+            z: graph_data.Season[i],
+          });
         }
         chart1 = new CanvasJS.Chart('graph1', {
           title: {
@@ -1453,8 +1508,8 @@
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
-              toolTipContent :"<a>{x} <br> Original Data: {y}</a>",
-              dataPoints: AllSeason
+              toolTipContent: '<a>{x} <br> Original Data: {y}</a>',
+              dataPoints: AllSeason,
             },
             {
               type: 'line',
@@ -1463,9 +1518,9 @@
               showInLegend: true,
               markerSize: 0,
               yValueFormatString: '#.###',
-              toolTipContent :"<a>Algorithm Data: {y} <br> Season:{z} </a>",
-              dataPoints: AllSeasonAlgo
-            }
+              toolTipContent: '<a>Algorithm Data: {y} <br> Season:{z} </a>',
+              dataPoints: AllSeasonAlgo,
+            },
           ],
         });
         chart2 = new CanvasJS.Chart('graph2', {
@@ -1779,9 +1834,15 @@
 
       /*************** STOP YASH SECTION **********************/
 
-
       function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'bn,gu,hi,kn,ml,mr,or,sd,ta,te,ur', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            includedLanguages: 'bn,gu,hi,kn,ml,mr,or,sd,ta,te,ur',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          'google_translate_element'
+        );
       }
     </script>
   </body>
