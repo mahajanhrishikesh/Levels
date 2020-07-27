@@ -430,7 +430,7 @@
     <script>
       // GLOBAL VARIABLES
       var year = 2018;
-      var loc = 'India';
+      var loc = 'INDIA';
       var docIdx = 91;
       var algo = 'ARIMA';
       var level = 0;
@@ -500,7 +500,7 @@
         PY: 'Pudducherry',
         AN: 'Andaman & Nicobar Islands',
         TG: 'Telengana',
-        INDIA: 'India',
+        INDIA: 'INDIA',
       };
 
       /*************START FUNCTIONS THAT ARE SET TO RUN ON SITE LOAD********************/
@@ -658,7 +658,7 @@
           }
         };
         if (loc == 'INDIA') {
-          xhttp.open('GET', 'data/Total-india.json', true);
+          xhttp.open('GET', 'data/Total-India.json', true);
         } else if (state_code.hasOwnProperty(loc)) {
           xhttp.open('GET', 'data/India.json', true);
         } else {
