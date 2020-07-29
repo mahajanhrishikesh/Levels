@@ -747,7 +747,7 @@
       /*****START FUNCTIONS FOR CHANGING THE INDEX OF THE DOWNLOADED DATA************/
       function searchClick(id) {
         var searchString = document.getElementById('searchText').value;
-        console.log(searchString);
+        //console.log(searchString);
         //Make Search operational
       }
 
@@ -777,7 +777,7 @@
 
       function changeSeason(id) {
         docIdx = document.getElementById('seasonSelect').value;
-        console.log('docIdx=', docIdx);
+        //console.log('docIdx=', docIdx);
         labelMap();
         processJSON();
         //tableUpdate();
@@ -1744,8 +1744,8 @@
               console.log('No data for :', meth);
             }
           }
-          console.log(dict);
-          console.log(states_names);
+          //console.log(dict);
+          //console.log(states_names);
           for (var key in dict) {
             //console.log(key);
             st = document.getElementById(key);
@@ -1787,18 +1787,18 @@
             //console.log(states[i]);
             var meth = states_names[i] + '_' + algo;
             if (obj[states_names[i]][t] <= obj[meth][t]) {
-              console.log('Value', obj[states_names[i]][t]);
-              console.log('Ref', obj[meth][t]);
+              //console.log('Value', obj[states_names[i]][t]);
+              //console.log('Ref', obj[meth][t]);
               dict[states_names[i]] = 1;
             }
             if (obj[states_names[i]][t] > obj[meth][t]) {
-              console.log('Value', obj[states_names[i]][t]);
-              console.log('Ref', obj[meth][t]);
+              //console.log('Value', obj[states_names[i]][t]);
+              //console.log('Ref', obj[meth][t]);
               dict[states_names[i]] = 0;
             }
           }
-          console.log(dict);
-          console.log(states_names);
+          //console.log(dict);
+          //console.log(states_names);
           for (var key in dict) {
             st = document.getElementById(key);
             //console.log(key);
