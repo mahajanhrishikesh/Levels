@@ -608,12 +608,16 @@
 
       // Will execute on clicking state on the map
       function changeToLoc(id) {
+        mapFileData = null;
+        tableFileData = null;
+        locFileData = null;
+        graphFileData = null;
         loc = id;
         document.getElementById('locName').innerHTML = state_code[loc] + ' Map';
         loadMapData();
-        loadTableData();
         loadNormalData();
         loadGraphData();
+        loadTableData();
       }
 
       //DOWNLOAD NORMAL JSON
@@ -622,9 +626,13 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             locFileData = this.responseText;
-            setTimeout(function () {
-              processJSON();
-            }, 10000);
+            while(true) {
+              if(locFileData == null) {}
+              else{
+                processJSON();
+                break;
+              }
+            }
           }
         };
         if (loc == 'INDIA') {
@@ -660,9 +668,13 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             tableFileData = this.responseText;
-            setTimeout(function () {
-              buildtable();
-            }, 10000);
+            while(true) {
+              if(graphFileData == null) {}
+              else{
+                buildtable();
+                break;
+              }
+            }
           }
         };
         if (loc == 'INDIA') {
@@ -679,31 +691,6 @@
         xhttp.send();
         //Write Load Table function here
       }
-      //DOWNLOAD TABLES
-      function loadTableData() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            tableFileData = this.responseText;
-            setTimeout(function () {
-              buildtable();
-            }, 10000);
-          }
-        };
-        if (loc == 'INDIA') {
-          //xhttp.open('GET', 'table_data/' + loc + '.json', true);
-          xhttp.open('GET', 'table_data/TABLE_DATA_' + algo + '.json', true);
-        } else {
-          xhttp.open(
-            'GET',
-            'table_data/STATEWISE-' + algo + '/TABLE_DATA_' + loc + '.json',
-            true
-          );
-        }
-
-        xhttp.send();
-        //Write Load Table function here
-      }
 
       //Download graphs
       function loadGraphData() {
@@ -711,9 +698,13 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             graphFileData = this.responseText;
-            setTimeout(function () {
-              graphUpdate();
-            }, 10000);
+            while(true) {
+              if(graphFileData == null) {}
+              else{
+                graphUpdate();
+                break;
+              }
+            }
           }
         };
         if (loc == 'INDIA') {
