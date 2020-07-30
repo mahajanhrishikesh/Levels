@@ -65,6 +65,11 @@ input[type='submit'] {
   stroke-opacity: 1;
 }
 
+.regionsUT path:hover {
+  stroke-width: 1;
+  stroke-opacity: 1;
+}
+
 #navbar_element:hover{
   background-color: rgb(219, 216, 216);
   color: black;
