@@ -344,14 +344,35 @@
               </div>
               <div id="mapContainer" class="card-body responsive"></div>
               <div class="card-footer d-flex justify-content-center">
-                <img src="img/legend.png" alt="">
+                <img src="img/legend.png" alt="" />
               </div>
             </div>
             <p class="h5 text-center mt-4">Union Territories</p>
             <div class="btn-group d-flex justify-content-center">
-              <button class="btn btn-outline-warning" type="button" id="PY" onclick="districtView(this.id);">Pondicherry</button>
-              <button class="btn btn-outline-warning" type="button" id="DD" onclick="districtView(this.id);">Daman&Diu</button>
-              <button class="btn btn-outline-warning" type="button" id="CH" onclick="districtView(this.id);">Chandigarh</button>
+              <button
+                class="btn btn-outline-warning"
+                type="button"
+                id="PY"
+                onclick="districtView(this.id);"
+              >
+                Pondicherry
+              </button>
+              <button
+                class="btn btn-outline-warning"
+                type="button"
+                id="DD"
+                onclick="districtView(this.id);"
+              >
+                Daman&Diu
+              </button>
+              <button
+                class="btn btn-outline-warning"
+                type="button"
+                id="CH"
+                onclick="districtView(this.id);"
+              >
+                Chandigarh
+              </button>
             </div>
             <!--END OF MAP CONTAINER-->
             <!--MAP ENDS HERE-->
@@ -626,9 +647,9 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             locFileData = this.responseText;
-            while(true) {
-              if(locFileData == null) {}
-              else{
+            while (true) {
+              if (locFileData == null) {
+              } else {
                 processJSON();
                 break;
               }
@@ -668,9 +689,9 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             tableFileData = this.responseText;
-            while(true) {
-              if(graphFileData == null) {}
-              else{
+            while (true) {
+              if (graphFileData == null) {
+              } else {
                 buildtable();
                 break;
               }
@@ -683,7 +704,7 @@
         } else {
           xhttp.open(
             'GET',
-            'table_data/STATEWISE' + algo + '/TABLE_DATA_' + loc + '.json',
+            'table_data/STATEWISE-' + algo + '/TABLE_DATA_' + loc + '.json',
             true
           );
         }
@@ -698,9 +719,9 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             graphFileData = this.responseText;
-            while(true) {
-              if(graphFileData == null) {}
-              else{
+            while (true) {
+              if (graphFileData == null) {
+              } else {
                 graphUpdate();
                 break;
               }
@@ -710,7 +731,7 @@
         if (loc == 'INDIA') {
           xhttp.open('GET', 'data/Total-India.json', true);
         } else if (state_code.hasOwnProperty(loc)) {
-          xhttp.open('GET', 'data/India.json', true);
+          xhttp.open('GET', 'data/INDIA.json', true);
         } else {
           xhttp.open(
             'GET',
