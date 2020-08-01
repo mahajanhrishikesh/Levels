@@ -216,7 +216,7 @@
         district = document.getElementById('selectDistrict').value;
         if (state.localeCompare('null') != 0) {
           var link =
-            'https://raw.githubusercontent.com/mahajanhrishikesh/Levels/master/data/DISTRICTDATA/JSON/DISTRICTWISE_' +
+            'gwl-dashboard.herokuapp.com/data/DISTRICTDATA/JSON/DISTRICTWISE_' +
             state +
             '.json';
           document.getElementById('link').href = link;
@@ -225,7 +225,7 @@
 
         if (state.localeCompare('null') != 0 && district) {
           var link =
-            'https://raw.githubusercontent.com/mahajanhrishikesh/Levels/master/data/DISTRICTDATA/JSON/BLOCKWISE_' +
+            'gwl-dashboard.herokuapp.com/data/DISTRICTDATA/JSON/BLOCKWISE_' +
             state +
             '_' +
             district +
