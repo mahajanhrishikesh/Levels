@@ -323,8 +323,6 @@
 
           <!--RIGHT SIDE HOME-->
           <div class="col-md-6 col-sm-12">
-            
-
             <!--MAP STARTS HERE-->
             <!--MAP CONTAINER WITH BACK BUTTON-->
             <div class="card shadow">
@@ -648,13 +646,9 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             locFileData = this.responseText;
-            while (true) {
-              if (locFileData == null) {
-              } else {
-                processJSON();
-                break;
-              }
-            }
+            setTimeout(function () {
+              processJSON();
+            }, 1000);
           }
         };
         if (loc == 'INDIA') {
@@ -690,13 +684,9 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             tableFileData = this.responseText;
-            while (true) {
-              if (graphFileData == null) {
-              } else {
-                buildtable();
-                break;
-              }
-            }
+            setTimeout(function () {
+              buildtable();
+            }, 1000);
           }
         };
         if (loc == 'INDIA') {
@@ -720,13 +710,9 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             graphFileData = this.responseText;
-            while (true) {
-              if (graphFileData == null) {
-              } else {
-                graphUpdate();
-                break;
-              }
-            }
+            setTimeout(function () {
+              graphUpdate();
+            }, 1000);
           }
         };
         if (loc == 'INDIA') {
