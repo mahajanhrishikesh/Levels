@@ -213,12 +213,17 @@
                 </div>
               </div>
               <div class="row my-2">
-                <span id="checkError" class="text-center"></span>
+                <div class="col-4 offset-4">
+                  <p id="checkError" class="text-center text-muted"></p>
+                </div>
               </div>
               <div class="row my-2">
-                  <button class="btn btn-success btn-block mx-3" onclick="checkAccuracy();">
-                    Check Accuracy
-                  </button>
+                <button
+                  class="btn btn-success btn-block mx-3"
+                  onclick="checkAccuracy();"
+                >
+                  Check Accuracy
+                </button>
               </div>
             </div>
             <!--CURRENT MASTER LOCATION STATS CARD GROUP-->
@@ -606,7 +611,6 @@
       var tableFileData = null;
       var locFileData = null;
       var graphFileData = null;
-      var errorFileData = null;
       function rollUp() {
         level = 0;
         loc = 'INDIA';
@@ -620,6 +624,7 @@
       }
 
       function districtView(id) {
+        document.getElementById('checkError').innerText = '';
         if (level == 0) {
           level = 1;
           document.getElementsByClassName('level').innerHTML = 'Districts';
@@ -656,7 +661,7 @@
             locFileData = this.responseText;
             setTimeout(function () {
               processJSON();
-            }, 10000);
+            }, 5000);
           }
         };
         if (loc == 'INDIA') {
@@ -694,7 +699,7 @@
             tableFileData = this.responseText;
             setTimeout(function () {
               buildtable();
-            }, 10000);
+            }, 5000);
           }
         };
         if (loc == 'INDIA') {
@@ -720,7 +725,7 @@
             graphFileData = this.responseText;
             setTimeout(function () {
               graphUpdate();
-            }, 10000);
+            }, 5000);
           }
         };
         if (loc == 'INDIA') {
@@ -747,16 +752,15 @@
         chart3.render();
         chart4.render();
         chart5.render();
-        errorFileData = graphFileData;
         /*for (var i = 0; i < 4; i++) {
-          chart1.options.data[i].dataPoints = [];
-        }
-        for (var i = 0; i < 2; i++) {
-          chart2.options.data[i].dataPoints = [];
-          chart3.options.data[i].dataPoints = [];
-          chart4.options.data[i].dataPoints = [];
-          chart5.options.data[i].dataPoints = [];
-        }*/
+            chart1.options.data[i].dataPoints = [];
+          }
+          for (var i = 0; i < 2; i++) {
+            chart2.options.data[i].dataPoints = [];
+            chart3.options.data[i].dataPoints = [];
+            chart4.options.data[i].dataPoints = [];
+            chart5.options.data[i].dataPoints = [];
+          }*/
       }
 
       /*****END FUNCTIONS FOR CHANGING LOCATION IE. DOWNLOADING NEW FILES****/
@@ -787,6 +791,7 @@
         document.getElementById('POMKH').value = seasonIdxs[3];
         docIdx = seasonIdxs[0];
         document.getElementById('POMRB').selected = true;
+        document.getElementById('checkError').innerText = '';
         labelMap();
         processJSON();
         buildtable();
@@ -794,7 +799,7 @@
 
       function changeSeason(id) {
         docIdx = document.getElementById('seasonSelect').value;
-
+        document.getElementById('checkError').innerText = '';
         //console.log('docIdx=', docIdx);
         labelMap();
         processJSON();
@@ -804,6 +809,7 @@
 
       function changeAlgorithm() {
         algo = document.getElementById('algoSelect').value;
+        document.getElementById('checkError').innerText = '';
         labelMap();
         loadTableData();
         processJSON();
@@ -891,136 +897,140 @@
         table.innerHTML = '';
         for (var i = 0; i < data.length; i++) {
           var row = `<tr class="state-row ${i}">
-                    <td>
-                      <div class="title-chevron">
-                        <span class="dropdown rotateDownRight">
-                          <svg height="24" width="24" viewbox=" 0 0 24 24">
-                             <polyline points="6 9 12 15 18 9" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" />
-                          </svg>
-                          </span>
-                      <span class ="title-icon" >${data[i].State}</span>
-                      </div>
-                    </td>
-                    <td>
-                      <span class="delta is-increasing"></span> 
-                      <span class="total">${data[i].IncreasingDistricts}</span>
-                    </td>
-                    <td>
-                      <span class="delta is-decreasing"></span> 
-                      <span class="total">${data[i].DecreasingDistricts}</span>
-                    </td>
-                    <td>
-                      <span class="delta is-avgLevel"></span> 
-                      <span class="total">${
-                        Math.round(data[i].CurrentLevel * 100) / 100
-                      }</span>
-                    </td>
-                    <td>
-                      <span class="delta is-minLevel"></span> 
-                      <span class="total">${
-                        Math.round(data[i].AlgoLevel * 100) / 100
-                      }</span>
-                    </td>
-                    <td>
-                      <span class="delta is-minLevel"></span> 
-                      <span class="total">${lastCol(
-                        data[i].CurrentLevel,
-                        data[i].AlgoLevel
-                      )}</span>
-                    </td>
-               </tr>
-               <tr></tr>`;
+                      <td>
+                        <div class="title-chevron">
+                          <span class="dropdown rotateDownRight">
+                            <svg height="24" width="24" viewbox=" 0 0 24 24">
+                               <polyline points="6 9 12 15 18 9" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" />
+                            </svg>
+                            </span>
+                        <span class ="title-icon" >${data[i].State}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <span class="delta is-increasing"></span>
+                        <span class="total">${
+                          data[i].IncreasingDistricts
+                        }</span>
+                      </td>
+                      <td>
+                        <span class="delta is-decreasing"></span>
+                        <span class="total">${
+                          data[i].DecreasingDistricts
+                        }</span>
+                      </td>
+                      <td>
+                        <span class="delta is-avgLevel"></span>
+                        <span class="total">${
+                          Math.round(data[i].CurrentLevel * 100) / 100
+                        }</span>
+                      </td>
+                      <td>
+                        <span class="delta is-minLevel"></span>
+                        <span class="total">${
+                          Math.round(data[i].AlgoLevel * 100) / 100
+                        }</span>
+                      </td>
+                      <td>
+                        <span class="delta is-minLevel"></span>
+                        <span class="total">${lastCol(
+                          data[i].CurrentLevel,
+                          data[i].AlgoLevel
+                        )}</span>
+                      </td>
+                 </tr>
+                 <tr></tr>`;
 
           table.innerHTML += row;
         }
         var row = `<!--<tr class="is-spacer" style="display:none;">
-              <td colspan="4">
-              </td>
-            </tr>-->
-            <tr class="state-last-update" style="display:none;">
-              <td colspan="5" style="padding-bottom: 0px;">
-              </td>
-              <td align="center" class="state-page-link" colspan="1" style="width: 2.5rem;" style="padding-bottom:1rem;">
-                See more details 
-              </td>
-            </tr>
-            <tr class="districtHead" style="display:none;">
-            <td data-column="district" data-order="desc" class="district-heading">
-              <div class="heading-content"> 
-                  <abbr title="District">District</abbr>
+                <td colspan="4">
+                </td>
+              </tr>-->
+              <tr class="state-last-update" style="display:none;">
+                <td colspan="5" style="padding-bottom: 0px;">
+                </td>
+                <td align="center" class="state-page-link" colspan="1" style="width: 2.5rem;" style="padding-bottom:1rem;">
+                  See more details
+                </td>
+              </tr>
+              <tr class="districtHead" style="display:none;">
+              <td data-column="district" data-order="desc" class="district-heading">
+                <div class="heading-content">
+                    <abbr title="District">District</abbr>
+                </div>
+            </td>
+            <td data-column="IncreasingBlocks" data-order="desc" class="district-heading">
+                <div class="heading-content" >
+                    <abbr title="Increasing Blocks">Increasing Blocks</abbr>
+                </div>
+            </td>
+            <td data-column="DecreasingBlocks" data-order="desc" class="district-heading">
+                <div class="heading-content">
+                    <abbr title="Decreasing Blocks">Decreasing Blocks</abbr>
+                </div>
+            </td>
+            <td data-column="CurrentLevel" data-order="desc" class="district-heading">
+                <div class="heading-content">
+                    <abbr title="Current Level">Current Level</abbr>
+                </div>
+            </td>
+            <td data-column="AlgorithmLevel" data-order="desc" class="district-heading">
+              <div class="heading-content">
+                  <abbr title="Algorithm Level">Algorithm Level</abbr>
               </div>
-          </td>
-          <td data-column="IncreasingBlocks" data-order="desc" class="district-heading">
-              <div class="heading-content" > 
-                  <abbr title="Increasing Blocks">Increasing Blocks</abbr>
+            </td>
+            <td data-column="AlgorithmLevel" data-order="desc" class="district-heading">
+              <div class="heading-content">
+                  <abbr title="Status">Status</abbr>
               </div>
-          </td>
-          <td data-column="DecreasingBlocks" data-order="desc" class="district-heading">
-              <div class="heading-content"> 
-                  <abbr title="Decreasing Blocks">Decreasing Blocks</abbr>
-              </div>
-          </td>
-          <td data-column="CurrentLevel" data-order="desc" class="district-heading">
-              <div class="heading-content"> 
-                  <abbr title="Current Level">Current Level</abbr>
-              </div>
-          </td>
-          <td data-column="AlgorithmLevel" data-order="desc" class="district-heading">
-            <div class="heading-content"> 
-                <abbr title="Algorithm Level">Algorithm Level</abbr>
-            </div>
-          </td>
-          <td data-column="AlgorithmLevel" data-order="desc" class="district-heading">
-            <div class="heading-content"> 
-                <abbr title="Status">Status</abbr>
-            </div>
-          </td>            
-    </tr>`;
+            </td>
+      </tr>`;
         $('.state-row').after(row);
 
         for (i = 0; i < data.length; i++) {
           for (j = 0; j < data[i].districts.length; j++) {
             var row = `<tr class="district-row ${i}" style="display:none;">
-                    <td>
-                      <div class="title-chevron">
-                        <span class ="title-icon">${
-                          data[i].districts[j].district
+                      <td>
+                        <div class="title-chevron">
+                          <span class ="title-icon">${
+                            data[i].districts[j].district
+                          }</span>
+                        </div>
+                      </td>
+                      <td>
+                        <span class="delta is-increasing"></span>
+                        <span class="total">${
+                          data[i].districts[j].IncreasingBlocks
                         }</span>
-                      </div>
-                    </td>
-                    <td>
-                      <span class="delta is-increasing"></span> 
-                      <span class="total">${
-                        data[i].districts[j].IncreasingBlocks
-                      }</span>
-                    </td>
-                    <td>
-                      <span class="delta is-decreasing"></span> 
-                      <span class="total">${
-                        data[i].districts[j].DecreasingBlocks
-                      }</span>
-                    </td>
-                    <td>
-                      <span class="delta is-avgLevel"></span> 
-                      <span class="total">${
-                        Math.round(data[i].districts[j].CurrentLevel * 100) /
-                        100
-                      }</span>
-                    </td>
-                    <td>
-                      <span class="delta is-minLevel"></span> 
-                      <span class="total">${
-                        Math.round(data[i].districts[j].AlgoLevel * 100) / 100
-                      }</span>
-                    </td>
-                    <td>
-                      <span class="delta is-minLevel"></span> 
-                      <span class="total">${lastCol(
-                        data[i].districts[j].CurrentLevel,
-                        data[i].districts[j].AlgoLevel
-                      )}</span>
-                    </td>
-               </tr>`;
+                      </td>
+                      <td>
+                        <span class="delta is-decreasing"></span>
+                        <span class="total">${
+                          data[i].districts[j].DecreasingBlocks
+                        }</span>
+                      </td>
+                      <td>
+                        <span class="delta is-avgLevel"></span>
+                        <span class="total">${
+                          Math.round(data[i].districts[j].CurrentLevel * 100) /
+                          100
+                        }</span>
+                      </td>
+                      <td>
+                        <span class="delta is-minLevel"></span>
+                        <span class="total">${
+                          Math.round(data[i].districts[j].AlgoLevel * 100) / 100
+                        }</span>
+                      </td>
+                      <td>
+                        <span class="delta is-minLevel"></span>
+                        <span class="total">${lastCol(
+                          data[i].districts[j].CurrentLevel,
+                          data[i].districts[j].AlgoLevel
+                        )}</span>
+                      </td>
+                 </tr>`;
             var dist = $('.districtHead')[i];
             $(dist).after(row);
           }
@@ -1093,51 +1103,51 @@
         $(`.district-row.${index}`).remove();
         for (var i = 0; i < table_data[index].districts.length; i++) {
           var row = `<tr class="district-row ${index}">
-                    <td>
-                      <div class="title-chevron">
-                      <span class ="title-icon">${
-                        table_data[index].districts[i].district
-                      }</span>
-                      </div>
-                    </td>
-                    <td>
-                      <span class="delta is-increasing"></span> 
-                      <span class="total">${
-                        table_data[index].districts[i].IncreasingBlocks
-                      }</span>
-                    </td>
-                    <td>
-                      <span class="delta is-decreasing"></span> 
-                      <span class="total">${
-                        table_data[index].districts[i].DecreasingBlocks
-                      }</span>
-                    </td>
-                    <td>
-                      <span class="delta is-avgLevel"></span> 
-                      <span class="total">${
-                        Math.round(
-                          table_data[index].districts[i].CurrentLevel * 100
-                        ) / 100
-                      }</span>
-                    </td>
-                    <td>
-                      <span class="delta is-minLevel"></span> 
-                      <span class="total">${
-                        Math.round(
-                          table_data[index].districts[i].AlgoLevel * 100
-                        ) / 100
-                      }</span>
-                    </td>
-                    <td>
-                      <span class="delta is-minLevel"></span> 
-                      <span class="total">${lastCol(
-                        table_data[index].districts[i].CurrentLevel,
-                        table_data[index].districts[i].AlgoLevel
-                      )}</span>
-                    </td>
-        
-                  
-               </tr>`;
+                      <td>
+                        <div class="title-chevron">
+                        <span class ="title-icon">${
+                          table_data[index].districts[i].district
+                        }</span>
+                        </div>
+                      </td>
+                      <td>
+                        <span class="delta is-increasing"></span>
+                        <span class="total">${
+                          table_data[index].districts[i].IncreasingBlocks
+                        }</span>
+                      </td>
+                      <td>
+                        <span class="delta is-decreasing"></span>
+                        <span class="total">${
+                          table_data[index].districts[i].DecreasingBlocks
+                        }</span>
+                      </td>
+                      <td>
+                        <span class="delta is-avgLevel"></span>
+                        <span class="total">${
+                          Math.round(
+                            table_data[index].districts[i].CurrentLevel * 100
+                          ) / 100
+                        }</span>
+                      </td>
+                      <td>
+                        <span class="delta is-minLevel"></span>
+                        <span class="total">${
+                          Math.round(
+                            table_data[index].districts[i].AlgoLevel * 100
+                          ) / 100
+                        }</span>
+                      </td>
+                      <td>
+                        <span class="delta is-minLevel"></span>
+                        <span class="total">${lastCol(
+                          table_data[index].districts[i].CurrentLevel,
+                          table_data[index].districts[i].AlgoLevel
+                        )}</span>
+                      </td>
+
+
+                 </tr>`;
           var appendRow = $(`.state-row.${index}`).next().next();
 
           appendRow.after(row).app;
@@ -1211,118 +1221,125 @@
           if (i % 2 == 0) odd = 'odd';
           else odd = '';
           var row = `<tr class="districtRow ${i}" id ="${odd}">
-                        <td>
-                          <div class="title-chevron">
-                            <span class="dropdown rotateDownRight">
-                              <svg height="24" width="24" viewbox=" 0 0 24 24">
-                                 <polyline points="6 9 12 15 18 9" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" />
-                              </svg>
-                              </span>
-                          <span class ="title-icon" >${data[i].District}</span>
-                          </div>
-                        </td>
-                        <td>
-                          <span class="delta is-increasing"></span> 
-                          <span class="total">${data[i].IncreasingBlocks}</span>
-                        </td>
-                        <td>
-                          <span class="delta is-decreasing"></span> 
-                          <span class="total">${data[i].DecreasingBlocks}</span>
-                        </td>
-                        <td>
-                          <span class="delta is-avgLevel"></span> 
-                          <span class="total">${
-                            Math.round(data[i].CurrentLevel * 100) / 100
-                          }</span>
-                        </td>
-                        <td>
-                          <span class="delta is-minLevel"></span> 
-                          <span class="total">${
-                            Math.round(data[i].AlgoLevel * 100) / 100
-                          }</span>
-                        </td>
-                        <td>
-                          <span class="delta is-minLevel"></span> 
-                          <span class="total">${lastCol(
-                            data[i].CurrentLevel,
-                            data[i].AlgoLevel
-                          )}</span>
-                        </td>
-                   </tr>`;
+                          <td>
+                            <div class="title-chevron">
+                              <span class="dropdown rotateDownRight">
+                                <svg height="24" width="24" viewbox=" 0 0 24 24">
+                                   <polyline points="6 9 12 15 18 9" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" />
+                                </svg>
+                                </span>
+                            <span class ="title-icon" >${
+                              data[i].District
+                            }</span>
+                            </div>
+                          </td>
+                          <td>
+                            <span class="delta is-increasing"></span>
+                            <span class="total">${
+                              data[i].IncreasingBlocks
+                            }</span>
+                          </td>
+                          <td>
+                            <span class="delta is-decreasing"></span>
+                            <span class="total">${
+                              data[i].DecreasingBlocks
+                            }</span>
+                          </td>
+                          <td>
+                            <span class="delta is-avgLevel"></span>
+                            <span class="total">${
+                              Math.round(data[i].CurrentLevel * 100) / 100
+                            }</span>
+                          </td>
+                          <td>
+                            <span class="delta is-minLevel"></span>
+                            <span class="total">${
+                              Math.round(data[i].AlgoLevel * 100) / 100
+                            }</span>
+                          </td>
+                          <td>
+                            <span class="delta is-minLevel"></span>
+                            <span class="total">${lastCol(
+                              data[i].CurrentLevel,
+                              data[i].AlgoLevel
+                            )}</span>
+                          </td>
+                     </tr>`;
 
           table.innerHTML += row;
         }
 
         //Add block Heading
         var row = `
-                <tr class="state-last-update" style="display:none;">
-                  <td colspan="5" style="padding-bottom: 0px;">
-                  </td>
-                  <td align="center" class="state-page-link" colspan="1" style="width: 2.5rem;" style="padding-bottom:1rem;">
-                    See more details 
-                  </td>
-                </tr>
-    
-                <tr class="blockHead" style="display:none;">
-                <td data-column="district" data-order="desc" class="block-heading" colsplan="1">
-                  <div class="heading-content"> 
-                      <abbr title="District">Block</abbr>
+                  <tr class="state-last-update" style="display:none;">
+                    <td colspan="5" style="padding-bottom: 0px;">
+                    </td>
+                    <td align="center" class="state-page-link" colspan="1" style="width: 2.5rem;" style="padding-bottom:1rem;">
+                      See more details
+                    </td>
+                  </tr>
+
+                  <tr class="blockHead" style="display:none;">
+                  <td data-column="district" data-order="desc" class="block-heading" colsplan="1">
+                    <div class="heading-content">
+                        <abbr title="District">Block</abbr>
+                    </div>
+                </td>
+                <td data-column="CurrentLevel" data-order="desc" class="block-heading" colspan="2">
+                    <div class="heading-content">
+                        <abbr title="Current Level">Current Level</abbr>
+                    </div>
+
+                </td>
+                <td data-column="AlgorithmLevel" data-order="desc" class="block-heading" colspan="2">
+                  <div class="heading-content">
+                      <abbr title="Algorithm Level">Algorithm Level</abbr>
                   </div>
+
               </td>
-              <td data-column="CurrentLevel" data-order="desc" class="block-heading" colspan="2">
-                  <div class="heading-content"> 
-                      <abbr title="Current Level">Current Level</abbr>
+              <td data-column="AlgorithmLevel" data-order="desc" class="block-heading" colspan="1">
+                  <div class="heading-content">
+                      <abbr title="">Status</abbr>
                   </div>
-                  
+
               </td>
-              <td data-column="AlgorithmLevel" data-order="desc" class="block-heading" colspan="2">
-                <div class="heading-content"> 
-                    <abbr title="Algorithm Level">Algorithm Level</abbr>
-                </div>
-               
+
             </td>
-            <td data-column="AlgorithmLevel" data-order="desc" class="block-heading" colspan="1">
-                <div class="heading-content"> 
-                    <abbr title="">Status</abbr>
-                </div>
-               
-            </td>
-              
-          </td>              
-        </tr>`;
+          </tr>`;
         $('.districtRow').after(row);
         //Add block rows
         for (i = 0; i < data.length; i++) {
           for (j = 0; j < data[i].blocks.length; j++) {
             var row = `<tr class="block-row ${i}" style="display:none;">
-                        <td colspan="1">
-                          <div class="title-chevron">
-                            <span class ="title-icon">${
-                              data[i].blocks[j].block
+                          <td colspan="1">
+                            <div class="title-chevron">
+                              <span class ="title-icon">${
+                                data[i].blocks[j].block
+                              }</span>
+                            </div>
+                          </td>
+                          <td colspan="2">
+                            <span class="delta is-avgLevel"></span>
+                            <span class="total">${
+                              Math.round(data[i].blocks[j].CurrentLevel * 100) /
+                              100
                             }</span>
-                          </div>
-                        </td>
-                        <td colspan="2">
-                          <span class="delta is-avgLevel"></span> 
-                          <span class="total">${
-                            Math.round(data[i].blocks[j].CurrentLevel * 100) /
-                            100
-                          }</span>
-                        </td>
-                        <td colspan="2">
-                          <span class="delta is-minLevel"></span> 
-                          <span class="total">${
-                            Math.round(data[i].blocks[j].AlgoLevel * 100) / 100
-                          }</span>
-                        </td>
-                        <td colspan="1">
-                          <span class="delta is-minLevel"></span> 
-                          <span class="total">${lastCol(
-                            data[i].blocks[j].CurrentLevel,
-                            data[i].blocks[j].AlgoLevel
-                          )}</span>
-                        </td>
-                   </tr>`;
+                          </td>
+                          <td colspan="2">
+                            <span class="delta is-minLevel"></span>
+                            <span class="total">${
+                              Math.round(data[i].blocks[j].AlgoLevel * 100) /
+                              100
+                            }</span>
+                          </td>
+                          <td colspan="1">
+                            <span class="delta is-minLevel"></span>
+                            <span class="total">${lastCol(
+                              data[i].blocks[j].CurrentLevel,
+                              data[i].blocks[j].AlgoLevel
+                            )}</span>
+                          </td>
+                     </tr>`;
             var dist = $('.blockHead')[i];
             $(dist).after(row);
           }
@@ -1373,37 +1390,37 @@
         $(`.block-row.${index}`).remove();
         for (var i = 0; i < table_data[index].blocks.length; i++) {
           var row = `<tr class="block-row ${index}">
-                        <td colspan="1">
-                          <div class="title-chevron">
-                          <span class ="title-icon">${
-                            table_data[index].blocks[i].block
-                          }</span>
-                          </div>
-                        </td>
-                        <td colspan="2">
-                          <span class="delta is-avgLevel"></span> 
-                          <span class="total">${
-                            Math.round(
-                              table_data[index].blocks[i].CurrentLevel * 100
-                            ) / 100
-                          }</span>
-                        </td>
-                        <td colspan="2">
-                          <span class="delta is-minLevel"></span> 
-                          <span class="total">${
-                            Math.round(
-                              table_data[index].blocks[i].AlgoLevel * 100
-                            ) / 100
-                          }</span>
-                        </td>
-                        <td colspan="1">
-                          <span class="delta is-minLevel"></span> 
-                          <span class="total">${lastCol(
-                            table_data[index].blocks[i].CurrentLevel,
-                            table_data[index].blocks[i].AlgoLevel
-                          )}</span>
-                        </td>
-                        </tr>`;
+                          <td colspan="1">
+                            <div class="title-chevron">
+                            <span class ="title-icon">${
+                              table_data[index].blocks[i].block
+                            }</span>
+                            </div>
+                          </td>
+                          <td colspan="2">
+                            <span class="delta is-avgLevel"></span>
+                            <span class="total">${
+                              Math.round(
+                                table_data[index].blocks[i].CurrentLevel * 100
+                              ) / 100
+                            }</span>
+                          </td>
+                          <td colspan="2">
+                            <span class="delta is-minLevel"></span>
+                            <span class="total">${
+                              Math.round(
+                                table_data[index].blocks[i].AlgoLevel * 100
+                              ) / 100
+                            }</span>
+                          </td>
+                          <td colspan="1">
+                            <span class="delta is-minLevel"></span>
+                            <span class="total">${lastCol(
+                              table_data[index].blocks[i].CurrentLevel,
+                              table_data[index].blocks[i].AlgoLevel
+                            )}</span>
+                          </td>
+                          </tr>`;
           var appendRow = $(`.districtRow.${index}`).next().next();
           appendRow.after(row).app;
         }
@@ -1739,9 +1756,9 @@
             }
           }
           /*for(var i in district_names)
-          {
-            console.log(district_names[i]);
-          }*/
+            {
+              console.log(district_names[i]);
+            }*/
           //console.log(obj["Anand_ARIMA"][91]);
 
           var dict = {};
@@ -1853,12 +1870,42 @@
       /*************** STOP YASH SECTION **********************/
 
       /***************ROOT MEAN SQUARE ERROR*****************/
-      function rmse(y, ypred) {
+
+      function rmseCalc(y, ypred) {
         rmse = 0;
         for (i = 0; i < y.length; i++) {
           rmse += Math.pow(y[i] - ypred[i], 2);
         }
+        rmse /= y.length;
         rmse = Math.sqrt(rmse);
+        mean = 0;
+        for (i = 0; i < y.length; i++) {
+          mean += y[i];
+        }
+        mean /= y.length;
+        document.getElementById('checkError').innerText =
+          loc +
+          ' ' +
+          algo +
+          ' ' +
+          $('#yearSelect option:selected').text() +
+          ' ' +
+          ((1 - rmse / mean) * 100).toFixed(2);
+      }
+
+      function checkAccuracy() {
+        errorFileData = JSON.parse(graphFileData);
+        arr1 = errorFileData[loc];
+        arr2 = errorFileData[loc + '_' + algo];
+        y = [];
+        ypred = [];
+        for (i in arr1) {
+          y.push(arr1[i]);
+          ypred.push(arr2[i]);
+        }
+        y = y.slice(5, docIdx);
+        ypred = ypred.slice(5, docIdx);
+        rmseCalc(y, ypred);
       }
       /**************END ROOT MEAN SQUARE ERROR**************/
 
