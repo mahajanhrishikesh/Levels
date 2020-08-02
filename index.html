@@ -754,6 +754,7 @@
         //Write graph updation code here
         graph_data = JSON.parse(graphFileData);
         buildGraphData();
+        chart0.render();
         chart1.render();
         chart2.render();
         chart3.render();
@@ -1445,8 +1446,10 @@
         var graphDataOriginalPOMKH = [];
         var graphDataAlgoPOMKH = [];
         var AllSeason = [];
+        var AllSeasonTrend = [];
         var AllSeasonAlgo = [];
         var locAlgo = loc.concat('_', algo);
+        var locTrend = loc.concat('_Trend');
         var POMRB_IDX = [];
         var PREMON_IDX = [];
         var MONSOON_IDX = [];
@@ -1512,12 +1515,64 @@
             y: graph_data[loc][i],
             z: graph_data.Season[i],
           });
+          AllSeasonTrend.push({
+            x: new Date(graph_data.Date[i]),
+            y: graph_data[locTrend][i],
+            z: graph_data.Season[i],
+          })
           AllSeasonAlgo.push({
             x: new Date(graph_data.Date[i]),
             y: graph_data[locAlgo][i],
             z: graph_data.Season[i],
           });
         }
+        chart0 = new CanvasJS.Chart('graph0', {
+          title: {
+            text: 'Trend',
+          },
+          axisX: {
+            valueFormatString: 'MMM YYYY',
+          },
+          axisY: {
+            //  title: "Median List Price",
+            //   minimum: 0
+            //suffix: k
+          },
+          toolTip: {
+            shared: true,
+          },
+          legend: {
+            cursor: 'pointer',
+            gridThickness: '0',
+            verticalAlign: 'top',
+            horizontalAlign: 'center',
+            dockInsidePlotArea: true,
+
+            //	itemclick: toogleDataSeries
+          },
+          data: [
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'Original',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              toolTipContent: '<a>{x} <br> Original Data: {y}</a>',
+              dataPoints: AllSeason,
+            },
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'Trend',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              toolTipContent: '<a>Trend Data: {y} <br> Season:{z} </a>',
+              dataPoints: AllSeasonTrend,
+            },
+          ],
+        });
         chart1 = new CanvasJS.Chart('graph1', {
           title: {
             text: 'All Seasons',
