@@ -60,7 +60,7 @@
             </li>
             <li class="nav-item">
               <a
-                href="compare.html"
+                href="#"
                 style="border-radius: 8px; margin: 2px;"
                 id="navbar_element"
                 class="nav-link"
@@ -70,7 +70,7 @@
             </li>
             <li class="nav-item">
               <a
-                href="getAPI.html"
+                href="#"
                 style="border-radius: 8px; margin: 2px;"
                 id="navbar_element"
                 class="nav-link"
@@ -78,19 +78,18 @@
               >
               <!--FORM THAT WILL LINK TO GIT RAW-->
             </li>
-            <li class="nav-item">
+            <!--<li class="nav-item">
               <a
-                href="forecast.html"
+                href="#"
                 style="border-radius: 8px; margin: 2px;"
                 id="navbar_element"
                 class="nav-link"
                 >Forecast</a
               >
-              <!--FORECASTING PAGE-->
-            </li>
+            </li>-->
             <li class="nav-item">
               <a
-                href="deepdive.html"
+                href="#"
                 style="border-radius: 8px; margin: 2px;"
                 id="navbar_element"
                 class="nav-link"
@@ -648,7 +647,7 @@
             locFileData = this.responseText;
             setTimeout(function () {
               processJSON();
-            }, 1000);
+            }, 10000);
           }
         };
         if (loc == 'INDIA') {
@@ -686,7 +685,7 @@
             tableFileData = this.responseText;
             setTimeout(function () {
               buildtable();
-            }, 1000);
+            }, 10000);
           }
         };
         if (loc == 'INDIA') {
@@ -712,7 +711,7 @@
             graphFileData = this.responseText;
             setTimeout(function () {
               graphUpdate();
-            }, 1000);
+            }, 10000);
           }
         };
         if (loc == 'INDIA') {
