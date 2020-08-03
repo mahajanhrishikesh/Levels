@@ -611,7 +611,7 @@
             document.getElementById('mapContainer2').innerHTML = mapFile2Data;
           }
         };
-        xhttp.open('GET', 'maps/' + loc + '.svg', true);
+        xhttp.open('GET', 'maps/' + loc + '_GWRA.svg', true);
         xhttp.send();
       }
 
@@ -622,7 +622,7 @@
             locFileData = this.responseText;
             setTimeout(function () {
               processJSON('map1'); //LEFT SIDE CALL
-              processJSON('map2'); //RIGHT SIDE CALL
+              //processJSON('map2'); //RIGHT SIDE CALL
             }, 1000);
           }
         };
