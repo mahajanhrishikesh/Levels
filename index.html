@@ -1953,29 +1953,49 @@
           mean += y[i];
         }
         mean /= y.length;
-        document.getElementById('checkError').innerText =
-          loc +
-          ' ' +
-          algo +
-          ' ' +
-          $('#yearSelect option:selected').text() +
-          ' ' +
-          ((1 - rmse / mean) * 100).toFixed(2);
+        return ((1 - rmse / mean) * 100).toFixed(2);
       }
+
+      var scores_dict = null;
 
       function checkAccuracy() {
         errorFileData = JSON.parse(graphFileData);
         arr1 = errorFileData[loc];
-        arr2 = errorFileData[loc + '_' + algo];
+        sma_array = errorFileData[loc + '_' + 'SMA'];
+        ewma_array = errorFileData[loc + '_' + 'EWMA'];
+        arima_array = errorFileData[loc + '_' + 'ARIMA'];
+        tes_array = errorFileData[loc + '_' + 'TES'];
+        des_array = errorFileData[loc + '_' + 'DES'];
         y = [];
-        ypred = [];
+        ypred_sma = [];
+        ypred_ewma = [];
+        ypred_arima = [];
+        ypred_tes = [];
+        ypred_des = [];
         for (i in arr1) {
           y.push(arr1[i]);
-          ypred.push(arr2[i]);
+          ypred_sma.push(sma_array[i]);
+          ypred_ewma.push(ewma_array[i]);
+          ypred_arima.push(arima_array[i]);
+          ypred_tes.push(tes_array[i]);
+          ypred_des.push(des_array[i]);
         }
         y = y.slice(5, docIdx);
-        ypred = ypred.slice(5, docIdx);
-        rmseCalc(y, ypred);
+        ypred_sma.slice(5, docIdx);
+        ypred_ewma.slice(5, docIdx);
+        ypred_arima.slice(5, docIdx);
+        ypred_tes.slice(5, docIdx);
+        ypred_des.slice(5, docIdx);
+        scores_dict = {
+          sma : rmseCalc(y, ypred_sma),
+          ewma : rmseCalc(y, ypred_ewma),
+          arima : rmseCalc(y, ypred_arima),
+          tes : rmseCalc(y, ypred_tes),
+          des : rmseCalc(y, ypred_des),
+        }
+        for (key in scores_dict.keys) {
+          min = 
+        }
       }
       /**************END ROOT MEAN SQUARE ERROR**************/
 
