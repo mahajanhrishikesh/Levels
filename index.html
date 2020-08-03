@@ -513,6 +513,9 @@
       src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
     ></script>
 
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
     <script>
       // GLOBAL VARIABLES
       var year = 2018;
@@ -741,12 +744,7 @@
         //Write graph updation code here
         graph_data = JSON.parse(graphFileData);
         buildGraphData();
-        chart0.render();
-        chart1.render();
-        chart2.render();
-        chart3.render();
-        chart4.render();
-        chart5.render();
+       
         /*for (var i = 0; i < 4; i++) {
             chart1.options.data[i].dataPoints = [];
           }
@@ -1421,20 +1419,16 @@
         }
       }
 
-      //Graphs section
+           //Graphs section
 
-      function buildGraphData() {
-        var graphDataOriginalPOMRB = [];
-        var graphDataAlgoPOMRB = [];
-        var graphDataOriginalPREMON = [];
-        var graphDataAlgoPREMON = [];
-        var graphDataOriginalMONSOON = [];
-        var graphDataAlgoMONSOON = [];
-        var graphDataOriginalPOMKH = [];
-        var graphDataAlgoPOMKH = [];
+     function buildGraphData() {
+        var graphDataPOMRB = [];
+        var graphDataPREMON = [];
+        var graphDataMONSOON = [];
+        var graphDataPOMKH = []; 
         var AllSeason = [];
-        var AllSeasonTrend = [];
-        var AllSeasonAlgo = [];
+        var AllSeasonAlgo =[];
+        var AllSeasonTrends = [];
         var locAlgo = loc.concat('_', algo);
         var locTrend = loc.concat('_Trend');
         var POMRB_IDX = [];
@@ -1448,344 +1442,449 @@
           MONSOON_IDX.push(idxDict[key][2]);
           POMKH_IDX.push(idxDict[key][3]);
         });
-        var j = 0;
-        var z = 0;
-        if (algo == 'ARIMA') {
-          j = 1;
-          z = 4;
+        var j = 0
+        var z = 0
+        if(algo == "ARIMA"){
+            j = 1
+            z = 4
         }
-        for (i = j; i < POMRB_IDX.length; i++) {
-          graphDataOriginalPOMRB.push({
-            x: new Date(graph_data.Date[POMRB_IDX[i]]),
-            y: graph_data[loc][POMRB_IDX[i]],
+       for (i = j; i < POMRB_IDX.length; i++) {
+          graphDataPOMRB.push({
+            x: graph_data.Date[POMRB_IDX[i]],
+            y1: graph_data[loc][POMRB_IDX[i]],
             z: graph_data.Season[POMRB_IDX[i]],
+            y2: graph_data[locAlgo][POMRB_IDX[i]]
           });
-          graphDataAlgoPOMRB.push({
-            x: new Date(graph_data.Date[POMRB_IDX[i]]),
-            y: graph_data[locAlgo][POMRB_IDX[i]],
-            z: graph_data.Season[POMRB_IDX[i]],
-          });
-          graphDataOriginalPREMON.push({
-            x: new Date(graph_data.Date[PREMON_IDX[i]]),
-            y: graph_data[loc][PREMON_IDX[i]],
+          graphDataPREMON.push({
+            x: graph_data.Date[PREMON_IDX[i]],
+            y1: graph_data[loc][PREMON_IDX[i]],
+            y2: graph_data[locAlgo][PREMON_IDX[i]],
             z: graph_data.Season[PREMON_IDX[i]],
           });
-          graphDataAlgoPREMON.push({
-            x: new Date(graph_data.Date[PREMON_IDX[i]]),
-            y: graph_data[locAlgo][PREMON_IDX[i]],
-            z: graph_data.Season[PREMON_IDX[i]],
-          });
-          graphDataOriginalMONSOON.push({
-            x: new Date(graph_data.Date[MONSOON_IDX[i]]),
-            y: graph_data[loc][MONSOON_IDX[i]],
+          graphDataMONSOON.push({
+            x: graph_data.Date[MONSOON_IDX[i]],
+            y1: graph_data[loc][MONSOON_IDX[i]],
+            y2: graph_data[locAlgo][MONSOON_IDX[i]],
             z: graph_data.Season[MONSOON_IDX[i]],
           });
-          graphDataAlgoMONSOON.push({
-            x: new Date(graph_data.Date[MONSOON_IDX[i]]),
-            y: graph_data[locAlgo][MONSOON_IDX[i]],
-            z: graph_data.Season[MONSOON_IDX[i]],
-          });
-          graphDataOriginalPOMKH.push({
-            x: new Date(graph_data.Date[POMKH_IDX[i]]),
-            y: graph_data[loc][POMKH_IDX[i]],
-            z: graph_data.Season[POMKH_IDX[i]],
-          });
-          graphDataAlgoPOMKH.push({
-            x: new Date(graph_data.Date[POMKH_IDX[i]]),
-            y: graph_data[locAlgo][POMKH_IDX[i]],
+          graphDataPOMKH.push({
+            x:  graph_data.Date[POMKH_IDX[i]],
+            y1: graph_data[loc][POMKH_IDX[i]],
+            y2: graph_data[locAlgo][POMKH_IDX[i]],
             z: graph_data.Season[POMKH_IDX[i]],
           });
         }
-        for (var i = z; i < 92; i++) {
+        for (var i = z;i<92;i++){
           AllSeason.push({
-            x: new Date(graph_data.Date[i]),
-            y: graph_data[loc][i],
-            z: graph_data.Season[i],
-          });
-          AllSeasonTrend.push({
-            x: new Date(graph_data.Date[i]),
-            y: graph_data[locTrend][i],
-            z: graph_data.Season[i],
-          });
-          AllSeasonAlgo.push({
-            x: new Date(graph_data.Date[i]),
-            y: graph_data[locAlgo][i],
-            z: graph_data.Season[i],
-          });
+            x: graph_data.Date[i],
+            y1: graph_data[loc][i],
+            y2: graph_data[locAlgo][i],
+            z:graph_data.Season[i]
+          })
         }
-        chart0 = new CanvasJS.Chart('graph0', {
-          title: {
-            text: 'Trend',
-          },
-          axisX: {
-            valueFormatString: 'MMM YYYY',
-          },
-          axisY: {
-            //  title: "Median List Price",
-            //   minimum: 0
-            //suffix: k
-          },
-          toolTip: {
-            shared: true,
-          },
-          legend: {
-            cursor: 'pointer',
-            gridThickness: '0',
-            verticalAlign: 'top',
-            horizontalAlign: 'center',
-            dockInsidePlotArea: true,
 
-            //	itemclick: toogleDataSeries
-          },
-          data: [
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: 'Original',
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              toolTipContent: '<a>{x} <br> Original Data: {y}</a>',
-              dataPoints: AllSeason,
-            },
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: 'Trend',
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              toolTipContent: '<a>Trend Data: {y} <br> Season:{z} </a>',
-              dataPoints: AllSeasonTrend,
-            },
-          ],
-        });
-        chart1 = new CanvasJS.Chart('graph1', {
-          title: {
-            text: 'All Seasons',
-          },
-          axisX: {
-            valueFormatString: 'MMM YYYY',
-          },
-          axisY: {
-            //  title: "Median List Price",
-            //   minimum: 0
-            //suffix: k
-          },
-          toolTip: {
-            shared: true,
-          },
-          legend: {
-            cursor: 'pointer',
-            gridThickness: '0',
-            verticalAlign: 'top',
-            horizontalAlign: 'center',
-            dockInsidePlotArea: true,
+        for (var i = z;i<92;i++){
+          AllSeasonTrends.push({
+            x: graph_data.Date[i],
+            y1: graph_data[loc][i],
+            y2: graph_data[locTrend][i],
+            z:graph_data.Season[i]
+          })
+        }
+        
+        console.log(AllSeason)
 
-            //	itemclick: toogleDataSeries
-          },
-          data: [
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: 'Original',
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              toolTipContent: '<a>{x} <br> Original Data: {y}</a>',
-              dataPoints: AllSeason,
-            },
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: algo,
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              toolTipContent: '<a>Algorithm Data: {y} <br> Season:{z} </a>',
-              dataPoints: AllSeasonAlgo,
-            },
-          ],
-        });
-        chart2 = new CanvasJS.Chart('graph2', {
-          title: {
-            text: 'POMRB',
-          },
-          axisX: {
-            valueFormatString: 'MMM YYYY',
-          },
-          axisY: {
-            //  title: "Median List Price",
-            //  maximum: maxVal
-            //   minimum: 4
-            //suffix: "K"
-          },
-          toolTip: {
-            shared: true,
-          },
-          legend: {
-            cursor: 'pointer',
-            verticalAlign: 'top',
-            horizontalAlign: 'center',
-            dockInsidePlotArea: true,
-            //	itemclick: toogleDataSeries
-          },
-          data: [
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: 'Original',
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              dataPoints: graphDataOriginalPOMRB,
-            },
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: algo,
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              dataPoints: graphDataAlgoPOMRB,
-            },
-          ],
-        });
+        am4core.ready(function(){
+          am4core.useTheme(am4themes_animated);
+          var chart0 = am4core.create("graph0", am4charts.XYChart);
+          chart0.exporting.menu = new am4core.ExportMenu();
+          var data = AllSeasonTrends;
+          var title = chart0.titles.create();
+          title.text = "Trend";
+          title.fontSize = 15;
+          title.fontWeight = 600  
+          title.marginBottom = 0;
+          /*Legend*/
+          chart0.legend = new am4charts.Legend();
+         // chart.legend.useDefaultMarker = true;
+         chart0.legend.maxHeight = 10;
+          var marker = chart0.legend.markers.template.children.getIndex(0);
+          marker.cornerRadius(7, 7, 7, 7);
+          marker.strokeWidth = 2;
+          marker.strokeOpacity = 1;
+          marker.stroke = am4core.color("#ccc");
 
-        chart3 = new CanvasJS.Chart('graph3', {
-          title: {
-            text: 'MONSOON',
-          },
-          axisX: {
-            valueFormatString: 'MMM YYYY',
-          },
-          axisY: {
-            //  title: "Median List Price",
-            //  maximum: maxVal
-            //   minimum: 4
-            //suffix: "K"
-          },
-          toolTip: {
-            shared: true,
-          },
-          legend: {
-            cursor: 'pointer',
-            verticalAlign: 'top',
-            horizontalAlign: 'center',
-            dockInsidePlotArea: true,
-            //	itemclick: toogleDataSeries
-          },
-          data: [
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: 'Original',
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              dataPoints: graphDataOriginalMONSOON,
-            },
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: algo,
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              dataPoints: graphDataAlgoMONSOON,
-            },
-          ],
-        });
+          /* Create axes */
+          var categoryAxis = chart0.xAxes.push(new am4charts.CategoryAxis());
+          categoryAxis.dataFields.category = "x";
+          categoryAxis.renderer.minGridDistance = 100;
 
-        chart4 = new CanvasJS.Chart('graph4', {
-          title: {
-            text: 'PREMON',
-          },
-          axisX: {
-            valueFormatString: 'MMM YYYY',
-          },
-          axisY: {
-            //  title: "Median List Price",
-            //  maximum: maxVal
-            //   minimum: 4
-            //suffix: "K"
-          },
-          toolTip: {
-            shared: true,
-          },
-          legend: {
-            cursor: 'pointer',
-            verticalAlign: 'top',
-            horizontalAlign: 'center',
-            dockInsidePlotArea: true,
-            //	itemclick: toogleDataSeries
-          },
-          data: [
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: 'Original',
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              dataPoints: graphDataOriginalPREMON,
-            },
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: algo,
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              dataPoints: graphDataAlgoPREMON,
-            },
-          ],
-        });
+          /* Create value axis */
+          var valueAxis = chart0.yAxes.push(new am4charts.ValueAxis());
 
-        chart5 = new CanvasJS.Chart('graph5', {
-          title: {
-            text: 'POMKH',
-          },
-          axisX: {
-            valueFormatString: 'MMM YYYY',
-          },
-          axisY: {
-            //  title: "Median List Price",
-            //suffix: "K"
-          },
-          toolTip: {
-            shared: true,
-          },
-          legend: {
-            cursor: 'pointer',
-            verticalAlign: 'top',
-            horizontalAlign: 'center',
-            dockInsidePlotArea: true,
-            //	itemclick: toogleDataSeries
-          },
-          data: [
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: 'Original',
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              dataPoints: graphDataOriginalPOMKH,
-            },
-            {
-              type: 'line',
-              //	axisYType: "secondary",
-              name: algo,
-              showInLegend: true,
-              markerSize: 0,
-              yValueFormatString: '#.###',
-              dataPoints: graphDataAlgoPOMKH,
-            },
-          ],
-        });
+
+          /* Create series */
+          var columnSeries = chart0.series.push(new am4charts.ColumnSeries());
+          columnSeries.name = "Original";
+          columnSeries.dataFields.valueY = "y1";
+          columnSeries.dataFields.categoryX = "x";
+          columnSeries.dataFields.valueZ = "z";
+
+          columnSeries.columns.template.tooltipText = "[#fff font-size: 15px]Date:{categoryX}\n[/][#fff font-size: 15px]Origial Data:{valueY}[/] [#fff]{additional}[/]\n[/][#fff font-size: 15px]Season:{valueZ}[/] [#fff]{additional}[/]"
+          columnSeries.columns.template.propertyFields.fillOpacity = "fillOpacity";
+          columnSeries.columns.template.propertyFields.stroke = "stroke";
+          columnSeries.columns.template.propertyFields.strokeWidth = "strokeWidth";
+          columnSeries.columns.template.propertyFields.strokeDasharray = "columnDash";
+          columnSeries.tooltip.label.textAlign = "middle";
+
+          var lineSeries = chart0.series.push(new am4charts.LineSeries());
+          lineSeries.name = "Trend";
+          lineSeries.dataFields.valueY = "y2";
+          lineSeries.dataFields.categoryX = "x";
+          lineSeries.dataFields.valueZ = "z";
+
+          lineSeries.stroke = am4core.color("#fdd400");
+          lineSeries.strokeWidth = 1;
+          lineSeries.propertyFields.strokeDasharray = "lineDash";
+          lineSeries.tooltip.label.textAlign = "middle";
+
+          var bullet = lineSeries.bullets.push(new am4charts.Bullet());
+          bullet.fill = am4core.color("#fdd400"); // tooltips grab fill from parent by default
+          bullet.tooltipText = "[#fff font-size: 15px]Date:{categoryX}\n[/][#fff font-size: 15px]Trend Data:{valueY}[/] [#fff]{additional}[/]\n[/][#fff font-size: 15px]Season:{valueZ}[/] [#fff]{additional}[/]"
+          var circle = bullet.createChild(am4core.Circle);
+          circle.radius = 2;
+          circle.fill = am4core.color("#fff");
+          circle.strokeWidth = 2;
+
+          chart0.data =  AllSeasonTrends;
+
+          //Chart 1
+
+          var chart1 = am4core.create("graph1", am4charts.XYChart);
+          chart1.exporting.menu = new am4core.ExportMenu();
+          var data = AllSeason;
+          /*Legend*/
+
+          var title = chart1.titles.create();
+          title.text = "All Seasons";
+          title.fontSize = 15;
+          title.fontWeight = 600  
+          title.marginBottom = 0;
+          chart1.legend = new am4charts.Legend();
+          //chart.legend.useDefaultMarker = true;
+          chart1.legend.maxHeight = 10;
+          var marker = chart1.legend.markers.template.children.getIndex(0);
+          marker.cornerRadius(7, 7, 7, 7);
+          marker.strokeWidth = 2;
+          marker.strokeOpacity = 1;
+          marker.stroke = am4core.color("#ccc");
+
+          /* Create axes */
+          var categoryAxis = chart1.xAxes.push(new am4charts.CategoryAxis());
+          categoryAxis.dataFields.category = "x";
+          categoryAxis.renderer.minGridDistance = 100;
+
+          /* Create value axis */
+          var valueAxis = chart1.yAxes.push(new am4charts.ValueAxis());
+
+
+          /* Create series */
+          var columnSeries = chart1.series.push(new am4charts.ColumnSeries());
+          columnSeries.name = "Original";
+          columnSeries.dataFields.valueY = "y1";
+          columnSeries.dataFields.categoryX = "x";
+          columnSeries.dataFields.valueZ = "z";
+
+          columnSeries.columns.template.tooltipText = "[#fff font-size: 15px]Date:{categoryX}\n[/][#fff font-size: 15px]Original Data:{valueY}[/] [#fff]{additional}[/]\n[/][#fff font-size: 15px]Season:{valueZ}[/] [#fff]{additional}[/]"
+          columnSeries.columns.template.propertyFields.fillOpacity = "fillOpacity";
+          columnSeries.columns.template.propertyFields.stroke = "stroke";
+          columnSeries.columns.template.propertyFields.strokeWidth = "strokeWidth";
+          columnSeries.columns.template.propertyFields.strokeDasharray = "columnDash";
+          columnSeries.tooltip.label.textAlign = "middle";
+
+          var lineSeries = chart1.series.push(new am4charts.LineSeries());
+          lineSeries.name = algo;
+          lineSeries.dataFields.valueY = "y2";
+          lineSeries.dataFields.categoryX = "x";
+          lineSeries.dataFields.valueZ = "z";
+
+          lineSeries.stroke = am4core.color("#fdd400");
+          lineSeries.strokeWidth = 1;
+          lineSeries.propertyFields.strokeDasharray = "lineDash";
+          lineSeries.tooltip.label.textAlign = "middle";
+
+          var bullet = lineSeries.bullets.push(new am4charts.Bullet());
+          bullet.fill = am4core.color("#fdd400"); // tooltips grab fill from parent by default
+          bullet.tooltipText = "[#fff font-size: 15px]Date:{categoryX}\n[/][#fff font-size: 15px]Algorithm Data:{valueY}[/] [#fff]{additional}[/]\n[/][#fff font-size: 15px]Season:{valueZ}[/] [#fff]{additional}[/]"
+          var circle = bullet.createChild(am4core.Circle);
+          circle.radius = 2;
+          circle.fill = am4core.color("#fff");
+          circle.strokeWidth = 2;
+
+          chart1.data =  AllSeason;
+
+          //chart 2
+
+          var chart2 = am4core.create("graph2", am4charts.XYChart);
+          chart2.exporting.menu = new am4core.ExportMenu();
+          var data = graphDataPOMRB;
+
+          var title = chart2.titles.create();
+          title.text = "POMRB";
+          title.fontSize = 15;
+          title.fontWeight = 600  
+          title.marginBottom = 0;
+          /*Legend*/
+          chart2.legend = new am4charts.Legend();
+         // chart.legend.useDefaultMarker = true;
+         chart2.legend.maxHeight = 10;
+          var marker = chart2.legend.markers.template.children.getIndex(0);
+          marker.cornerRadius(7, 7, 7, 7);
+          marker.strokeWidth = 2;
+          marker.strokeOpacity = 1;
+          marker.stroke = am4core.color("#ccc");
+
+          /* Create axes */
+          var categoryAxis = chart2.xAxes.push(new am4charts.CategoryAxis());
+          categoryAxis.dataFields.category = "x";
+          categoryAxis.renderer.minGridDistance = 100;
+
+          /* Create value axis */
+          var valueAxis = chart2.yAxes.push(new am4charts.ValueAxis());
+
+
+          /* Create series */
+          var columnSeries = chart2.series.push(new am4charts.ColumnSeries());
+          columnSeries.name = "Original";
+          columnSeries.dataFields.valueY = "y1";
+          columnSeries.dataFields.categoryX = "x";
+          columnSeries.dataFields.valueZ = "z";
+
+          columnSeries.columns.template.tooltipText = "[#fff font-size: 15px]Date:{categoryX}\n[/][#fff font-size: 15px]Original Data:{valueY}[/] [#fff]{additional}[/]"
+          columnSeries.columns.template.propertyFields.fillOpacity = "fillOpacity";
+          columnSeries.columns.template.propertyFields.stroke = "stroke";
+          columnSeries.columns.template.propertyFields.strokeWidth = "strokeWidth";
+          columnSeries.columns.template.propertyFields.strokeDasharray = "columnDash";
+          columnSeries.tooltip.label.textAlign = "middle";
+
+          var lineSeries = chart2.series.push(new am4charts.LineSeries());
+          lineSeries.name = algo;
+          lineSeries.dataFields.valueY = "y2";
+          lineSeries.dataFields.categoryX = "x";
+          lineSeries.dataFields.valueZ = "z";
+
+          lineSeries.stroke = am4core.color("#fdd400");
+          lineSeries.strokeWidth = 2;
+          lineSeries.propertyFields.strokeDasharray = "lineDash";
+          lineSeries.tooltip.label.textAlign = "middle";
+
+          var bullet = lineSeries.bullets.push(new am4charts.Bullet());
+          bullet.fill = am4core.color("#fdd400"); // tooltips grab fill from parent by default
+          bullet.tooltipText = "[#fff font-size: 15px]Date:{categoryX}\n[/][#fff font-size: 15px]Algorithm Data:{valueY}[/] [#fff]{additional}[/]"
+          var circle = bullet.createChild(am4core.Circle);
+          circle.radius = 3;
+          circle.fill = am4core.color("#fff");
+          circle.strokeWidth = 2;
+
+          chart2.data =  graphDataPOMRB;
+
+          //chart 3
+          var chart3 = am4core.create("graph3", am4charts.XYChart);
+          chart3.exporting.menu = new am4core.ExportMenu();
+
+          var title = chart3.titles.create();
+          title.text = "MONSOON";
+          title.fontSize = 15;
+          title.fontWeight = 600  
+          title.marginBottom = 0;
+
+          var data = graphDataMONSOON;
+          /*Legend*/
+          chart3.legend = new am4charts.Legend();
+         // chart.legend.useDefaultMarker = true;
+         chart3.legend.maxHeight = 10;
+          var marker = chart3.legend.markers.template.children.getIndex(0);
+          marker.cornerRadius(7, 7, 7, 7);
+          marker.strokeWidth = 2;
+          marker.strokeOpacity = 1;
+          marker.stroke = am4core.color("#ccc");
+
+          /* Create axes */
+          var categoryAxis = chart3.xAxes.push(new am4charts.CategoryAxis());
+          categoryAxis.dataFields.category = "x";
+          categoryAxis.renderer.minGridDistance = 100;
+
+          /* Create value axis */
+          var valueAxis = chart3.yAxes.push(new am4charts.ValueAxis());
+
+
+          /* Create series */
+          var columnSeries = chart3.series.push(new am4charts.ColumnSeries());
+          columnSeries.name = "Original";
+          columnSeries.dataFields.valueY = "y1";
+          columnSeries.dataFields.categoryX = "x";
+          columnSeries.dataFields.valueZ = "z";
+
+          columnSeries.columns.template.tooltipText = "[#fff font-size: 15px]Date:{categoryX}\n[/][#fff font-size: 15px]Original Data:{valueY}[/] [#fff]{additional}[/]"
+          columnSeries.columns.template.propertyFields.fillOpacity = "fillOpacity";
+          columnSeries.columns.template.propertyFields.stroke = "stroke";
+          columnSeries.columns.template.propertyFields.strokeWidth = "strokeWidth";
+          columnSeries.columns.template.propertyFields.strokeDasharray = "columnDash";
+          columnSeries.tooltip.label.textAlign = "middle";
+
+          var lineSeries = chart3.series.push(new am4charts.LineSeries());
+          lineSeries.name = algo;
+          lineSeries.dataFields.valueY = "y2";
+          lineSeries.dataFields.categoryX = "x";
+          lineSeries.dataFields.valueZ = "z";
+
+          lineSeries.stroke = am4core.color("#fdd400");
+          lineSeries.strokeWidth = 2;
+          lineSeries.propertyFields.strokeDasharray = "lineDash";
+          lineSeries.tooltip.label.textAlign = "middle";
+
+          var bullet = lineSeries.bullets.push(new am4charts.Bullet());
+          bullet.fill = am4core.color("#fdd400"); // tooltips grab fill from parent by default
+          bullet.tooltipText = "[#fff font-size: 15px]Date:{categoryX}\n[/][#fff font-size: 15px]Algorithm Data:{valueY}[/] [#fff]{additional}[/]"
+          var circle = bullet.createChild(am4core.Circle);
+          circle.radius = 3;
+          circle.fill = am4core.color("#fff");
+          circle.strokeWidth = 2;
+
+          chart3.data =  graphDataMONSOON;
+
+          //chart 4
+          var chart4 = am4core.create("graph4", am4charts.XYChart);
+          chart4.exporting.menu = new am4core.ExportMenu();
+
+          var title = chart4.titles.create();
+          title.text = "PREMON";
+          title.fontSize = 15;
+          title.fontWeight = 600  
+          title.marginBottom = 0;
+          var data = graphDataPREMON;
+          /*Legend*/
+          chart4.legend = new am4charts.Legend();
+         // chart.legend.useDefaultMarker = true;
+         chart4.legend.maxHeight = 10;
+          var marker = chart4.legend.markers.template.children.getIndex(0);
+          marker.cornerRadius(7, 7, 7, 7);
+          marker.strokeWidth = 2;
+          marker.strokeOpacity = 1;
+          marker.stroke = am4core.color("#ccc");
+
+          /* Create axes */
+          var categoryAxis = chart4.xAxes.push(new am4charts.CategoryAxis());
+          categoryAxis.dataFields.category = "x";
+          categoryAxis.renderer.minGridDistance = 100;
+
+          /* Create value axis */
+          var valueAxis = chart4.yAxes.push(new am4charts.ValueAxis());
+
+
+          /* Create series */
+          var columnSeries = chart4.series.push(new am4charts.ColumnSeries());
+          columnSeries.name = "Original";
+          columnSeries.dataFields.valueY = "y1";
+          columnSeries.dataFields.categoryX = "x";
+          columnSeries.dataFields.valueZ = "z";
+
+          columnSeries.columns.template.tooltipText = "[#fff font-size: 15px]Date:{categoryX}\n[/][#fff font-size: 15px]Original Data:{valueY}[/] [#fff]{additional}[/]"
+          columnSeries.columns.template.propertyFields.fillOpacity = "fillOpacity";
+          columnSeries.columns.template.propertyFields.stroke = "stroke";
+          columnSeries.columns.template.propertyFields.strokeWidth = "strokeWidth";
+          columnSeries.columns.template.propertyFields.strokeDasharray = "columnDash";
+          columnSeries.tooltip.label.textAlign = "middle";
+
+          var lineSeries = chart4.series.push(new am4charts.LineSeries());
+          lineSeries.name = algo;
+          lineSeries.dataFields.valueY = "y2";
+          lineSeries.dataFields.categoryX = "x";
+          lineSeries.dataFields.valueZ = "z";
+
+          lineSeries.stroke = am4core.color("#fdd400");
+          lineSeries.strokeWidth = 2;
+          lineSeries.propertyFields.strokeDasharray = "lineDash";
+          lineSeries.tooltip.label.textAlign = "middle";
+
+          var bullet = lineSeries.bullets.push(new am4charts.Bullet());
+          bullet.fill = am4core.color("#fdd400"); // tooltips grab fill from parent by default
+          bullet.tooltipText = "[#fff font-size: 15px]Date:{categoryX}\n[/][#fff font-size: 15px]Algorithm Data:{valueY}[/] [#fff]{additional}[/]"
+          var circle = bullet.createChild(am4core.Circle);
+          circle.radius = 3;
+          circle.fill = am4core.color("#fff");
+          circle.strokeWidth = 2;
+
+          chart4.data =  graphDataPREMON;
+
+          //chart 5
+
+          var chart5 = am4core.create("graph5", am4charts.XYChart);
+          chart5.exporting.menu = new am4core.ExportMenu();
+          var data = graphDataPOMKH;
+
+          var title = chart5.titles.create();
+          title.text = "POMKH";
+          title.fontSize = 15;
+          title.fontWeight = 600  
+          title.marginBottom = 0;
+          /*Legend*/
+          chart5.legend = new am4charts.Legend();
+         // chart.legend.useDefaultMarker = true;
+          chart5.legend.maxHeight = 10;
+          var marker = chart5.legend.markers.template.children.getIndex(0);
+          marker.cornerRadius(4, 4, 4, 4);
+          marker.strokeWidth = 2;
+          marker.strokeOpacity = 1;
+          marker.stroke = am4core.color("#ccc");
+
+
+          /* Create axes */
+          var categoryAxis = chart5.xAxes.push(new am4charts.CategoryAxis());
+          categoryAxis.dataFields.category = "x";
+          categoryAxis.renderer.minGridDistance = 100;
+
+          /* Create value axis */
+          var valueAxis = chart5.yAxes.push(new am4charts.ValueAxis());
+
+
+          /* Create series */
+          var columnSeries = chart5.series.push(new am4charts.ColumnSeries());
+          columnSeries.name = "Original";
+          columnSeries.dataFields.valueY = "y1";
+          columnSeries.dataFields.categoryX = "x";
+          columnSeries.dataFields.valueZ = "z";
+
+          columnSeries.columns.template.tooltipText = "[#fff font-size: 15px]Date:{categoryX}\n[/][#fff font-size: 15px]Original Data:{valueY}[/] [#fff]{additional}[/]"
+          columnSeries.columns.template.propertyFields.fillOpacity = "fillOpacity";
+          columnSeries.columns.template.propertyFields.stroke = "stroke";
+          columnSeries.columns.template.propertyFields.strokeWidth = "strokeWidth";
+          columnSeries.columns.template.propertyFields.strokeDasharray = "columnDash";
+          columnSeries.tooltip.label.textAlign = "middle";
+
+          var lineSeries = chart5.series.push(new am4charts.LineSeries());
+          lineSeries.name = algo;
+          lineSeries.dataFields.valueY = "y2";
+          lineSeries.dataFields.categoryX = "x";
+          lineSeries.dataFields.valueZ = "z";
+
+          lineSeries.stroke = am4core.color("#fdd400");
+          lineSeries.strokeWidth = 2;
+          lineSeries.propertyFields.strokeDasharray = "lineDash";
+          lineSeries.tooltip.label.textAlign = "middle";
+
+          var bullet = lineSeries.bullets.push(new am4charts.Bullet());
+          bullet.fill = am4core.color("#fdd400"); // tooltips grab fill from parent by default
+          bullet.tooltipText = "[#fff font-size: 15px]Date:{categoryX}\n[/][#fff font-size: 15px]Algorithm Data:{valueY}[/] [#fff]{additional}[/]"
+          var circle = bullet.createChild(am4core.Circle);
+          circle.radius = 3;
+          circle.fill = am4core.color("#fff");
+          circle.strokeWidth = 2;
+
+          chart5.data =  graphDataPOMKH;
+
+          });
       }
-
       /*************** STOP SHWETA SECTION **********************/
 
       /*************** START YASH SECTION **********************/
