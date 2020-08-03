@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.13.1/css/all.css"
+      integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+      crossorigin="anonymous"
+    />
+    <!--<link rel="stylesheet" href="css/theme.css" />-->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/load_page_animation.css" />
+    <link rel="stylesheet" href="css/table.css" />
+    <title>Projection</title>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav
+      class="navbar navbar-expand-lg bg-dark navbar-dark py-3"
+      id="mainNavbar"
+    >
+      <div class="container">
+        <a href="index.html" class="navbar-brand display-5">
+          Groundwater Dashboard
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarLinks"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarLinks">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a
+                href="index.html"
+                style="border-radius: 8px; margin: 2px;"
+                id="navbar_element"
+                class="nav-link"
+                >Home</a
+              >
+              <!--MAIN DESIGN-->
+            </li>
+            <li class="nav-item">
+              <a
+                href="compare.html"
+                style="border-radius: 8px; margin: 2px;"
+                class="nav-link active"
+                >Compare</a
+              >
+              <!--SOME GRAPHS-->
+            </li>
+            <li class="nav-item">
+              <a
+                href="compareGWRA.html"
+                style="border-radius: 8px; margin: 2px;"
+                id="navbar_element"
+                class="nav-link"
+                >Compare GWRA</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="getAPI.html"
+                style="border-radius: 8px; margin: 2px;"
+                id="navbar_element"
+                class="nav-link"
+                >Get API</a
+              >
+              <!--FORM THAT WILL LINK TO GIT RAW-->
+            </li>
+            <li class="nav-item">
+              <a
+                href="projection.html"
+                style="
+                  background-color: white;
+                  color: black;
+                  font-weight: 500;
+                  border-radius: 8px;
+                  margin: 2px;
+                "
+                id="navbar_element"
+                class="nav-link active"
+                >Projection</a
+              >
+              <!--PROJECTION PAGE-->
+            </li>
+            <li class="nav-item">
+              <a
+                href="deepdive.html"
+                style="border-radius: 8px; margin: 2px;"
+                id="navbar_element"
+                class="nav-link"
+                >Deep Dive</a
+              >
+              <!--KEPLER-->
+            </li>
+            <li>
+              <div class="nav-link">
+                <div id="google_translate_element"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- FORM SECTION -->
+    <section id="formSection" class="main_content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card card-body shadow my-5">
+              <p class="h2 text-center">Check Projection</p>
+              <div class="form-group">
+                <label for="regionSelect" class="font-weight-bold"
+                  >Select Region</label
+                >
+                <select
+                  class="form-control"
+                  onclick="changeRegion()"
+                  id="regionSelect"
+                ></select>
+                <div class="row mt-3">
+                  <label for="yearSelect1" class="font-weight-bold"
+                    >Select Year</label
+                  >
+                  <select
+                    id="yearSelect1"
+                    class="form-control"
+                    onclick="changeYear1(this.value);"
+                  >
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                    <option value="2014">2014</option>
+                    <option value="2013">2013</option>
+                    <option value="2012">2012</option>
+                    <option value="2011">2011</option>
+                    <option value="2010">2010</option>
+                    <option value="2009">2009</option>
+                    <option value="2008">2008</option>
+                    <option value="2007">2007</option>
+                    <option value="2006">2006</option>
+                    <option value="2005">2005</option>
+                    <option value="2004">2004</option>
+                    <option value="2003">2003</option>
+                    <option value="2002">2002</option>
+                    <option value="2001">2001</option>
+                    <option value="2000">2000</option>
+                    <option value="1999">1999</option>
+                    <option value="1998">1998</option>
+                    <option value="1997">1997</option>
+                    <option value="1996">1996</option>
+                  </select>
+
+                  <label for="seasonSelect1" class="mt-3 font-weight-bold"
+                    >Select Season</label
+                  >
+                  <select
+                    id="seasonSelect1"
+                    class="form-control"
+                    onclick="changeSeason1();"
+                  >
+                    <option value="" id="season1POMRB">POMRB</option>
+                    <option value="" id="season1PREMON">PREMON</option>
+                    <option value="" id="season1MONSOON">MONSOON</option>
+                    <option value="" id="season1POMKH">POMKH</option>
+                  </select>
+                </div>
+                <div class="row">
+                  <button
+                    class="btn btn-outline-primary btn-lg btn-block m-3"
+                    onclick="compare();"
+                  >
+                    Compare
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <p id="periodName1" class="h3 text-center text-muted"></p>
+            <p class="h3 text-center text-muted">Map</p>
+            <!--MAP STARTS HERE-->
+            <div id="mapSection1" class="my-3">
+              <div
+                id="mapContainer1"
+                class="card card-body shadow"
+                style="height: 600px;"
+              ></div>
+            </div>
+            <!--MAP ENDS HERE-->
+            <p class="h3 text-center text-muted">Regional Data</p>
+            <!--TABLE STARTS HERE-->
+            <div id="tableSection1">
+              <div
+                class="container"
+                style="
+                  height: auto;
+                  min-height: 800px;
+                  padding-right: 0%;
+                  padding-left: 0%;
+                "
+              >
+                <table
+                  class="table table-responsive fadeInUp"
+                  style="overflow-x: scroll;"
+                >
+                  <thead>
+                    <tr>
+                      <th
+                        data-column="State"
+                        data-order="asc"
+                        class="state-heading"
+                        id="Heading"
+                      >
+                        <div class="heading-content">
+                          <abbr class="s-name" title="State">State/UT</abbr>
+                        </div>
+                      </th>
+                      <th
+                        data-column="IncreasingDistricts"
+                        data-order="asc"
+                        class="state-heading"
+                      >
+                        <div class="heading-content">
+                          <abbr class="s-imp" title="Improving Disrticts"
+                            >Improving Districts</abbr
+                          >
+                        </div>
+                      </th>
+                      <th
+                        data-column="DecreasingDistricts"
+                        data-order="asc"
+                        class="state-heading"
+                      >
+                        <div class="heading-content">
+                          <abbr class="s-dec" title="Declining Disrticts"
+                            >Declining Districts</abbr
+                          >
+                        </div>
+                      </th>
+                      <th
+                        data-column="Current Level"
+                        data-order="asc"
+                        class="state-heading"
+                      >
+                        <div class="heading-content">
+                          <abbr class="s-avg" title="Average Level"
+                            >Current Level</abbr
+                          >
+                        </div>
+                      </th>
+                      <th
+                        data-column="Algorithm Level"
+                        data-order="asc"
+                        class="state-heading"
+                      >
+                        <div class="heading-content">
+                          <abbr class="s-algo" title="Minimum Level"
+                            >Algorithm Level</abbr
+                          >
+                        </div>
+                      </th>
+                      <th
+                        data-column="Algorithm Level"
+                        data-order="asc"
+                        class="state-heading"
+                      >
+                        <div class="heading-content">
+                          <abbr class="s-algo">Status</abbr>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id="myTableA"></tbody>
+                </table>
+              </div>
+            </div>
+            <!--TABLE ENDS HERE-->
+
+            <p class="text-muted text-center h3 mt-3">Trends</p>
+
+            <!--GRAPHS START HERE-->
+
+            <!--ALL SEASONS GRAPH-->
+            <div
+              class="container mt-3"
+              style="height: 200px;"
+              id="graph1A"
+            ></div>
+
+            <!--POMRB GRAPH-->
+            <div
+              class="container mt-3"
+              style="height: 200px;"
+              id="graph2A"
+            ></div>
+
+            <!--PREMON GRAPH-->
+            <div
+              class="container mt-3"
+              style="height: 200px;"
+              id="graph3A"
+            ></div>
+
+            <!--MONSOON GRAPH-->
+            <div
+              class="container mt-3"
+              style="height: 200px;"
+              id="graph4A"
+            ></div>
+
+            <!--POMKH GRAPH-->
+            <div
+              class="container my-3"
+              style="height: 200px;"
+              id="graph5A"
+            ></div>
+
+            <!--GRAPHS END HERE-->
+          </div>
+
+          <div class="col-md-6">
+            <p class="text-muted text-center h3 mt-5">Year to Year Trend</p>
+            <!--TREND GRAPH-->
+            <div
+              class="container mt-3"
+              style="border: 1px solid red; height: 200px;"
+              id="graph1"
+            ></div>
+            <p class="text-muted text-center h3 mt-5">Decadal Trend</p>
+            <!--DECADAL GRAPH-->
+            <div
+              class="container mt-3"
+              style="border: 1px solid red; height: 200px;"
+              id="graph1"
+            ></div>
+            <p class="text-muted text-center h3 mt-5">Projection Trend</p>
+            <!--PROJECTION GRAPH-->
+            <div
+              class="container mt-3"
+              style="border: 1px solid red; height: 200px;"
+              id="graph1"
+            ></div>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-md-4 offset-md-4 mt-5">
+            <div class="btn btn-warning btn-lg btn-block" onclick="print();">
+              <span><i class="fa fa-print"></i> Print Report</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--FOOTER-->
+    <footer id="main-footer" class="py-5 mb-0 bg-dark text-white">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-md-6 mx-auto">
+            <p class="display-4">
+              Zero++
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- DO NOT USE SLIM VERSION OF JQUERY -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+      integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <script>
+      // Document Indexes
+      var algo1 = 'ARIMA';
+      var algo2 = 'ARIMA';
+      var docIdx1 = 88;
+      var docIdx2 = 88;
+      var year1 = 2018;
+      var year2 = 2018;
+      var season1 = 'POMRB';
+      var season2 = 'POMRB';
+      var loc = 'INDIA';
+
+      //FILE VARIABLES WITH DATA
+      var mapFile1Data = null;
+      var mapFile2Data = null;
+      var tableFileData = null;
+      var locFileData = null;
+
+      // Index dictionary for years
+      var idxDict = {
+        1996: [0, 1, 2, 3],
+        1997: [4, 5, 6, 7],
+        1998: [8, 9, 10, 11],
+        1999: [12, 13, 14, 15],
+        2000: [16, 17, 18, 19],
+        2001: [20, 21, 22, 23],
+        2002: [24, 25, 26, 27],
+        2003: [28, 29, 30, 31],
+        2004: [32, 33, 34, 35],
+        2005: [36, 37, 38, 39],
+        2006: [40, 41, 42, 43],
+        2007: [44, 45, 46, 47],
+        2008: [48, 49, 50, 51],
+        2009: [52, 53, 54, 55],
+        2010: [56, 57, 58, 59],
+        2011: [60, 61, 62, 63],
+        2012: [64, 65, 66, 67],
+        2013: [68, 69, 70, 71],
+        2014: [72, 73, 74, 75],
+        2015: [76, 77, 78, 79],
+        2016: [80, 81, 82, 83],
+        2017: [84, 85, 86, 87],
+        2018: [88, 89, 90, 91],
+      };
+
+      var state_code = {
+        null: 'Select',
+        INDIA: 'India',
+        JK: 'Jammu & Kashmir',
+        HP: 'Himachal Pradesh',
+        PB: 'Punjab',
+        CH: 'Chandigarh',
+        UK: 'Uttarakhand',
+        HR: 'Haryana',
+        DL: 'Delhi',
+        RJ: 'Rajasthan',
+        UP: 'Uttar Pradesh',
+        BR: 'Bihar',
+        SIKKIM: 'Sikkim',
+        AR: 'Arunachal Pradesh',
+        NL: 'Nagaland',
+        MN: 'Manipur',
+        MIZORAM: 'Mizoram',
+        TR: 'Tripura',
+        ML: 'Meghalaya',
+        AS: 'Assam',
+        WB: 'West Bengal',
+        JH: 'Jharkhand',
+        OD: 'Odisha',
+        CG: 'Chhattisgarh',
+        MP: 'Madhya Pradesh',
+        GJ: 'Gujarat',
+        DD: 'Daman & Diu',
+        MS: 'Maharashtra',
+        AP: 'Andhra Pradesh',
+        KA: 'Karnataka',
+        GA: 'Goa',
+        LAKSHADWEEP: 'Lakshadweep',
+        KL: 'Kerala',
+        TN: 'Tamil Nadu',
+        PY: 'Pudducherry',
+        AN: 'Andaman & Nicobar Islands',
+      };
+
+      // Select Region Dropdown
+      var selectStateInner = '';
+      for (key in state_code) {
+        selectStateInner = selectStateInner.concat(
+          '<option value=' + key + '>' + state_code[key] + '</option>'
+        );
+      }
+      document.getElementById('regionSelect').innerHTML = selectStateInner;
+
+      function changeRegion() {
+        loc = document.getElementById('regionSelect').value;
+      }
+
+      // Select year for left side
+      function changeYear1() {
+        var seasonIdxs =
+          idxDict[parseInt(document.getElementById('yearSelect1').value)];
+        document.getElementById('season1POMRB').value = seasonIdxs[0];
+        document.getElementById('season1PREMON').value = seasonIdxs[1];
+        document.getElementById('season1MONSOON').value = seasonIdxs[2];
+        document.getElementById('season1POMKH').value = seasonIdxs[3];
+        docIdx1 = seasonIdxs[0];
+        year1 = document.getElementById('yearSelect1').value;
+      }
+
+      // Select season for left side
+      function changeSeason1() {
+        docIdx1 = parseInt(document.getElementById('seasonSelect1').value);
+      }
+
+      //Select algo for left side
+      function changeAlgo1() {
+        algo1 = document.getElementById('algoSelect1').value;
+      }
+      // Select year for right side
+      function changeYear2() {
+        var seasonIdxs =
+          idxDict[parseInt(document.getElementById('yearSelect2').value)];
+        document.getElementById('season2POMRB').value = seasonIdxs[0];
+        document.getElementById('season2PREMON').value = seasonIdxs[1];
+        document.getElementById('season2MONSOON').value = seasonIdxs[2];
+        document.getElementById('season2POMKH').value = seasonIdxs[3];
+        docIdx2 = seasonIdxs[0];
+      }
+
+      //Select season for right side
+      function changeSeason2() {
+        docIdx2 = parseInt(document.getElementById('seasonSelect2').value);
+      }
+
+      //Select algo for right side
+      function changeAlgo2() {
+        algo2 = document.getElementById('algoSelect2').value;
+      }
+
+      // Main Page Function
+      function compare() {
+        //Labelling sections
+        var periodText1 =
+          $('#yearSelect1 option:selected').text() +
+          ', ' +
+          $('#seasonSelect1 option:selected').text();
+        var periodText2 =
+          $('#yearSelect2 option:selected').text() +
+          ', ' +
+          $('#seasonSelect2 option:selected').text();
+        document.getElementById('periodName1').innerHTML = periodText1;
+        document.getElementById('periodName2').innerHTML = periodText2;
+
+        //Load maps, tables and graphs here
+        loadMap1Data();
+        loadMap2Data();
+        loadNormalData();
+        loadTableData1();
+        loadTableData2();
+        loadGraphData();
+      }
+
+      function loadMap1Data() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            mapFile1Data = this.responseText;
+            document.getElementById('mapContainer1').innerHTML = mapFile1Data;
+            separateSVG();
+          }
+        };
+        xhttp.open('GET', 'maps/' + loc + '.svg', true);
+        xhttp.send();
+      }
+
+      function loadMap2Data() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            mapFile2Data = this.responseText;
+            document.getElementById('mapContainer2').innerHTML = mapFile2Data;
+          }
+        };
+        xhttp.open('GET', 'maps/' + loc + '.svg', true);
+        xhttp.send();
+      }
+
+      function loadNormalData() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            locFileData = this.responseText;
+            setTimeout(function () {
+              processJSON('map1'); //LEFT SIDE CALL
+              processJSON('map2'); //RIGHT SIDE CALL
+            }, 1000);
+          }
+        };
+        if (loc == 'INDIA') {
+          xhttp.open('GET', 'data/' + loc + '.json', true);
+        } else {
+          xhttp.open(
+            'GET',
+            'data/DISTRICTDATA/JSON/DISTRICTWISE_' + loc + '.json',
+            true
+          );
+        }
+        xhttp.send();
+
+        //Write Load new map function here
+      }
+
+      function loadTableData1() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            tableFileData1 = this.responseText;
+            setTimeout(function () {
+              buildtable();
+            }, 1000);
+          }
+        };
+        if (loc == 'INDIA') {
+          //xhttp.open('GET', 'table_data/' + loc + '.json', true);
+          xhttp.open('GET', 'table_data/TABLE_DATA_' + algo1 + '.json', true);
+        } else {
+          xhttp.open(
+            'GET',
+            'table_data/STATEWISE-' + algo1 + '/TABLE_DATA_' + loc + '.json',
+            true
+          );
+        }
+
+        xhttp.send();
+        //Write Load Table function here
+      }
+
+      function loadTableData2() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            tableFileData2 = this.responseText;
+            setTimeout(function () {
+              buildtable();
+            }, 1000);
+          }
+        };
+        if (loc == 'INDIA') {
+          //xhttp.open('GET', 'table_data/' + loc + '.json', true);
+          xhttp.open('GET', 'table_data/TABLE_DATA_' + algo2 + '.json', true);
+        } else {
+          xhttp.open(
+            'GET',
+            'table_data/STATEWISE-' + algo2 + '/TABLE_DATA_' + loc + '.json',
+            true
+          );
+        }
+
+        xhttp.send();
+        //Write Load Table function here
+      }
+
+      function loadGraphData() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            graphFileData = this.responseText;
+            setTimeout(function () {
+              graphUpdate();
+            }, 1000);
+          }
+        };
+        if (loc == 'INDIA') {
+          xhttp.open('GET', 'data/Total-india.json', true);
+        } else if (state_code.hasOwnProperty(loc)) {
+          xhttp.open('GET', 'data/India.json', true);
+        } else {
+          xhttp.open(
+            'GET',
+            'data/DISTRICTDATA/JSON/DISTRICTWISE_' + loc + '.json',
+            true
+          );
+        }
+        xhttp.send();
+        //Write Load new graph function here
+      }
+
+      function separateSVG() {
+        var ids = document.getElementsByTagName('path');
+        //console.log(ramesh);
+        for (var i in ids) {
+          var temp = ids[i].id;
+          temp = temp + '_1';
+          ids[i].id = temp;
+        }
+      }
+
+      function processJSON(identifier) {
+        //console.log(identifier);
+        if (identifier == 'map1') {
+          //console.log("Working Level 1");
+          var t = docIdx1;
+          var obj = JSON.parse(locFileData);
+          var temp = Object.keys(obj);
+
+          var region_names = [];
+          for (var i = 1; i < temp.length - 1; i++) {
+            if (
+              !temp[i].includes('_') &&
+              temp[i] != 'MN' &&
+              temp[i] != 'NL' &&
+              temp[i] != 'AN'
+            ) {
+              region_names.push(temp[i]);
+            }
+          }
+          /*for(var i in region_names)
+          {
+            console.log(region_names[i]);
+          }*/
+          //console.log(obj["Anand_ARIMA"][91]);
+
+          var dict = {};
+
+          for (var i = 1; i < region_names.length; i++) {
+            var meth = region_names[i] + '_' + algo1;
+            try {
+              if (obj[region_names[i]][t] <= obj[meth][t]) {
+                //console.log("Value",obj[states[i]][t]);
+                //console.log("Benchmark",obj[meth][t]);
+                dict[region_names[i]] = 1;
+              }
+              if (obj[region_names[i]][t] > obj[meth][t]) {
+                //console.log("Value",obj[states[i]][t]);
+                //console.log("Benchmark",obj[meth][t]);
+                dict[region_names[i]] = 0;
+              }
+            } catch (err) {
+              console.log('[LEFT]No data for :', meth);
+            }
+          }
+          //console.log("_ wala");
+          for (var key in dict) {
+            //console.log(key);
+            var key2 = key + '_1';
+            //console.log(key);
+            st = document.getElementById(key2);
+            console.log(st);
+            try {
+              if (dict[key] == 1) {
+                //console.log("Coloring level 1 green");
+                st.style.fill = '#ABEBC6';
+              }
+              if (dict[key] == 0) {
+                //console.log("Coloring level 1 red");
+                st.style.fill = '#F5B7B1';
+              }
+            } catch (err) {
+              console.log(key, 'NOT FOUND [LEFT]');
+            }
+          }
+          if (loc == 'INDIA') {
+            var ldk = document.getElementById('LD_1');
+            ldk.style.fill = document.getElementById('JK_1').style.fill;
+          }
+        }
+        //LEFT UP
+        //RIGHT BELOW
+        else {
+          //console.log("Working Level 0");
+          var t = docIdx2;
+          var obj = JSON.parse(locFileData);
+          var temp = Object.keys(obj);
+          var states_names = [];
+          for (var i = 2; i < temp.length; i++) {
+            if (
+              !temp[i].includes('_') &&
+              temp[i] != 'MN' &&
+              temp[i] != 'NL' &&
+              temp[i] != 'AN'
+            ) {
+              states_names.push(temp[i]);
+            }
+          }
+          //console.log(states_names);
+          var dict = {};
+          for (var i = 0; i < states_names.length; i++) {
+            //console.log(states[i]);
+            var meth = states_names[i] + '_' + algo2;
+            try {
+              if (obj[states_names[i]][t] <= obj[meth][t]) {
+                //console.log("Value",obj[states_names[i]][t]);
+                //console.log("Ref",obj[meth][t]);
+                dict[states_names[i]] = 1;
+              }
+              if (obj[states_names[i]][t] > obj[meth][t]) {
+                //console.log("Value",obj[states_names[i]][t]);
+                //console.log("Ref",obj[meth][t]);
+                dict[states_names[i]] = 0;
+              }
+            } catch (err) {
+              console.log('[RIGHT]No data for :', meth);
+            }
+          }
+          console.log(dict);
+          console.log(states_names);
+          for (var key in dict) {
+            st = document.getElementById(key);
+            //console.log(key);
+            try {
+              if (dict[key] == 1) {
+                //console.log(key);
+                //console.log("Coloring level 0 green");
+                st.style.fill = '#ABEBC6';
+              }
+              if (dict[key] == 0) {
+                //console.log(key);
+                //console.log("Coloring level 0 red");
+                st.style.fill = '#F5B7B1';
+              }
+            } catch (err) {
+              console.log(key, 'NOT FOUND [LEFT]');
+            }
+          }
+          if (loc == 'INDIA') {
+            var ldk = document.getElementById('LD');
+            ldk.style.fill = document.getElementById('JK').style.fill;
+          }
+        }
+      }
+
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            includedLanguages: 'bn,gu,hi,kn,ml,mr,or,sd,ta,te,ur',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          'google_translate_element'
+        );
+      }
+      //Tables
+      function buildtable() {
+        if (loc == 'INDIA') {
+          table_data1 = buildTableData(tableFileData1, docIdx1);
+          buildStateTable(table_data1, 'A');
+          table_data2 = buildTableData(tableFileData2, docIdx2);
+          buildStateTable(table_data2, 'B');
+        } else {
+          table_data1 = buildDistrictData(tableFileData1, docIdx1);
+          table_data2 = buildDistrictData(tableFileData2, docIdx2);
+          builddistrictTable(table_data1, 'A');
+          builddistrictTable(table_data2, 'B');
+        }
+      }
+      function lastCol(n1, n2) {
+        if (n1 - n2 < 0) {
+          return 'Improving';
+        } else {
+          return 'Declining';
+        }
+      }
+      function buildTableData(tableFileData, docIdx) {
+        var i = 0;
+        var table_data = [];
+        var data = JSON.parse(tableFileData.replace(/\bNaN\b/g, 'null'));
+        for (i = 0; i < data.length; i++) {
+          var state_data = {};
+          var districts = [];
+          state_data.State = data[i].State;
+          state_data.CurrentLevel = data[i].CurrentLevel[docIdx];
+          state_data.AlgoLevel = data[i].AlgoLevel[docIdx];
+          state_data.IncreasingDistricts = data[i].IncreasingDistricts[docIdx];
+          state_data.DecreasingDistricts = data[i].DecreasingDistricts[docIdx];
+          for (var j = 0; j < data[i].districts.length; j++) {
+            var district_data = {};
+            district_data.district = data[i].districts[j].district;
+            district_data.CurrentLevel =
+              data[i].districts[j].CurrentLevel[docIdx];
+            district_data.AlgoLevel = data[i].districts[j].AlgoLevel[docIdx];
+            district_data.IncreasingBlocks =
+              data[i].districts[j].IncreasingBlocks[docIdx];
+            district_data.DecreasingBlocks =
+              data[i].districts[j].DecreasingBlocks[docIdx];
+            districts[j] = district_data;
+          }
+          state_data.districts = districts;
+          table_data[i] = state_data;
+        }
+        return table_data;
+      }
+
+      //Build State Table
+      function buildStateTable(data, table_id) {
+        $('#Heading').attr('class', 'state-heading');
+        $('.s-name').text('State');
+        $('.s-imp').text('Improving Districts');
+        $('.s-dec').text('Declining Districts');
+        var Table = 'myTable'.concat(table_id);
+        var districtHead = 'disrtrictHead '.concat(table_id);
+        var table = document.getElementById(Table);
+        table.innerHTML = '';
+        for (var i = 0; i < data.length; i++) {
+          var row = `<tr class="state-row ${table_id} ${i}">
+                    <td>
+                      <div class="title-chevron">
+                        <span class="dropdown rotateDownRight">
+                          <svg height="24" width="24" viewbox=" 0 0 24 24">
+                             <polyline points="6 9 12 15 18 9" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" />
+                          </svg>
+                          </span>
+                      <span class ="title-icon" >${data[i].State}</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="delta is-increasing"></span> 
+                      <span class="total">${data[i].IncreasingDistricts}</span>
+                    </td>
+                    <td>
+                      <span class="delta is-decreasing"></span> 
+                      <span class="total">${data[i].DecreasingDistricts}</span>
+                    </td>
+                    <td>
+                      <span class="delta is-avgLevel"></span> 
+                      <span class="total">${
+                        Math.round(data[i].CurrentLevel * 100) / 100
+                      }</span>
+                    </td>
+                    <td>
+                      <span class="delta is-minLevel"></span> 
+                      <span class="total">${
+                        Math.round(data[i].AlgoLevel * 100) / 100
+                      }</span>
+                    </td>
+                    <td>
+                      <span class="delta is-minLevel"></span> 
+                      <span class="total">${lastCol(
+                        data[i].CurrentLevel,
+                        data[i].AlgoLevel
+                      )}</span>
+                    </td>
+               </tr>`;
+
+          table.innerHTML += row;
+        }
+        var row = `
+            <tr class="state-last-update" style="display:none;">
+              <td colspan="5" style="padding-bottom: 0px;">
+              </td>
+              <td align="center" class="state-page-link" colspan="1" style="width: 2.5rem;" style="padding-bottom:1rem;">
+                See more details 
+              </td>
+            </tr>
+            <tr class="districtHead ${table_id}" style="display:none;">
+            <td data-column="district" data-order="desc" class="district-heading">
+              <div class="heading-content"> 
+                  <abbr title="District">District</abbr>
+              </div>
+          </td>
+          <td data-column="IncreasingBlocks" data-order="desc" class="district-heading">
+              <div class="heading-content" > 
+                  <abbr title="Increasing Blocks">Increasing Blocks</abbr>
+              </div>
+          </td>
+          <td data-column="DecreasingBlocks" data-order="desc" class="district-heading">
+              <div class="heading-content"> 
+                  <abbr title="Decreasing Blocks">Decreasing Blocks</abbr>
+              </div>
+          </td>
+          <td data-column="CurrentLevel" data-order="desc" class="district-heading">
+              <div class="heading-content"> 
+                  <abbr title="Current Level">Current Level</abbr>
+              </div>
+          </td>
+          <td data-column="AlgorithmLevel" data-order="desc" class="district-heading">
+            <div class="heading-content"> 
+                <abbr title="Algorithm Level">Algorithm Level</abbr>
+            </div>
+          </td>
+          <td data-column="AlgorithmLevel" data-order="desc" class="district-heading">
+            <div class="heading-content"> 
+                <abbr title="Status">Status</abbr>
+            </div>
+          </td>            
+        </tr>`;
+        $(`.state-row.${table_id}`).after(row);
+
+        for (i = 0; i < data.length; i++) {
+          for (j = 0; j < data[i].districts.length; j++) {
+            var row = `<tr class="district-row ${i}" style="display:none;">
+                    <td>
+                      <div class="title-chevron">
+                        <span class ="title-icon">${
+                          data[i].districts[j].district
+                        }</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="delta is-increasing"></span> 
+                      <span class="total">${
+                        data[i].districts[j].IncreasingBlocks
+                      }</span>
+                    </td>
+                    <td>
+                      <span class="delta is-decreasing"></span> 
+                      <span class="total">${
+                        data[i].districts[j].DecreasingBlocks
+                      }</span>
+                    </td>
+                    <td>
+                      <span class="delta is-avgLevel"></span> 
+                      <span class="total">${
+                        Math.round(data[i].districts[j].CurrentLevel * 100) /
+                        100
+                      }</span>
+                    </td>
+                    <td>
+                      <span class="delta is-minLevel"></span> 
+                      <span class="total">${
+                        Math.round(data[i].districts[j].AlgoLevel * 100) / 100
+                      }</span>
+                    </td>
+                    <td>
+                      <span class="delta is-minLevel"></span> 
+                      <span class="total">${lastCol(
+                        data[i].districts[j].CurrentLevel,
+                        data[i].districts[j].AlgoLevel
+                      )}</span>
+                    </td>
+               </tr>`;
+            var dist = $(`.districtHead.${table_id}`)[i];
+            $(dist).after(row);
+          }
+        }
+      }
+      $(document).ready(function () {
+        $(document).on('click', '.state-row', function () {
+          var ind = $(this).attr('class').split(' ')[2];
+          $(`.state-row.A.${ind}`).nextUntil(`tr.state-row.A`).slideToggle(200);
+          $(`.state-row.B.${ind}`).nextUntil(`tr.state-row.B`).slideToggle(200);
+          $(this).find('span:first').toggleClass('rotateDownRight');
+        });
+      });
+
+      function buildDistrictData(tableFileData, docIdx) {
+        var data = JSON.parse(tableFileData.replace(/\bNaN\b/g, 'null'));
+        var i = 0;
+        var table_data = [];
+        for (i = 0; i < data.length; i++) {
+          var district_data = {};
+          var blocks = [];
+          district_data.District = data[i].District;
+          district_data.CurrentLevel = data[i].CurrentLevel[docIdx];
+          district_data.AlgoLevel = data[i].AlgoLevel[docIdx];
+          district_data.IncreasingBlocks = data[i].IncreasingBlocks[docIdx];
+          district_data.DecreasingBlocks = data[i].DecreasingBlocks[docIdx];
+          for (var j = 0; j < data[i].blocks.length; j++) {
+            var block_data = {};
+            block_data.block = data[i].blocks[j].Block;
+            block_data.CurrentLevel = data[i].blocks[j].CurrentLevel[docIdx];
+            block_data.AlgoLevel = data[i].blocks[j].AlgoLevel[docIdx];
+            blocks[j] = block_data;
+          }
+          district_data.blocks = blocks;
+          table_data[i] = district_data;
+        }
+        //  console.log(table_data)
+        return table_data;
+      }
+
+      //Build district table
+      function builddistrictTable(data, table_id) {
+        $('.state-heading').attr('class', 'district-Heading');
+        $('.s-name').text('District');
+        $('.s-imp').text('Improving Blocks');
+        $('.s-dec').text('Declining Blocks');
+        var Table = 'myTable'.concat(table_id);
+        var table = document.getElementById(Table);
+        table.innerHTML = '';
+        for (var i = 0; i < data.length; i++) {
+          var row = `<tr class="districtRow ${table_id} ${i}" >
+                        <td>
+                          <div class="title-chevron">
+                            <span class="dropdown rotateDownRight">
+                              <svg height="24" width="24" viewbox=" 0 0 24 24">
+                                 <polyline points="6 9 12 15 18 9" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" />
+                              </svg>
+                              </span>
+                          <span class ="title-icon" >${data[i].District}</span>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="delta is-increasing"></span> 
+                          <span class="total">${data[i].IncreasingBlocks}</span>
+                        </td>
+                        <td>
+                          <span class="delta is-decreasing"></span> 
+                          <span class="total">${data[i].DecreasingBlocks}</span>
+                        </td>
+                        <td>
+                          <span class="delta is-avgLevel"></span> 
+                          <span class="total">${
+                            Math.round(data[i].CurrentLevel * 100) / 100
+                          }</span>
+                        </td>
+                        <td>
+                          <span class="delta is-minLevel"></span> 
+                          <span class="total">${
+                            Math.round(data[i].AlgoLevel * 100) / 100
+                          }</span>
+                        </td>
+                        <td>
+                          <span class="delta is-minLevel"></span> 
+                          <span class="total">${lastCol(
+                            data[i].CurrentLevel,
+                            data[i].AlgoLevel
+                          )}</span>
+                        </td>
+                   </tr>`;
+
+          table.innerHTML += row;
+        }
+
+        //Add block Heading
+        var row = `
+                <tr class="state-last-update" style="display:none;">
+                  <td colspan="5" style="padding-bottom: 0px;">
+                  </td>
+                  <td align="center" class="state-page-link" colspan="1" style="width: 2.5rem;" style="padding-bottom:1rem;">
+                    See more details 
+                  </td>
+                </tr>
+    
+                <tr class="blockHead ${table_id}" style="display:none;">
+                <td data-column="district" data-order="desc" class="block-heading" colsplan="1">
+                  <div class="heading-content"> 
+                      <abbr title="District">Block</abbr>
+                  </div>
+              </td>
+              <td data-column="CurrentLevel" data-order="desc" class="block-heading" colspan="2">
+                  <div class="heading-content"> 
+                      <abbr title="Current Level">Current Level</abbr>
+                  </div>
+                  
+              </td>
+              <td data-column="AlgorithmLevel" data-order="desc" class="block-heading" colspan="2">
+                <div class="heading-content"> 
+                    <abbr title="Algorithm Level">Algorithm Level</abbr>
+                </div>
+               
+            </td>
+            <td data-column="AlgorithmLevel" data-order="desc" class="block-heading" colspan="1">
+                <div class="heading-content"> 
+                    <abbr title="">Status</abbr>
+                </div>
+               
+            </td>
+              
+          </td>              
+        </tr>`;
+        $(`.districtRow.${table_id}`).after(row);
+        //Add block rows
+        for (i = 0; i < data.length; i++) {
+          for (j = 0; j < data[i].blocks.length; j++) {
+            var row = `<tr class="block-row ${i}" style="display:none;">
+                        <td colspan="1">
+                          <div class="title-chevron">
+                            <span class ="title-icon">${
+                              data[i].blocks[j].block
+                            }</span>
+                          </div>
+                        </td>
+                        <td colspan="2">
+                          <span class="delta is-avgLevel"></span> 
+                          <span class="total">${
+                            Math.round(data[i].blocks[j].CurrentLevel * 100) /
+                            100
+                          }</span>
+                        </td>
+                        <td colspan="2">
+                          <span class="delta is-minLevel"></span> 
+                          <span class="total">${
+                            Math.round(data[i].blocks[j].AlgoLevel * 100) / 100
+                          }</span>
+                        </td>
+                        <td colspan="1">
+                          <span class="delta is-minLevel"></span> 
+                          <span class="total">${lastCol(
+                            data[i].blocks[j].CurrentLevel,
+                            data[i].blocks[j].AlgoLevel
+                          )}</span>
+                        </td>
+                   </tr>`;
+            var dist = $(`.blockHead.${table_id}`)[i];
+            $(dist).after(row);
+          }
+        }
+      }
+
+      $(document).on('click', '.districtRow', function () {
+        var ind = $(this).attr('class').split(' ')[2];
+        $(`.districtRow.A.${ind}`)
+          .nextUntil(`tr.districtRow.A`)
+          .slideToggle(200);
+        $(`.districtRow.B.${ind}`)
+          .nextUntil(`tr.districtRow.B`)
+          .slideToggle(200);
+        $(this).find('span:first').toggleClass('rotateDownRight');
+      });
+
+      function graphUpdate() {
+        //Write graph updation code here
+        graph_data = JSON.parse(graphFileData);
+        chartA = buildGraphData(algo1, 'A');
+        chartB = buildGraphData(algo2, 'B');
+        chart1A = chartA[0];
+        chart2A = chartA[1];
+        chart3A = chartA[2];
+        chart4A = chartA[3];
+        chart5A = chartA[4];
+
+        chart1B = chartB[0];
+        chart2B = chartB[1];
+        chart3B = chartB[2];
+        chart4B = chartB[3];
+        chart5B = chartB[4];
+
+        chart1A.render();
+        chart2A.render();
+        chart3A.render();
+        chart4A.render();
+        chart5A.render();
+
+        chart1B.render();
+        chart2B.render();
+        chart3B.render();
+        chart4B.render();
+        chart5B.render();
+      }
+
+      function buildGraphData(algo, graph_id) {
+        var graphDataOriginalPOMRB = [];
+        var graphDataAlgoPOMRB = [];
+        var graphDataOriginalPREMON = [];
+        var graphDataAlgoPREMON = [];
+        var graphDataOriginalMONSOON = [];
+        var graphDataAlgoMONSOON = [];
+        var graphDataOriginalPOMKH = [];
+        var graphDataAlgoPOMKH = [];
+        var AllSeason = [];
+        var AllSeasonAlgo = [];
+        var locAlgo = loc.concat('_', algo);
+        var POMRB_IDX = [];
+        var PREMON_IDX = [];
+        var MONSOON_IDX = [];
+        var POMKH_IDX = [];
+        chart1 = 'chart1'.concat(graph_id);
+        console.log(chart1);
+        Object.keys(idxDict).forEach(function (key) {
+          POMRB_IDX.push(idxDict[key][0]);
+          PREMON_IDX.push(idxDict[key][1]);
+          MONSOON_IDX.push(idxDict[key][2]);
+          POMKH_IDX.push(idxDict[key][3]);
+        });
+
+        var j = 0;
+        var z = 0;
+        if (algo == 'ARIMA') {
+          j = 1;
+          z = 4;
+        }
+
+        for (var i = j; i < POMRB_IDX.length; i++) {
+          graphDataOriginalPOMRB.push({
+            x: new Date(graph_data.Date[POMRB_IDX[i]]),
+            y: graph_data[loc][POMRB_IDX[i]],
+            z: graph_data.Season[POMRB_IDX[i]],
+          });
+          graphDataAlgoPOMRB.push({
+            x: new Date(graph_data.Date[POMRB_IDX[i]]),
+            y: graph_data[locAlgo][POMRB_IDX[i]],
+            z: graph_data.Season[POMRB_IDX[i]],
+          });
+          graphDataOriginalPREMON.push({
+            x: new Date(graph_data.Date[PREMON_IDX[i]]),
+            y: graph_data[loc][PREMON_IDX[i]],
+            z: graph_data.Season[PREMON_IDX[i]],
+          });
+          graphDataAlgoPREMON.push({
+            x: new Date(graph_data.Date[PREMON_IDX[i]]),
+            y: graph_data[locAlgo][PREMON_IDX[i]],
+            z: graph_data.Season[PREMON_IDX[i]],
+          });
+          graphDataOriginalMONSOON.push({
+            x: new Date(graph_data.Date[MONSOON_IDX[i]]),
+            y: graph_data[loc][MONSOON_IDX[i]],
+            z: graph_data.Season[MONSOON_IDX[i]],
+          });
+          graphDataAlgoMONSOON.push({
+            x: new Date(graph_data.Date[MONSOON_IDX[i]]),
+            y: graph_data[locAlgo][MONSOON_IDX[i]],
+            z: graph_data.Season[MONSOON_IDX[i]],
+          });
+          graphDataOriginalPOMKH.push({
+            x: new Date(graph_data.Date[POMKH_IDX[i]]),
+            y: graph_data[loc][POMKH_IDX[i]],
+            z: graph_data.Season[POMKH_IDX[i]],
+          });
+          graphDataAlgoPOMKH.push({
+            x: new Date(graph_data.Date[POMKH_IDX[i]]),
+            y: graph_data[locAlgo][POMKH_IDX[i]],
+            z: graph_data.Season[POMKH_IDX[i]],
+          });
+        }
+        for (var i = z; i < 92; i++) {
+          AllSeason.push({
+            x: new Date(graph_data.Date[i]),
+            y: graph_data[loc][i],
+            z: graph_data.Season[i],
+          });
+          AllSeasonAlgo.push({
+            x: new Date(graph_data.Date[i]),
+            y: graph_data[locAlgo][i],
+            z: graph_data.Season[i],
+          });
+        }
+        chart1 = new CanvasJS.Chart(`graph1${graph_id}`, {
+          title: {
+            text: 'All Seasons',
+          },
+          axisX: {
+            valueFormatString: 'MMM YYYY',
+          },
+          axisY: {
+            //  title: "Median List Price",
+            //   minimum: 0
+            //suffix: k
+          },
+          toolTip: {
+            shared: true,
+          },
+          legend: {
+            cursor: 'pointer',
+            gridThickness: '0',
+            verticalAlign: 'top',
+            horizontalAlign: 'center',
+            dockInsidePlotArea: true,
+
+            //	itemclick: toogleDataSeries
+          },
+          data: [
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'Original',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              toolTipContent: '<a>{x} <br> Original Data: {y}</a>',
+              dataPoints: AllSeason,
+            },
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: algo,
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              toolTipContent: '<a>Algorithm Data: {y} <br> Season:{z} </a>',
+              dataPoints: AllSeasonAlgo,
+            },
+          ],
+        });
+        chart2 = new CanvasJS.Chart(`graph2${graph_id}`, {
+          title: {
+            text: 'POMRB',
+          },
+          axisX: {
+            valueFormatString: 'MMM YYYY',
+          },
+          axisY: {
+            //  title: "Median List Price",
+            //  maximum: maxVal
+            //   minimum: 4
+            //suffix: "K"
+          },
+          toolTip: {
+            shared: true,
+          },
+          legend: {
+            cursor: 'pointer',
+            verticalAlign: 'top',
+            horizontalAlign: 'center',
+            dockInsidePlotArea: true,
+            //	itemclick: toogleDataSeries
+          },
+          data: [
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'Original',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataOriginalPOMRB,
+            },
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: algo,
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataAlgoPOMRB,
+            },
+          ],
+        });
+
+        chart3 = new CanvasJS.Chart(`graph3${graph_id}`, {
+          title: {
+            text: 'MONSOON',
+          },
+          axisX: {
+            valueFormatString: 'MMM YYYY',
+          },
+          axisY: {
+            //  title: "Median List Price",
+            //  maximum: maxVal
+            //   minimum: 4
+            //suffix: "K"
+          },
+          toolTip: {
+            shared: true,
+          },
+          legend: {
+            cursor: 'pointer',
+            verticalAlign: 'top',
+            horizontalAlign: 'center',
+            dockInsidePlotArea: true,
+            //	itemclick: toogleDataSeries
+          },
+          data: [
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'Original',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataOriginalMONSOON,
+            },
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: algo,
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataAlgoMONSOON,
+            },
+          ],
+        });
+
+        chart4 = new CanvasJS.Chart(`graph4${graph_id}`, {
+          title: {
+            text: 'PREMON',
+          },
+          axisX: {
+            valueFormatString: 'MMM YYYY',
+          },
+          axisY: {
+            //  title: "Median List Price",
+            //  maximum: maxVal
+            //   minimum: 4
+            //suffix: "K"
+          },
+          toolTip: {
+            shared: true,
+          },
+          legend: {
+            cursor: 'pointer',
+            verticalAlign: 'top',
+            horizontalAlign: 'center',
+            dockInsidePlotArea: true,
+            //	itemclick: toogleDataSeries
+          },
+          data: [
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'Original',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataOriginalPREMON,
+            },
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: algo,
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataAlgoPREMON,
+            },
+          ],
+        });
+
+        chart5 = new CanvasJS.Chart(`graph5${graph_id}`, {
+          title: {
+            text: 'POMKH',
+          },
+          axisX: {
+            valueFormatString: 'MMM YYYY',
+          },
+          axisY: {
+            //  title: "Median List Price",
+            //suffix: "K"
+          },
+          toolTip: {
+            shared: true,
+          },
+          legend: {
+            cursor: 'pointer',
+            verticalAlign: 'top',
+            horizontalAlign: 'center',
+            dockInsidePlotArea: true,
+            //	itemclick: toogleDataSeries
+          },
+          data: [
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: 'Original',
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataOriginalPOMKH,
+            },
+            {
+              type: 'line',
+              //	axisYType: "secondary",
+              name: algo,
+              showInLegend: true,
+              markerSize: 0,
+              yValueFormatString: '#.###',
+              dataPoints: graphDataAlgoPOMKH,
+            },
+          ],
+        });
+        return [chart1, chart2, chart3, chart4, chart5];
+      }
+    </script>
+  </body>
+</html>

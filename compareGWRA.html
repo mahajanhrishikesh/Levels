@@ -99,7 +99,7 @@
               <!-- Select Left Period -->
               <div class="col-md-6">
                 <label for="yearSelect1" class="font-weight-bold"
-                  >Select Year 1</label
+                  >Select Year</label
                 >
                 <select
                   id="yearSelect1"
@@ -132,7 +132,7 @@
                 </select>
 
                 <label for="seasonSelect1" class="mt-3 font-weight-bold"
-                  >Select Season 1</label
+                  >Select Season</label
                 >
                 <select
                   id="seasonSelect1"
@@ -146,7 +146,7 @@
                 </select>
 
                 <label for="algoSelect1" class="mt-3 font-weight-bold"
-                  >Select Algorithm 1</label
+                  >Select Algorithm</label
                 >
                 <select
                   id="algoSelect1"
@@ -162,68 +162,11 @@
               </div>
 
               <!-- Select Right Period -->
-              <div class="col-md-6">
-                <label for="yearSelect2" class="font-weight-bold"
-                  >Select Year 2</label
-                >
-                <select
-                  id="yearSelect2"
-                  class="form-control"
-                  onclick="changeYear2(this.value);"
-                >
-                  <option value="2018">2018</option>
-                  <option value="2017">2017</option>
-                  <option value="2016">2016</option>
-                  <option value="2015">2015</option>
-                  <option value="2014">2014</option>
-                  <option value="2013">2013</option>
-                  <option value="2012">2012</option>
-                  <option value="2011">2011</option>
-                  <option value="2010">2010</option>
-                  <option value="2009">2009</option>
-                  <option value="2008">2008</option>
-                  <option value="2007">2007</option>
-                  <option value="2006">2006</option>
-                  <option value="2005">2005</option>
-                  <option value="2004">2004</option>
-                  <option value="2003">2003</option>
-                  <option value="2002">2002</option>
-                  <option value="2001">2001</option>
-                  <option value="2000">2000</option>
-                  <option value="1999">1999</option>
-                  <option value="1998">1998</option>
-                  <option value="1997">1997</option>
-                  <option value="1996">1996</option>
-                </select>
-
-                <label for="seasonSelect2" class="mt-3 font-weight-bold"
-                  >Select Season 2</label
-                >
-                <select
-                  id="seasonSelect2"
-                  class="form-control"
-                  onclick="changeSeason2()"
-                >
-                  <option value="" id="season2POMRB">POMRB</option>
-                  <option value="" id="season2PREMON">PREMON</option>
-                  <option value="" id="season2MONSOON">MONSOON</option>
-                  <option value="" id="season2POMKH">POMKH</option>
-                </select>
-
-                <label for="algoSelect2" class="mt-3 font-weight-bold"
-                  >Select Algorithm 2</label
-                >
-                <select
-                  id="algoSelect2"
-                  class="form-control"
-                  onclick="changeAlgo2()"
-                >
-                  <option value="ARIMA">ARIMA</option>
-                  <option value="EWMA">EWMA</option>
-                  <option value="SMA">SMA</option>
-                  <option value="DES">DES</option>
-                  <option value="TES">HWES</option>
-                </select>
+              <div class="col-md-6 my-auto">
+                <div class="card card-body text-center">
+                  <h2>Ground Water Resource Assessment</h2>
+                  <h3>2017</h3> 
+                </div>
               </div>
             </div>
             <div class="row">
@@ -256,7 +199,7 @@
               ></div>
             </div>
             <!--MAP ENDS HERE-->
-            <p class="h3 text-center text-muted">Regional Data</p>
+            <p class="h3 text-center text-muted">Trend Data</p>
             <!--TABLE STARTS HERE-->
             <div id="tableSection1">
               <div
@@ -341,47 +284,6 @@
               </div>
             </div>
             <!--TABLE ENDS HERE-->
-
-            <p class="text-muted text-center h3 mt-3">Trends</p>
-
-            <!--GRAPHS START HERE-->
-
-            <!--ALL SEASONS GRAPH-->
-            <div
-              class="container mt-3"
-              style="height: 200px;"
-              id="graph1A"
-            ></div>
-
-            <!--POMRB GRAPH-->
-            <div
-              class="container mt-3"
-              style="height: 200px;"
-              id="graph2A"
-            ></div>
-
-            <!--PREMON GRAPH-->
-            <div
-              class="container mt-3"
-              style="height: 200px;"
-              id="graph3A"
-            ></div>
-
-            <!--MONSOON GRAPH-->
-            <div
-              class="container mt-3"
-              style="height: 200px;"
-              id="graph4A"
-            ></div>
-
-            <!--POMKH GRAPH-->
-            <div
-              class="container my-3"
-              style="height: 200px;"
-              id="graph5A"
-            ></div>
-
-            <!--GRAPHS END HERE-->
           </div>
 
           <div class="col-md-6">
@@ -396,7 +298,7 @@
               ></div>
             </div>
             <!--MAP ENDS HERE-->
-            <p class="h3 text-center text-muted">Regional Data</p>
+            <p class="h3 text-center text-muted">GWRA Report Data</p>
             <!--TABLE STARTS HERE-->
             <div id="tableSection2">
               <div
@@ -481,47 +383,6 @@
               </div>
             </div>
             <!--TABLE ENDS HERE-->
-
-            <p class="text-muted text-center h3 mt-3">Trends</p>
-
-            <!--GRAPHS START HERE-->
-
-            <!--ALL SEASONS GRAPH-->
-            <div
-              class="container mt-3"
-              style="height: 200px;"
-              id="graph1B"
-            ></div>
-
-            <!--POMRB GRAPH-->
-            <div
-              class="container mt-3"
-              style="height: 200px;"
-              id="graph2B"
-            ></div>
-
-            <!--PREMON GRAPH-->
-            <div
-              class="container mt-3"
-              style="height: 200px;"
-              id="graph3B"
-            ></div>
-
-            <!--MONSOON GRAPH-->
-            <div
-              class="container mt-3"
-              style="height: 200px;"
-              id="graph4B"
-            ></div>
-
-            <!--POMKH GRAPH-->
-            <div
-              class="container my-3"
-              style="height: 200px;"
-              id="graph5B"
-            ></div>
-
-            <!--GRAPHS END HERE-->
           </div>
         </div>
         <div class="row my-3">
@@ -717,12 +578,8 @@
           $('#yearSelect1 option:selected').text() +
           ', ' +
           $('#seasonSelect1 option:selected').text();
-        var periodText2 =
-          $('#yearSelect2 option:selected').text() +
-          ', ' +
-          $('#seasonSelect2 option:selected').text();
         document.getElementById('periodName1').innerHTML = periodText1;
-        document.getElementById('periodName2').innerHTML = periodText2;
+        document.getElementById('periodName2').innerHTML = '2017 GWRA Report';
 
         //Load maps, tables and graphs here
         loadMap1Data();
