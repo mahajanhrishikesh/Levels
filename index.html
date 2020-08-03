@@ -204,34 +204,13 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-12">
-                  <div class="card-title">
-                    Algorithms
-                  </div>
-                  <select
-                    name="year"
-                    id="algoSelect"
-                    class="form-control"
-                    onclick="changeAlgorithm()"
-                  >
-                    <option value="ARIMA">ARIMA</option>
-                    <option value="EWMA">EWMA</option>
-                    <option value="SMA">SMA</option>
-                    <option value="DES">DES</option>
-                    <option value="TES">HWES</option>
-                  </select>
-                </div>
+                
               </div>
               <div class="row text-center my-2">
                 <h5 id="checkError" class="mx-auto"></h5>
               </div>
               <div class="row my-2">
-                <button
-                  class="btn btn-outline-success btn-block mx-3"
-                  onclick="checkAccuracy();"
-                >
-                  Check Fit Score
-                </button>
+                
               </div>
             </div>
             <!--CURRENT MASTER LOCATION STATS CARD GROUP-->
@@ -539,7 +518,7 @@
       var year = 2018;
       var loc = 'INDIA';
       var docIdx = 91;
-      var algo = 'ARIMA';
+      var algo = 'TES';
       var level = 0;
       var improvingRegionCount = 0;
       var decliningRegionCount = 0;
@@ -1987,15 +1966,12 @@
         ypred_tes.slice(5, docIdx);
         ypred_des.slice(5, docIdx);
         scores_dict = {
-          sma : rmseCalc(y, ypred_sma),
-          ewma : rmseCalc(y, ypred_ewma),
-          arima : rmseCalc(y, ypred_arima),
-          tes : rmseCalc(y, ypred_tes),
-          des : rmseCalc(y, ypred_des),
-        }
-        for (key in scores_dict.keys) {
-          min = 
-        }
+          sma: rmseCalc(y, ypred_sma),
+          ewma: rmseCalc(y, ypred_ewma),
+          arima: rmseCalc(y, ypred_arima),
+          tes: rmseCalc(y, ypred_tes),
+          des: rmseCalc(y, ypred_des),
+        };
       }
       /**************END ROOT MEAN SQUARE ERROR**************/
 

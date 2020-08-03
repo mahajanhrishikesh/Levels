@@ -144,21 +144,6 @@
                   <option value="" id="season1MONSOON">MONSOON</option>
                   <option value="" id="season1POMKH">POMKH</option>
                 </select>
-
-                <label for="algoSelect1" class="mt-3 font-weight-bold"
-                  >Select Algorithm</label
-                >
-                <select
-                  id="algoSelect1"
-                  class="form-control"
-                  onclick="changeAlgo1()"
-                >
-                  <option value="ARIMA">ARIMA</option>
-                  <option value="EWMA">EWMA</option>
-                  <option value="SMA">SMA</option>
-                  <option value="DES">DES</option>
-                  <option value="TES">HWES</option>
-                </select>
               </div>
 
               <!-- Select Right Period -->
@@ -199,6 +184,13 @@
               ></div>
             </div>
             <!--MAP ENDS HERE-->
+            <label for="District"><b>District</b></label>
+            <select
+              name="District"
+              id="selectDistrict"
+              class="form-control mb-4"
+            >
+            </select>
             <p class="h3 text-center text-muted">Trend Data</p>
             <!--TABLE STARTS HERE-->
             <div id="tableSection1">
@@ -297,7 +289,16 @@
                 style="height: 600px;"
               ></div>
             </div>
+            
             <!--MAP ENDS HERE-->
+            <label for="District"><b>District</b></label>
+            <select
+              name="District"
+              id="selectDistrict"
+              class="form-control mb-4"
+              disabled
+            >
+            </select>
             <p class="h3 text-center text-muted">GWRA Report Data</p>
             <!--TABLE STARTS HERE-->
             <div id="tableSection2">
@@ -434,7 +435,7 @@
 
     <script>
       // Document Indexes
-      var algo1 = 'ARIMA';
+      var algo1 = 'TES';
       var algo2 = 'ARIMA';
       var docIdx1 = 88;
       var docIdx2 = 88;
@@ -527,6 +528,7 @@
 
       function changeRegion() {
         loc = document.getElementById('regionSelect').value;
+        fetchDistricts();
       }
 
       // Select year for left side
@@ -1579,6 +1581,21 @@
           ],
         });
         return [chart1, chart2, chart3, chart4, chart5];
+      }
+
+
+      function fetchDistricts() {
+        var state = loc;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById(
+              'selectDistrict'
+            ).innerHTML = this.responseText;
+          }
+        };
+        xhttp.open('GET', 'meta/district_names/' + state + '.txt', true);
+        xhttp.send();
       }
     </script>
   </body>

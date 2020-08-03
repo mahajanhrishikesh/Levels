@@ -144,21 +144,6 @@
                   <option value="" id="season1MONSOON">MONSOON</option>
                   <option value="" id="season1POMKH">POMKH</option>
                 </select>
-
-                <label for="algoSelect1" class="mt-3 font-weight-bold"
-                  >Select Algorithm 1</label
-                >
-                <select
-                  id="algoSelect1"
-                  class="form-control"
-                  onclick="changeAlgo1()"
-                >
-                  <option value="ARIMA">ARIMA</option>
-                  <option value="EWMA">EWMA</option>
-                  <option value="SMA">SMA</option>
-                  <option value="DES">DES</option>
-                  <option value="TES">HWES</option>
-                </select>
               </div>
 
               <!-- Select Right Period -->
@@ -208,21 +193,6 @@
                   <option value="" id="season2PREMON">PREMON</option>
                   <option value="" id="season2MONSOON">MONSOON</option>
                   <option value="" id="season2POMKH">POMKH</option>
-                </select>
-
-                <label for="algoSelect2" class="mt-3 font-weight-bold"
-                  >Select Algorithm 2</label
-                >
-                <select
-                  id="algoSelect2"
-                  class="form-control"
-                  onclick="changeAlgo2()"
-                >
-                  <option value="ARIMA">ARIMA</option>
-                  <option value="EWMA">EWMA</option>
-                  <option value="SMA">SMA</option>
-                  <option value="DES">DES</option>
-                  <option value="TES">HWES</option>
                 </select>
               </div>
             </div>
@@ -573,8 +543,8 @@
 
     <script>
       // Document Indexes
-      var algo1 = 'ARIMA';
-      var algo2 = 'ARIMA';
+      var algo1 = 'TES';
+      var algo2 = 'TES';
       var docIdx1 = 88;
       var docIdx2 = 88;
       var year1 = 2018;
