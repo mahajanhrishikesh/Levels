@@ -19,7 +19,7 @@ Our Team chose the problem statement by SKF Pvt. Ltd, ([wiki](https://en.wikiped
 Problem Statment - Problem Statement : Data analytics to provide complete solution for groundwater management for the country
 ### Our Solution
 
-
+[![](http://img.youtube.com/vi/zt_kJZohRfs/0.jpg)](http://www.youtube.com/watch?v=zt_kJZohRfs "SIH2020 - Solution Video")
 
 ### Conclusion
 
