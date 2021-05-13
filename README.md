@@ -23,6 +23,7 @@ Problem Statment - Problem Statement : Data analytics to provide complete soluti
 
 ### Conclusion
 
+![alt text](/winningPic.jpeg "Team Winning PIC")
 
 Position - **1st**
 
