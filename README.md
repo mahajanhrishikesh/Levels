@@ -16,7 +16,15 @@ Smart India Hackathon [(SIH)](https://www.sih.gov.in/) 2020 is a nationwide init
 ### Problem Statement 
 
 Problem Statement : Data analytics to provide complete solution for groundwater management for the country
+Problem Statement ID - DM 84
+
+
+Groundwater is the major source of freshwater for drinking, irrigation and industrial purposes and has always been a hidden treasure because of its dynamic nature. The health of the groundwater system is reflected in the groundwater levels of the region. There is a need to develop a robust application to understand the groundwater scenario and its resources of the regions. Representative groundwater level data needs to be analyzed using statistical and arithmetical solutions along with the groundwater resources of the country to identify the blocks/district/state which has been critical compared to previous decade.
+
 ### Our Solution
+
+Our solution - [IndiaGWanalytics.in](https://gwl-dashboard.herokuapp.com/) is a application that provides visualization of Groundwater scenario
+in India with GIS mapping, graphs and various analysis tools.
 
 [![](http://img.youtube.com/vi/zt_kJZohRfs/0.jpg)](http://www.youtube.com/watch?v=zt_kJZohRfs "SIH2020 - Solution Video")
 
