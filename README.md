@@ -16,7 +16,7 @@ Mentors - Dr. Nitin Pise and Mr. Aniket Ingavle
 
 Rating : :star::star::star::star::star: 4.6       Downloads - 5,000+
 
-Download the App - [AQI MIT-WPU](https://play.google.com/store/apps/details?id=com.dheeraj.gw_sample&hl=en&gl=US) 
+Download the App - [Ground Water Analysis India](https://play.google.com/store/apps/details?id=com.dheeraj.gw_sample&hl=en&gl=US) 
 
 View Online : [Ground Water Data analytics Dashboard India](https://gwl-dashboard.herokuapp.com/)
 
@@ -75,10 +75,16 @@ Our solution can be divided into below mentioned components:
 
 ![alt text](/arch.png "Arch Dia")
 
+
 <p align="center"> <b> Architecture Diagram </b> </p>
 
 
+### App Screenshots
 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![alt text](/ss1.webp "1") &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![alt text](/ss2.webp "2") &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![alt text](/ss3.webp "3") &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 ### Conclusion
 
